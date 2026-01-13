@@ -1,0 +1,20 @@
+{
+  "name": "lumen-ui",
+  "private": true,
+  "description": "LumenUI - A modern React UI component library",
+  "scripts": {
+    "dev": "pnpm --filter @lumen-ui/core dev",
+    "build": "pnpm --filter @lumen-ui/core build",
+    "typecheck": "pnpm --filter @lumen-ui/core typecheck",
+    "clean": "rm -rf packages/*/dist",
+    "prepublishOnly": "pnpm build"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

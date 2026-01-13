@@ -1,0 +1,156 @@
+/* LumenUI Theme - CSS Variables */
+
+:root,
+[data-theme="light"] {
+  /* Primary Colors */
+  --lm-primary-50: #f0f9ff;
+  --lm-primary-100: #e0f2fe;
+  --lm-primary-200: #bae6fd;
+  --lm-primary-300: #7dd3fc;
+  --lm-primary-400: #38bdf8;
+  --lm-primary-500: #0ea5e9;
+  --lm-primary-600: #0284c7;
+  --lm-primary-700: #0369a1;
+  --lm-primary-800: #075985;
+  --lm-primary-900: #0c4a6e;
+
+  /* Success Colors */
+  --lm-success-50: #f0fdf4;
+  --lm-success-100: #dcfce7;
+  --lm-success-200: #bbf7d0;
+  --lm-success-300: #86efac;
+  --lm-success-400: #4ade80;
+  --lm-success-500: #22c55e;
+  --lm-success-600: #16a34a;
+  --lm-success-700: #15803d;
+  --lm-success-800: #166534;
+  --lm-success-900: #14532d;
+
+  /* Warning Colors */
+  --lm-warning-50: #fffbeb;
+  --lm-warning-100: #fef3c7;
+  --lm-warning-200: #fde68a;
+  --lm-warning-300: #fcd34d;
+  --lm-warning-400: #fbbf24;
+  --lm-warning-500: #f59e0b;
+  --lm-warning-600: #d97706;
+  --lm-warning-700: #b45309;
+  --lm-warning-800: #92400e;
+  --lm-warning-900: #78350f;
+
+  /* Error Colors */
+  --lm-error-50: #fef2f2;
+  --lm-error-100: #fee2e2;
+  --lm-error-200: #fecaca;
+  --lm-error-300: #fca5a5;
+  --lm-error-400: #f87171;
+  --lm-error-500: #ef4444;
+  --lm-error-600: #dc2626;
+  --lm-error-700: #b91c1c;
+  --lm-error-800: #991b1b;
+  --lm-error-900: #7f1d1d;
+
+  /* Info Colors */
+  --lm-info-50: #eff6ff;
+  --lm-info-100: #dbeafe;
+  --lm-info-200: #bfdbfe;
+  --lm-info-300: #93c5fd;
+  --lm-info-400: #60a5fa;
+  --lm-info-500: #3b82f6;
+  --lm-info-600: #2563eb;
+  --lm-info-700: #1d4ed8;
+  --lm-info-800: #1e40af;
+  --lm-info-900: #1e3a8a;
+
+  /* Gray Scale */
+  --lm-gray-50: #f9fafb;
+  --lm-gray-100: #f3f4f6;
+  --lm-gray-200: #e5e7eb;
+  --lm-gray-300: #d1d5db;
+  --lm-gray-400: #9ca3af;
+  --lm-gray-500: #6b7280;
+  --lm-gray-600: #4b5563;
+  --lm-gray-700: #374151;
+  --lm-gray-800: #1f2937;
+  --lm-gray-900: #111827;
+
+  /* Background */
+  --lm-bg-default: #ffffff;
+  --lm-bg-paper: #f9fafb;
+  --lm-bg-elevated: #ffffff;
+  --lm-bg-hover: #f3f4f6;
+  --lm-bg-active: #e5e7eb;
+  --lm-bg-disabled: #f3f4f6;
+
+  /* Text */
+  --lm-text-primary: #111827;
+  --lm-text-secondary: #6b7280;
+  --lm-text-tertiary: #9ca3af;
+  --lm-text-disabled: #9ca3af;
+  --lm-text-inverse: #ffffff;
+
+  /* Border */
+  --lm-border-default: #e5e7eb;
+  --lm-border-light: #f3f4f6;
+  --lm-border-strong: #d1d5db;
+  --lm-border-focus: #0ea5e9;
+
+  /* Shadow */
+  --lm-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --lm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --lm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --lm-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* Radius */
+  --lm-radius-sm: 0.25rem;
+  --lm-radius-md: 0.375rem;
+  --lm-radius-lg: 0.5rem;
+  --lm-radius-xl: 0.75rem;
+  --lm-radius-full: 9999px;
+
+  /* Transition */
+  --lm-transition-fast: 150ms;
+  --lm-transition-normal: 200ms;
+  --lm-transition-slow: 300ms;
+}
+
+[data-theme="dark"] {
+  /* Primary Colors - adjusted for dark mode */
+  --lm-primary-50: #0c4a6e;
+  --lm-primary-100: #075985;
+  --lm-primary-200: #0369a1;
+  --lm-primary-300: #0284c7;
+  --lm-primary-400: #0ea5e9;
+  --lm-primary-500: #38bdf8;
+  --lm-primary-600: #7dd3fc;
+  --lm-primary-700: #bae6fd;
+  --lm-primary-800: #e0f2fe;
+  --lm-primary-900: #f0f9ff;
+
+  /* Background */
+  --lm-bg-default: #111827;
+  --lm-bg-paper: #1f2937;
+  --lm-bg-elevated: #374151;
+  --lm-bg-hover: #374151;
+  --lm-bg-active: #4b5563;
+  --lm-bg-disabled: #1f2937;
+
+  /* Text */
+  --lm-text-primary: #f9fafb;
+  --lm-text-secondary: #d1d5db;
+  --lm-text-tertiary: #9ca3af;
+  --lm-text-disabled: #6b7280;
+  --lm-text-inverse: #111827;
+
+  /* Border */
+  --lm-border-default: #374151;
+  --lm-border-light: #1f2937;
+  --lm-border-strong: #4b5563;
+  --lm-border-focus: #38bdf8;
+
+  /* Shadow - darker for dark mode */
+  --lm-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --lm-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --lm-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --lm-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+}
