@@ -4,7 +4,7 @@ A modern React UI component library with glassmorphism design, built with TypeSc
 
 ## Features
 
-- 17+ beautifully crafted components
+- 25 beautifully crafted components
 - Glassmorphism design language
 - Full TypeScript support
 - TailwindCSS v4 integration
@@ -16,18 +16,18 @@ A modern React UI component library with glassmorphism design, built with TypeSc
 ## Installation
 
 ```bash
-npm install @lumen-ui/core
+npm install @ryanhe919/lumen-ui
 # or
-pnpm add @lumen-ui/core
+pnpm add @ryanhe919/lumen-ui
 # or
-yarn add @lumen-ui/core
+yarn add @ryanhe919/lumen-ui
 ```
 
 ## Quick Start
 
 ```tsx
-import { LMButton, LMInput } from '@lumen-ui/core'
-import '@lumen-ui/core/styles.css'
+import { LMButton, LMInput } from '@ryanhe919/lumen-ui'
+import '@ryanhe919/lumen-ui/styles.css'
 
 function App() {
   return (
@@ -41,28 +41,40 @@ function App() {
 
 ## Components
 
-### Basic Components
+### General
 - **LMButton** - Button with multiple variants and sizes
-- **LMInput** - Text input field
 - **LMBadge** - Status badges and labels
-- **LMTooltip** - Hover tooltips
-- **LMModal** - Modal dialogs
 
-### Form Components
-- **LMCheckbox** - Checkbox input
-- **LMRadio** - Radio button input
-- **LMSwitch** - Toggle switch
+### Form
+- **LMInput** - Text input field
 - **LMTextarea** - Multi-line text input
 - **LMNumberInput** - Numeric input with controls
 - **LMSearchInput** - Search input with icon
 - **LMSelect** - Dropdown select (single/multiple)
+- **LMCheckbox** - Checkbox input
+- **LMRadio** - Radio button input
+- **LMSwitch** - Toggle switch
 - **LMField** - Form field wrapper with label
+- **LMDatePicker** - Date picker with calendar
 
-### Complex Components
+### Data Display
 - **LMTable** - Data table with pagination, sorting, selection
-- **LMMessage** - Toast notifications
-- **LMConfirm** - Confirmation dialogs
 - **LMStatCard** - Statistics display cards
+- **LMTooltip** - Hover tooltips
+- **LMCard** - Card container with variants
+- **LMEmpty** - Empty state placeholder
+- **LMTabs** - Tab navigation component
+
+### Navigation
+- **LMMenu** - Side navigation menu
+- **LMDropdown** - Dropdown menu
+- **LMPagination** - Pagination component
+
+### Feedback
+- **LMMessage** - Toast notifications
+- **LMModal** - Modal dialogs
+- **LMConfirm** - Confirmation dialogs
+- **LMDrawer** - Side drawer panel
 
 ## Theming
 
@@ -126,10 +138,35 @@ const data = [
 />
 ```
 
+### Tabs
+
+```tsx
+<LMTabs
+  items={[
+    { key: 'tab1', label: 'Tab 1', children: <div>Content 1</div> },
+    { key: 'tab2', label: 'Tab 2', children: <div>Content 2</div> },
+  ]}
+  defaultActiveKey="tab1"
+/>
+```
+
+### Menu
+
+```tsx
+<LMMenu
+  items={[
+    { key: 'home', label: 'Home', icon: <HomeIcon /> },
+    { key: 'settings', label: 'Settings', icon: <SettingsIcon /> },
+  ]}
+  mode="inline"
+  collapsed={false}
+/>
+```
+
 ### Message Notifications
 
 ```tsx
-import { useMessage, LMMessageContainer } from '@lumen-ui/core'
+import { useMessage, LMMessageContainer } from '@ryanhe919/lumen-ui'
 
 function App() {
   const { messages, success, error, removeMessage } = useMessage()
@@ -148,7 +185,7 @@ function App() {
 ### Confirm Dialog
 
 ```tsx
-import { useConfirm } from '@lumen-ui/core'
+import { useConfirm } from '@ryanhe919/lumen-ui'
 
 function App() {
   const { confirm, ConfirmDialog } = useConfirm()
@@ -180,11 +217,14 @@ function App() {
 # Install dependencies
 pnpm install
 
-# Start development
-pnpm dev
+# Start Storybook
+pnpm storybook
 
 # Build
 pnpm build
+
+# Run tests
+pnpm test:run
 
 # Type check
 pnpm typecheck

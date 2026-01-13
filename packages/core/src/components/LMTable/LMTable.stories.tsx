@@ -34,7 +34,7 @@ const columns = [
     dataIndex: 'status',
     render: (value: unknown) => {
       const status = value as User['status']
-      const variant = status === 'active' ? 'success' : status === 'inactive' ? 'danger' : 'warning'
+      const variant = status === 'active' ? 'success' : status === 'inactive' ? 'error' : 'warning'
       return <LMBadge variant={variant} size="sm">{status}</LMBadge>
     },
   },
@@ -360,7 +360,7 @@ export const CustomRender: Story = {
         dataIndex: 'status',
         render: (value: unknown) => {
           const status = value as User['status']
-          const variant = status === 'active' ? 'success' : status === 'inactive' ? 'danger' : 'warning'
+          const variant = status === 'active' ? 'success' : status === 'inactive' ? 'error' : 'warning'
           return <LMBadge variant={variant}>{status}</LMBadge>
         },
       },

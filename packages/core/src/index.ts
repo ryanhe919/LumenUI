@@ -20,6 +20,16 @@ export * from './components/LMMessage'
 export * from './components/LMConfirm'
 export * from './components/LMStatCard'
 
+// New components - Batch 1
+export * from './components/LMCard'
+export * from './components/LMEmpty'
+export * from './components/LMPagination'
+export * from './components/LMDropdown'
+export * from './components/LMTabs'
+export * from './components/LMDrawer'
+export * from './components/LMMenu'
+export * from './components/LMDatePicker'
+
 // Utilities
 export * from './utils'
 

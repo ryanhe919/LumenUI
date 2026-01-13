@@ -1,6 +1,6 @@
 {
   "name": "lumen-ui",
-  "private": true,
+  "private": false,
   "description": "LumenUI - A modern React UI component library",
   "scripts": {
     "dev": "pnpm --filter @lumen-ui/core dev",
