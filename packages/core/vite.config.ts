@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, type PluginOption } from 'vite'
 import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts'
 import tailwindcss from '@tailwindcss/vite'
@@ -6,12 +6,12 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [
-    react(),
-    tailwindcss(),
+    react() as PluginOption,
+    tailwindcss() as PluginOption,
     dts({
       include: ['src'],
       rollupTypes: true,
-    }),
+    }) as PluginOption,
   ],
   build: {
     lib: {

@@ -1,0 +1,650 @@
+# LumenUI 组件使用文档
+
+本文档为 AI 模型提供 LumenUI 组件库的完整 API 参考，便于快速理解和使用组件。
+
+## 安装与引入
+
+```tsx
+import { LMButton, LMInput, LMSelect, ... } from '@lumen-ui/core'
+import '@lumen-ui/core/styles.css'
+```
+
+## 通用属性
+
+所有组件支持以下通用尺寸：
+```ts
+type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+```
+
+---
+
+## 通用 General
+
+### LMButton 按钮
+
+用于触发操作或事件的交互元素。
+
+```tsx
+interface LMButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success' | 'warning'
+  size?: ComponentSize              // 默认 'md'
+  loading?: boolean                 // 加载状态
+  disabled?: boolean                // 禁用状态
+  fullWidth?: boolean               // 是否撑满容器宽度
+  rounded?: boolean                 // 圆角样式
+  leftIcon?: ReactNode              // 左侧图标
+  rightIcon?: ReactNode             // 右侧图标
+  loadingText?: string              // 加载时显示的文字
+  children: ReactNode               // 按钮内容
+  onClick?: () => void
+}
+```
+
+**示例：**
+```tsx
+<LMButton variant="primary" size="md">提交</LMButton>
+<LMButton variant="danger" loading loadingText="删除中...">删除</LMButton>
+<LMButton variant="outline" leftIcon={<Icon />}>带图标</LMButton>
+```
+
+### LMBadge 徽章
+
+用于状态标记和分类展示。
+
+```tsx
+interface LMBadgeProps {
+  variant?: 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'
+  size?: ComponentSize              // 默认 'md'
+  rounded?: boolean                 // 圆形徽章
+  dot?: boolean                     // 仅显示圆点
+  children?: ReactNode              // 徽章内容
+}
+```
+
+**示例：**
+```tsx
+<LMBadge variant="success">已完成</LMBadge>
+<LMBadge variant="error" dot />
+<LMBadge variant="primary" rounded>99+</LMBadge>
+```
+
+---
+
+## 表单 Form
+
+### LMInput 输入框
+
+单行文本输入，支持多种类型。
+
+```tsx
+interface LMInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean                   // 错误状态
+  errorMessage?: string             // 错误提示信息
+  leftIcon?: ReactNode              // 左侧图标
+  rightElement?: ReactNode          // 右侧元素
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'date' | 'time' | 'datetime-local'
+  includeSeconds?: boolean          // 时间类型是否包含秒
+}
+```
+
+**示例：**
+```tsx
+<LMInput placeholder="请输入用户名" />
+<LMInput type="email" error errorMessage="邮箱格式不正确" />
+<LMInput type="password" rightElement={<EyeIcon />} />
+```
+
+### LMTextarea 文本域
+
+多行文本输入。
+
+```tsx
+interface LMTextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean                   // 错误状态
+  errorMessage?: string             // 错误提示信息
+  rows?: number                     // 显示行数
+  maxLength?: number                // 最大字符数
+}
+```
+
+**示例：**
+```tsx
+<LMTextarea placeholder="请输入描述..." rows={4} />
+<LMTextarea maxLength={500} error errorMessage="内容不能为空" />
+```
+
+### LMNumberInput 数字输入框
+
+数值输入，支持步进、范围限制和精度控制。
+
+```tsx
+interface LMNumberInputProps {
+  value?: number | null             // 当前值 (受控)
+  onChange?: (value: number | null) => void
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean
+  errorMessage?: string
+  placeholder?: string
+  disabled?: boolean
+  min?: number                      // 最小值
+  max?: number                      // 最大值
+  step?: number                     // 步进值，默认 1
+  precision?: number                // 小数精度，默认 0
+  showControls?: boolean            // 显示增减按钮，默认 true
+  prefix?: string                   // 前缀文字 (如 $)
+  suffix?: string                   // 后缀文字 (如 %)
+}
+```
+
+**示例：**
+```tsx
+<LMNumberInput value={100} min={0} max={1000} step={10} />
+<LMNumberInput prefix="$" precision={2} step={0.01} />  {/* 价格输入 */}
+<LMNumberInput suffix="%" min={0} max={100} />          {/* 百分比 */}
+```
+
+### LMSearchInput 搜索输入框
+
+专用于搜索场景的输入框。
+
+```tsx
+interface LMSearchInputProps {
+  value?: string                    // 当前搜索值
+  onChange?: (value: string) => void
+  onSearch?: (value: string) => void // 搜索回调 (回车或点击按钮)
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean
+  errorMessage?: string
+  placeholder?: string              // 默认 'Search...'
+  disabled?: boolean
+  showClear?: boolean               // 显示清除按钮，默认 true
+  showSearchButton?: boolean        // 显示搜索按钮，默认 true
+  searchButtonText?: string         // 搜索按钮文字，默认 'Search'
+  debounceDelay?: number            // 防抖延迟 (ms)，默认 300
+}
+```
+
+**示例：**
+```tsx
+<LMSearchInput placeholder="搜索商品..." onSearch={(v) => search(v)} />
+<LMSearchInput showSearchButton={false} showClear />    {/* 简洁模式 */}
+```
+
+### LMSelect 选择器
+
+下拉选择，支持单选和多选。
+
+```tsx
+interface LMSelectOption {
+  value: string | number
+  label: string
+  disabled?: boolean
+}
+
+interface LMSelectProps {
+  options: LMSelectOption[]         // 选项列表
+  value?: string | number | (string | number)[]  // 单选时为值，多选时为数组
+  onChange?: (value: string | number | (string | number)[]) => void
+  onDropdownVisibleChange?: (visible: boolean) => void
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean
+  errorMessage?: string
+  placeholder?: string              // 默认 'Select...'
+  disabled?: boolean
+  multiple?: boolean                // 是否多选，默认 false
+  name?: string                     // 表单字段名
+}
+```
+
+**示例：**
+```tsx
+const options = [
+  { value: '1', label: '选项一' },
+  { value: '2', label: '选项二' },
+  { value: '3', label: '选项三', disabled: true }
+]
+
+<LMSelect options={options} value={selected} onChange={setSelected} />
+<LMSelect options={options} multiple value={selectedList} onChange={setSelectedList} />
+```
+
+### LMCheckbox 复选框
+
+多选项勾选控件。
+
+```tsx
+interface LMCheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  label: string                     // 标签文字 (必填)
+  description?: string              // 描述文字
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean
+  errorMessage?: string
+  checked?: boolean
+  onChange?: (e: ChangeEvent) => void
+  disabled?: boolean
+}
+```
+
+**示例：**
+```tsx
+<LMCheckbox label="同意协议" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} />
+<LMCheckbox label="订阅通知" description="接收最新消息和优惠信息" />
+```
+
+### LMRadio 单选框
+
+单选项控件，通常成组使用。
+
+```tsx
+interface LMRadioProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+  label: string                     // 标签文字 (必填)
+  description?: string              // 描述文字
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean
+  errorMessage?: string
+  name?: string                     // 同组 radio 需相同 name
+  value?: string
+  checked?: boolean
+  onChange?: (e: ChangeEvent) => void
+  disabled?: boolean
+}
+```
+
+**示例：**
+```tsx
+<LMRadio name="gender" value="male" label="男" checked={gender === 'male'} onChange={...} />
+<LMRadio name="gender" value="female" label="女" checked={gender === 'female'} onChange={...} />
+```
+
+### LMSwitch 开关
+
+开关切换控件。
+
+```tsx
+interface LMSwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+  label?: string                    // 标签文字
+  description?: string              // 描述文字
+  size?: ComponentSize              // 默认 'md'
+  error?: boolean
+  errorMessage?: string
+  checked?: boolean
+  onChange?: (e: ChangeEvent) => void
+  disabled?: boolean
+}
+```
+
+**示例：**
+```tsx
+<LMSwitch label="开启通知" checked={enabled} onChange={(e) => setEnabled(e.target.checked)} />
+<LMSwitch label="暗色模式" description="切换深色主题" />
+```
+
+### LMField 表单字段
+
+表单字段容器，用于包装输入组件并提供统一的标签和错误展示。
+
+```tsx
+interface LMFieldProps {
+  label: string                     // 字段标签 (必填)
+  required?: boolean                // 是否必填 (显示 * 号)
+  errorMessage?: string             // 错误提示
+  help?: string                     // 帮助文字
+  children: ReactNode               // 输入组件
+  className?: string
+}
+```
+
+**示例：**
+```tsx
+<LMField label="用户名" required errorMessage={errors.username}>
+  <LMInput value={username} onChange={setUsername} error={!!errors.username} />
+</LMField>
+
+<LMField label="简介" help="不超过 200 字">
+  <LMTextarea maxLength={200} />
+</LMField>
+```
+
+---
+
+## 数据展示 Data Display
+
+### LMTable 表格
+
+数据表格，支持排序、分页、选择等功能。
+
+```tsx
+interface LMTableColumn<T> {
+  title: string                     // 列标题
+  dataIndex: string                 // 数据字段名 (支持嵌套如 'user.name')
+  width?: string | number           // 列宽
+  render?: (value: unknown, record: T, index: number) => ReactNode  // 自定义渲染
+  sorter?: boolean                  // 是否可排序
+  align?: 'left' | 'center' | 'right'
+  fixed?: 'left' | 'right'          // 固定列
+}
+
+interface LMPaginationConfig {
+  current: number                   // 当前页
+  pageSize: number                  // 每页条数
+  total: number                     // 总条数
+  showPagination?: boolean          // 显示分页
+  pageSizeOptions?: number[]        // 每页条数选项
+  showTotal?: boolean               // 显示总数
+  showQuickJumper?: boolean         // 显示快速跳转
+  showSizeChanger?: boolean         // 显示每页条数选择
+  onChange?: (page: number, pageSize: number) => void
+}
+
+interface LMTableProps<T> {
+  dataSource: T[]                   // 数据源
+  columns: LMTableColumn<T>[]       // 列配置
+  rowKey?: string | ((record: T, index: number) => string)  // 行唯一键，默认 'id'
+  pagination?: LMPaginationConfig   // 分页配置
+  loading?: boolean                 // 加载状态
+  emptyText?: string                // 空数据文案，默认 'No data'
+  size?: ComponentSize              // 默认 'md'
+  bordered?: boolean                // 显示边框
+  striped?: boolean                 // 斑马纹
+  selectable?: boolean              // 可选择
+  selectedRowKeys?: string[]        // 已选行 keys
+  onSelectionChange?: (keys: string[], rows: T[]) => void
+  onRowClick?: (record: T, index: number) => void
+  onSortChange?: (field: string, order: 'ascend' | 'descend') => void
+  variant?: 'default' | 'elevated' | 'outline' | 'minimal' | 'soft' | 'zebra'
+  fullHeight?: boolean              // 撑满容器高度
+}
+```
+
+**示例：**
+```tsx
+const columns = [
+  { title: '姓名', dataIndex: 'name', sorter: true },
+  { title: '年龄', dataIndex: 'age', align: 'center' },
+  {
+    title: '操作',
+    dataIndex: 'id',
+    render: (_, record) => <LMButton size="xs" onClick={() => edit(record)}>编辑</LMButton>
+  }
+]
+
+<LMTable
+  dataSource={users}
+  columns={columns}
+  rowKey="id"
+  pagination={{
+    current: page,
+    pageSize: 10,
+    total: 100,
+    showPagination: true,
+    showTotal: true,
+    onChange: (p, ps) => fetchData(p, ps)
+  }}
+  selectable
+  selectedRowKeys={selected}
+  onSelectionChange={setSelected}
+/>
+```
+
+### LMStatCard 统计卡片
+
+数据统计展示卡片。
+
+```tsx
+interface LMStatCardProps {
+  title: string                     // 标题 (必填)
+  value: string | number            // 数值 (必填)
+  description?: string              // 描述文字
+  icon?: ReactNode                  // 左侧图标
+  trend?: number                    // 趋势值 (正数上升，负数下降，0 持平)
+  trendText?: string                // 趋势描述文字
+  variant?: 'default' | 'primary' | 'success' | 'warning' | 'error' | 'info'
+  size?: ComponentSize              // 默认 'md'
+  clickable?: boolean               // 可点击
+  onClick?: () => void
+  prefix?: string                   // 数值前缀 (如 $)
+  suffix?: string                   // 数值后缀 (如 %)
+  bordered?: boolean                // 显示边框，默认 true
+  shadow?: boolean                  // 显示阴影，默认 true
+  compact?: boolean                 // 紧凑模式
+}
+```
+
+**示例：**
+```tsx
+<LMStatCard title="总收入" value="12,345" prefix="$" trend={12.5} trendText="较上月" />
+<LMStatCard
+  title="用户数"
+  value={1024}
+  icon={<UserIcon />}
+  variant="primary"
+  clickable
+  onClick={() => navigate('/users')}
+/>
+```
+
+### LMTooltip 文字提示
+
+鼠标悬停时显示的提示气泡。
+
+```tsx
+interface LMTooltipProps {
+  content: ReactNode                // 提示内容 (必填)
+  children: ReactNode               // 触发元素 (必填)
+  placement?: 'top' | 'bottom' | 'left' | 'right'  // 位置，默认 'top'
+  maxWidth?: number                 // 最大宽度
+  size?: ComponentSize              // 默认 'sm'
+}
+```
+
+**示例：**
+```tsx
+<LMTooltip content="这是提示信息">
+  <LMButton>悬停查看</LMButton>
+</LMTooltip>
+
+<LMTooltip content="很长的提示文字会自动换行..." placement="right" maxWidth={200}>
+  <span>帮助</span>
+</LMTooltip>
+```
+
+---
+
+## 反馈 Feedback
+
+### LMMessage 消息提示
+
+全局消息通知，用于操作反馈。
+
+```tsx
+type LMMessageType = 'success' | 'error' | 'warning' | 'info'
+
+// 单条消息 Props
+interface LMMessageProps {
+  id: string
+  type: LMMessageType
+  title?: string                    // 标题
+  content: string                   // 内容 (必填)
+  duration?: number                 // 自动关闭延迟 (ms)，0 表示不自动关闭，默认 2000
+  onClose: (id: string) => void
+}
+
+// 消息容器 Props
+interface LMMessageContainerProps {
+  messages: LMMessageItem[]
+  onClose: (id: string) => void
+  position?: 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center'
+}
+
+// useMessage Hook 返回值
+interface UseMessageReturn {
+  messages: LMMessageItem[]
+  success: (content: string, title?: string, duration?: number) => string
+  error: (content: string, title?: string, duration?: number) => string
+  warning: (content: string, title?: string, duration?: number) => string
+  info: (content: string, title?: string, duration?: number) => string
+  removeMessage: (id: string) => void
+  clearAll: () => void
+}
+```
+
+**示例：**
+```tsx
+function App() {
+  const { messages, success, error, removeMessage } = useMessage()
+
+  const handleSave = async () => {
+    try {
+      await save()
+      success('保存成功', '操作提示')
+    } catch (e) {
+      error('保存失败，请重试')
+    }
+  }
+
+  return (
+    <>
+      <LMButton onClick={handleSave}>保存</LMButton>
+      <LMMessageContainer messages={messages} onClose={removeMessage} position="top-right" />
+    </>
+  )
+}
+```
+
+### LMModal 模态框
+
+模态对话框，用于重要信息确认或复杂表单。
+
+```tsx
+interface LMModalProps {
+  visible: boolean                  // 是否显示 (必填)
+  title?: string                    // 标题
+  children: ReactNode               // 内容 (必填)
+  footer?: ReactNode                // 自定义底部 (传 null 隐藏底部)
+  onClose?: () => void              // 关闭回调
+  onOk?: () => void                 // 确认回调
+  onCancel?: () => void             // 取消回调
+  okText?: string                   // 确认按钮文字，默认 'Confirm'
+  cancelText?: string               // 取消按钮文字，默认 'Cancel'
+  showOk?: boolean                  // 显示确认按钮，默认 true
+  showCancel?: boolean              // 显示取消按钮，默认 true
+  okLoading?: boolean               // 确认按钮加载状态
+  cancelLoading?: boolean           // 取消按钮加载状态
+  mask?: boolean                    // 显示遮罩，默认 true
+  maskClosable?: boolean            // 点击遮罩关闭，默认 false
+  closable?: boolean                // 显示关闭按钮，默认 true
+  closeIcon?: ReactNode             // 自定义关闭图标
+  headerIcon?: ReactNode            // 标题图标
+  width?: string | number           // 宽度
+  height?: string | number          // 高度
+  size?: ComponentSize              // 默认 'md'
+  centered?: boolean                // 垂直居中，默认 true
+  fullscreen?: boolean              // 全屏模式
+  animation?: boolean               // 启用动画，默认 true
+  animationDuration?: number        // 动画时长 (ms)，默认 300
+}
+```
+
+**示例：**
+```tsx
+<LMModal
+  visible={showModal}
+  title="编辑用户"
+  onOk={handleSubmit}
+  onCancel={() => setShowModal(false)}
+  okText="保存"
+  cancelText="取消"
+  okLoading={saving}
+>
+  <LMField label="姓名" required>
+    <LMInput value={name} onChange={setName} />
+  </LMField>
+</LMModal>
+
+{/* 自定义底部 */}
+<LMModal visible={show} title="详情" footer={null}>
+  <p>只读内容...</p>
+</LMModal>
+```
+
+### LMConfirm 确认框
+
+简单的确认对话框。
+
+```tsx
+interface LMConfirmProps {
+  visible: boolean                  // 是否显示 (必填)
+  title?: string                    // 标题，默认 'Confirm'
+  content: string                   // 内容 (必填)
+  confirmText?: string              // 确认按钮文字，默认 'Confirm'
+  cancelText?: string               // 取消按钮文字，默认 'Cancel'
+  confirmButtonStyle?: 'primary' | 'danger'  // 确认按钮样式，默认 'primary'
+  onConfirm: () => void             // 确认回调 (必填)
+  onCancel: () => void              // 取消回调 (必填)
+  closeOnOverlayClick?: boolean     // 点击遮罩关闭，默认 true
+}
+
+// useConfirm Hook 返回值
+interface UseConfirmReturn {
+  confirm: (options: {
+    title?: string
+    content: string
+    confirmText?: string
+    cancelText?: string
+    confirmButtonStyle?: 'primary' | 'danger'
+  }) => Promise<boolean>            // 返回 true 表示确认，false 表示取消
+  ConfirmDialog: React.FC           // 对话框组件，需渲染到页面
+}
+```
+
+**示例：**
+```tsx
+function DeleteButton({ onDelete }) {
+  const { confirm, ConfirmDialog } = useConfirm()
+
+  const handleDelete = async () => {
+    const confirmed = await confirm({
+      title: '确认删除',
+      content: '删除后无法恢复，是否继续？',
+      confirmText: '删除',
+      confirmButtonStyle: 'danger'
+    })
+
+    if (confirmed) {
+      onDelete()
+    }
+  }
+
+  return (
+    <>
+      <LMButton variant="danger" onClick={handleDelete}>删除</LMButton>
+      <ConfirmDialog />
+    </>
+  )
+}
+```
+
+---
+
+## 主题系统
+
+通过 CSS 变量控制主题，支持亮色和暗色模式。
+
+```html
+<!-- 切换暗色模式 -->
+<html data-theme="dark">
+```
+
+**主要颜色变量：**
+- `--lm-primary-*`: 主色系 (50-900)
+- `--lm-success-*`: 成功色
+- `--lm-warning-*`: 警告色
+- `--lm-error-*`: 错误色
+- `--lm-gray-*`: 灰色系
+- `--lm-bg-elevated`: 浮层背景
+- `--lm-bg-paper`: 卡片背景
+- `--lm-text-primary`: 主要文字
+- `--lm-text-secondary`: 次要文字
+- `--lm-border-default`: 默认边框
