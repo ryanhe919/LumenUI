@@ -4,7 +4,8 @@
  */
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import LMConfirm, { useConfirm } from './LMConfirm'
+import LMConfirm from './LMConfirm'
+import { useConfirm } from '../../hooks/useConfirm'
 import LMButton from '../LMButton/LMButton'
 
 const meta: Meta<typeof LMConfirm> = {

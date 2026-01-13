@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 export interface LMConfirmProps {
   /** Dialog visible */
@@ -42,19 +42,37 @@ const LMConfirm: React.FC<LMConfirmProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
+  const animationFrameRef = useRef<number>()
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
   useEffect(() => {
+    // Cleanup previous timers
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current)
+    }
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+    }
+
     if (visible) {
       setIsVisible(true)
-      requestAnimationFrame(() => {
+      animationFrameRef.current = requestAnimationFrame(() => {
         setIsAnimating(true)
       })
     } else {
       setIsAnimating(false)
-      const timer = setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setIsVisible(false)
       }, 200)
-      return () => clearTimeout(timer)
+    }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
     }
   }, [visible])
 
@@ -192,71 +210,6 @@ const LMConfirm: React.FC<LMConfirmProps> = ({
       </div>
     </div>
   )
-}
-
-// Hook for using confirm dialog
-export interface UseConfirmReturn {
-  visible: boolean
-  config: Omit<LMConfirmProps, 'visible' | 'onConfirm' | 'onCancel'> | null
-  confirm: (options: {
-    title?: string
-    content: string
-    confirmText?: string
-    cancelText?: string
-    confirmButtonStyle?: 'primary' | 'danger'
-  }) => Promise<boolean>
-  ConfirmDialog: React.FC
-}
-
-export const useConfirm = (): UseConfirmReturn => {
-  const [visible, setVisible] = useState(false)
-  const [config, setConfig] = useState<Omit<LMConfirmProps, 'visible' | 'onConfirm' | 'onCancel'> | null>(null)
-  const [resolveRef, setResolveRef] = useState<((value: boolean) => void) | null>(null)
-
-  const confirm = useCallback((options: {
-    title?: string
-    content: string
-    confirmText?: string
-    cancelText?: string
-    confirmButtonStyle?: 'primary' | 'danger'
-  }): Promise<boolean> => {
-    return new Promise((resolve) => {
-      setConfig(options)
-      setVisible(true)
-      setResolveRef(() => resolve)
-    })
-  }, [])
-
-  const handleConfirm = useCallback(() => {
-    setVisible(false)
-    resolveRef?.(true)
-    setResolveRef(null)
-  }, [resolveRef])
-
-  const handleCancel = useCallback(() => {
-    setVisible(false)
-    resolveRef?.(false)
-    setResolveRef(null)
-  }, [resolveRef])
-
-  const ConfirmDialog: React.FC = useCallback(() => {
-    if (!config) return null
-    return (
-      <LMConfirm
-        visible={visible}
-        {...config}
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-      />
-    )
-  }, [visible, config, handleConfirm, handleCancel])
-
-  return {
-    visible,
-    config,
-    confirm,
-    ConfirmDialog,
-  }
 }
 
 export default LMConfirm

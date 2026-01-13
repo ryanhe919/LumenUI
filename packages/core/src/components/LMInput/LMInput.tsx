@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useId } from 'react'
 import { SIZE_INPUT_CONFIG } from '../../utils/componentSizes'
 import type { ComponentSize } from '../../utils/componentSizes'
 
@@ -30,9 +30,7 @@ const LMInput: React.FC<LMInputProps> = ({
 }) => {
   const hasLeftIcon = !!leftIcon
   const hasRightElement = !!rightElement
-  const errorId = useRef(
-    `lm-input-err-${Math.random().toString(36).slice(2)}`
-  ).current
+  const errorId = `lm-input-err-${useId()}`
 
   const timeInputProps = () => {
     if (

@@ -4,7 +4,8 @@
  */
 import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
-import LMMessage, { LMMessageContainer, useMessage } from './LMMessage'
+import LMMessage, { LMMessageContainer } from './LMMessage'
+import { useMessage } from '../../hooks/useMessage'
 import LMButton from '../LMButton/LMButton'
 
 const meta: Meta<typeof LMMessage> = {

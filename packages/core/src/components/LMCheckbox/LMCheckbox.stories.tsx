@@ -6,6 +6,49 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import LMCheckbox from './LMCheckbox'
 
+// Wrapper components for stories that need state
+const CheckedExample = () => {
+  const [checked, setChecked] = useState(true)
+  return (
+    <LMCheckbox
+      label="I agree to the privacy policy"
+      checked={checked}
+      onChange={(e) => setChecked(e.target.checked)}
+    />
+  )
+}
+
+const CheckboxGroupExample = () => {
+  const [selected, setSelected] = useState<string[]>(['email'])
+  const toggle = (value: string) => {
+    setSelected((prev) =>
+      prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
+    )
+  }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+      <LMCheckbox
+        label="Email notifications"
+        description="Get notified via email"
+        checked={selected.includes('email')}
+        onChange={() => toggle('email')}
+      />
+      <LMCheckbox
+        label="SMS notifications"
+        description="Get notified via SMS"
+        checked={selected.includes('sms')}
+        onChange={() => toggle('sms')}
+      />
+      <LMCheckbox
+        label="Push notifications"
+        description="Get notified via push"
+        checked={selected.includes('push')}
+        onChange={() => toggle('push')}
+      />
+    </div>
+  )
+}
+
 const meta: Meta<typeof LMCheckbox> = {
   title: '表单 Form/LMCheckbox 复选框',
   component: LMCheckbox,
@@ -71,16 +114,7 @@ export const WithDescription: Story = {
 
 /** 选中状态 - 已勾选的复选框 */
 export const Checked: Story = {
-  render: () => {
-    const [checked, setChecked] = useState(true)
-    return (
-      <LMCheckbox
-        label="I agree to the privacy policy"
-        checked={checked}
-        onChange={(e) => setChecked(e.target.checked)}
-      />
-    )
-  },
+  render: () => <CheckedExample />,
 }
 
 /** 错误状态 - 显示错误提示 */
@@ -125,34 +159,5 @@ export const Sizes: Story = {
 
 /** 复选框组 - 多个复选框的组合使用 */
 export const CheckboxGroup: Story = {
-  render: () => {
-    const [selected, setSelected] = useState<string[]>(['email'])
-    const toggle = (value: string) => {
-      setSelected((prev) =>
-        prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
-      )
-    }
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-        <LMCheckbox
-          label="Email notifications"
-          description="Get notified via email"
-          checked={selected.includes('email')}
-          onChange={() => toggle('email')}
-        />
-        <LMCheckbox
-          label="SMS notifications"
-          description="Get notified via SMS"
-          checked={selected.includes('sms')}
-          onChange={() => toggle('sms')}
-        />
-        <LMCheckbox
-          label="Push notifications"
-          description="Get notified via push"
-          checked={selected.includes('push')}
-          onChange={() => toggle('push')}
-        />
-      </div>
-    )
-  },
+  render: () => <CheckboxGroupExample />,
 }

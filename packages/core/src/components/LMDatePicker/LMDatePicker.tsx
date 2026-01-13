@@ -97,6 +97,38 @@ const DoubleChevronRightIcon: React.FC = () => (
 const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
 const MONTHS = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 
+// TimeColumn component moved outside to avoid re-creation during render
+const TimeColumn: React.FC<{
+  options: number[]
+  value: number
+  onChange: (val: number) => void
+  listRef: React.RefObject<HTMLDivElement | null>
+}> = ({ options, value, onChange, listRef }) => (
+  <div
+    ref={listRef as React.RefObject<HTMLDivElement>}
+    className="flex-1 h-[168px] overflow-y-auto scrollbar-thin"
+    style={{ scrollbarWidth: 'thin' }}
+  >
+    {options.map((opt) => (
+      <button
+        key={opt}
+        className={`
+          w-full h-7 text-sm flex items-center justify-center
+          transition-colors duration-150
+          hover:bg-[var(--lm-bg-hover)]
+        `}
+        style={{
+          backgroundColor: opt === value ? 'var(--lm-primary-500)' : 'transparent',
+          color: opt === value ? 'white' : 'var(--lm-text-primary)',
+        }}
+        onClick={() => onChange(opt)}
+      >
+        {String(opt).padStart(2, '0')}
+      </button>
+    ))}
+  </div>
+)
+
 const formatDate = (date: Date, format: string): string => {
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -163,9 +195,8 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
 
   // Time state for pending selection
   const [tempDate, setTempDate] = useState<Date | null>(null)
-  const [tempHour, setTempHour] = useState(0)
-  const [tempMinute, setTempMinute] = useState(0)
-  const [tempSecond, setTempSecond] = useState(0)
+  // Track user-modified time separately from selected date time
+  const [userModifiedTime, setUserModifiedTime] = useState<{hour: number, minute: number, second: number} | null>(null)
 
   const triggerRef = useRef<HTMLDivElement>(null)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -177,14 +208,19 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
 
   const displayValue = selectedDate ? formatDate(selectedDate, format) : ''
 
-  // Sync temp time when selectedDate changes
-  useEffect(() => {
-    if (selectedDate) {
-      setTempHour(selectedDate.getHours())
-      setTempMinute(selectedDate.getMinutes())
-      setTempSecond(selectedDate.getSeconds())
+  // Derive temp time values - use user modified values if set, otherwise from selectedDate
+  const tempHour = userModifiedTime?.hour ?? selectedDate?.getHours() ?? 0
+  const tempMinute = userModifiedTime?.minute ?? selectedDate?.getMinutes() ?? 0
+  const tempSecond = userModifiedTime?.second ?? selectedDate?.getSeconds() ?? 0
+
+  // Reset user modified time when panel closes or selection changes
+  const prevSelectedDateRef = useRef(selectedDate)
+  if (prevSelectedDateRef.current !== selectedDate) {
+    prevSelectedDateRef.current = selectedDate
+    if (userModifiedTime !== null) {
+      setUserModifiedTime(null)
     }
-  }, [selectedDate])
+  }
 
   // Scroll time columns to selected values when panel opens
   useEffect(() => {
@@ -281,9 +317,11 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
   }
 
   const handleTimeChange = (type: 'hour' | 'minute' | 'second', val: number) => {
-    if (type === 'hour') setTempHour(val)
-    if (type === 'minute') setTempMinute(val)
-    if (type === 'second') setTempSecond(val)
+    setUserModifiedTime(prev => ({
+      hour: type === 'hour' ? val : (prev?.hour ?? tempHour),
+      minute: type === 'minute' ? val : (prev?.minute ?? tempMinute),
+      second: type === 'second' ? val : (prev?.second ?? tempSecond),
+    }))
   }
 
   const handleConfirm = () => {
@@ -300,9 +338,11 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
 
   const handleNow = () => {
     const now = new Date()
-    setTempHour(now.getHours())
-    setTempMinute(now.getMinutes())
-    setTempSecond(now.getSeconds())
+    setUserModifiedTime({
+      hour: now.getHours(),
+      minute: now.getMinutes(),
+      second: now.getSeconds(),
+    })
     setTempDate(now)
   }
 
@@ -451,37 +491,6 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
   const hourOptions = generateTimeOptions(24, hourStep)
   const minuteOptions = generateTimeOptions(60, minuteStep)
   const secondOptions = generateTimeOptions(60, secondStep)
-
-  const TimeColumn: React.FC<{
-    options: number[]
-    value: number
-    onChange: (val: number) => void
-    listRef: React.RefObject<HTMLDivElement | null>
-  }> = ({ options, value, onChange, listRef }) => (
-    <div
-      ref={listRef as React.RefObject<HTMLDivElement>}
-      className="flex-1 h-[168px] overflow-y-auto scrollbar-thin"
-      style={{ scrollbarWidth: 'thin' }}
-    >
-      {options.map((opt) => (
-        <button
-          key={opt}
-          className={`
-            w-full h-7 text-sm flex items-center justify-center
-            transition-colors duration-150
-            hover:bg-[var(--lm-bg-hover)]
-          `}
-          style={{
-            backgroundColor: opt === value ? 'var(--lm-primary-500)' : 'transparent',
-            color: opt === value ? 'white' : 'var(--lm-text-primary)',
-          }}
-          onClick={() => onChange(opt)}
-        >
-          {String(opt).padStart(2, '0')}
-        </button>
-      ))}
-    </div>
-  )
 
   const calendar = (
     <div

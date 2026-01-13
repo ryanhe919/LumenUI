@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent, act } from '@testing-library/react'
-import LMMessage, { LMMessageContainer, useMessage } from './LMMessage'
+import LMMessage, { LMMessageContainer } from './LMMessage'
+import { useMessage } from '../../hooks/useMessage'
 
 describe('LMMessage', () => {
   it('renders content', () => {

@@ -16,6 +16,45 @@ export interface LMRadioProps
   size?: ComponentSize
 }
 
+const sizeConfig = {
+  xs: {
+    container: 'p-2 gap-2',
+    label: 'text-xs',
+    description: 'text-xs mt-0.5',
+    errorMessage: 'text-xs',
+  },
+  sm: {
+    container: 'p-3 gap-2.5',
+    label: 'text-sm',
+    description: 'text-xs mt-1',
+    errorMessage: 'text-xs',
+  },
+  md: {
+    container: 'p-4 gap-3',
+    label: 'text-base',
+    description: 'text-sm mt-1',
+    errorMessage: 'text-xs',
+  },
+  lg: {
+    container: 'p-5 gap-4',
+    label: 'text-lg',
+    description: 'text-base mt-1.5',
+    errorMessage: 'text-sm',
+  },
+  xl: {
+    container: 'p-6 gap-4',
+    label: 'text-xl',
+    description: 'text-lg mt-2',
+    errorMessage: 'text-sm',
+  },
+  '2xl': {
+    container: 'p-8 gap-5',
+    label: 'text-2xl',
+    description: 'text-xl mt-2.5',
+    errorMessage: 'text-base',
+  },
+}
+
 const LMRadio: React.FC<LMRadioProps> = ({
   label,
   description,
@@ -30,6 +69,7 @@ const LMRadio: React.FC<LMRadioProps> = ({
   const controlId = id ?? `lm-radio-${autoId}`
   const errId = `lm-radio-err-${autoId}`
 
+  const currentSize = sizeConfig[size]
   const radioSizeClass = SIZE_ICON_CONFIG[size]
 
   const getRadioStyles = () => {
@@ -97,7 +137,7 @@ const LMRadio: React.FC<LMRadioProps> = ({
   return (
     <div>
       <div
-        className="flex items-start gap-3 p-4 rounded-2xl transition-colors duration-200"
+        className={`flex items-start ${currentSize.container} rounded-2xl transition-colors duration-200`}
         style={getContainerStyles()}
         onMouseEnter={(e) => {
           if (!props.disabled)
@@ -137,13 +177,13 @@ const LMRadio: React.FC<LMRadioProps> = ({
         <div className="flex-1">
           <label
             htmlFor={controlId}
-            className="text-base font-medium transition-colors duration-200"
+            className={`${currentSize.label} font-medium transition-colors duration-200`}
             style={getLabelStyles()}
           >
             {label}
           </label>
           {description && (
-            <p className="text-sm mt-1" style={getDescriptionStyles()}>
+            <p className={currentSize.description} style={getDescriptionStyles()}>
               {description}
             </p>
           )}
@@ -153,7 +193,7 @@ const LMRadio: React.FC<LMRadioProps> = ({
       {errorMessage && (
         <p
           id={errId}
-          className="text-xs flex items-center gap-1"
+          className={`${currentSize.errorMessage} flex items-center gap-1`}
           style={{ color: 'var(--lm-error-500)' }}
           role="alert"
           aria-live="polite"

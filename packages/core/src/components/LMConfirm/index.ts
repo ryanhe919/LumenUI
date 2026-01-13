@@ -1,2 +1,4 @@
-export { default as LMConfirm, useConfirm } from './LMConfirm'
-export type { LMConfirmProps, UseConfirmReturn } from './LMConfirm'
+export { default as LMConfirm } from './LMConfirm'
+export type { LMConfirmProps } from './LMConfirm'
+export { useConfirm } from '../../hooks/useConfirm'
+export type { UseConfirmReturn } from '../../hooks/useConfirm'

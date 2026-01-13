@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
+  useId,
 } from 'react'
 import { SIZE_INPUT_CONFIG } from '../../utils/componentSizes'
 import type { ComponentSize } from '../../utils/componentSizes'
@@ -66,7 +67,7 @@ const LMNumberInput: React.FC<LMNumberInputProps> = ({
   )
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const errId = useRef(`lm-ni-err-${Math.random().toString(36).slice(2)}`).current
+  const errId = `lm-ni-err-${useId()}`
 
   const formatNumber = useCallback(
     (num: number): string => {

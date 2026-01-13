@@ -29,6 +29,10 @@ export * from './components/LMTabs'
 export * from './components/LMDrawer'
 export * from './components/LMMenu'
 export * from './components/LMDatePicker'
+export * from './components/LMUpload'
+
+// Hooks
+export * from './hooks'
 
 // Utilities
 export * from './utils'

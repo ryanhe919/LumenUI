@@ -264,7 +264,6 @@ const LMDropdown: React.FC<LMDropdownProps> = ({
         ${minWidthClasses[resolvedSize]}
         rounded-xl border backdrop-blur-md
         shadow-lg py-1
-        animate-in fade-in-0 zoom-in-95 duration-200
       `}
       style={{
         position: 'absolute',

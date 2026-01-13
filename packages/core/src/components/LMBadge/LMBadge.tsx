@@ -9,7 +9,7 @@ export type LMBadgeVariant =
   | 'info'
   | 'neutral'
 
-export type LMBadgeSize = 'xs' | 'sm' | 'md' | 'lg'
+export type LMBadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 export interface LMBadgeProps {
   /** Badge content */
@@ -50,6 +50,18 @@ const sizeConfig = {
     fontSize: 'text-sm',
     dotSize: 'w-2.5 h-2.5',
     iconSize: 'text-sm',
+  },
+  xl: {
+    padding: 'px-5 py-2.5',
+    fontSize: 'text-base',
+    dotSize: 'w-3 h-3',
+    iconSize: 'text-base',
+  },
+  '2xl': {
+    padding: 'px-6 py-3',
+    fontSize: 'text-lg',
+    dotSize: 'w-3.5 h-3.5',
+    iconSize: 'text-lg',
   },
 }
 
