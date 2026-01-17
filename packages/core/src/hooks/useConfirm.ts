@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import type { LMConfirmProps } from '../components/LMConfirm/LMConfirm'
-import LMConfirm from '../components/LMConfirm/LMConfirm'
+import type { LMConfirmProps } from '../components/Feedback/LMConfirm/LMConfirm'
+import LMConfirm from '../components/Feedback/LMConfirm/LMConfirm'
 
 export interface UseConfirmReturn {
   visible: boolean

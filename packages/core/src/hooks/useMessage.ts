@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import type { LMMessageItem } from '../components/LMMessage/LMMessage'
+import type { LMMessageItem } from '../components/Feedback/LMMessage/LMMessage'
 
 export interface UseMessageReturn {
   messages: LMMessageItem[]
