@@ -2,7 +2,7 @@
  * LMButton - 按钮组件
  * 用于触发操作或事件的交互元素
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMButton from './LMButton'
 
 const meta: Meta<typeof LMButton> = {

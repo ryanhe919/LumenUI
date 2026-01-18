@@ -2,7 +2,7 @@
  * LMMessage - 消息提示组件
  * 用于全局消息通知，支持成功、错误、警告、信息等类型
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMMessage, { LMMessageContainer } from './LMMessage'
 import { useMessage } from '../../../hooks/useMessage'

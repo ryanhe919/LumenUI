@@ -2,7 +2,7 @@
  * LMRadio - 单选框组件
  * 用于单选场景的表单控件
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMRadio from './LMRadio'
 

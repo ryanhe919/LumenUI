@@ -2,7 +2,7 @@
  * LMPagination - 分页组件
  * 用于长列表数据的分页展示
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMPagination from './LMPagination'
 

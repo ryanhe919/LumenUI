@@ -2,7 +2,7 @@
  * LMConfirm - 确认对话框组件
  * 用于需要用户二次确认的操作场景
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMConfirm from './LMConfirm'
 import { useConfirm } from '../../../hooks/useConfirm'

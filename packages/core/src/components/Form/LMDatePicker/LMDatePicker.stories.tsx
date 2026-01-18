@@ -2,7 +2,7 @@
  * LMDatePicker - 日期选择器组件
  * 输入或选择日期的控件
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMDatePicker from './LMDatePicker'
 

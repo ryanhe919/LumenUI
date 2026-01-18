@@ -2,7 +2,7 @@
  * LMCard - 卡片组件
  * 通用容器组件，用于信息分组展示
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMCard from './LMCard'
 import { LMButton } from '../../General/LMButton'
 

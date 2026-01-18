@@ -2,7 +2,7 @@
  * LMSearchInput - 搜索输入框组件
  * 专用于搜索场景的输入框，带有搜索图标和清除按钮
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMSearchInput from './LMSearchInput'
 

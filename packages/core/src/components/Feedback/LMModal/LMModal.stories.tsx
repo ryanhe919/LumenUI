@@ -2,7 +2,7 @@
  * LMModal - 模态框组件
  * 用于在当前页面上层展示内容，需要用户处理后才能继续
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMModal from './LMModal'
 import LMButton from '../../General/LMButton/LMButton'

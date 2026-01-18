@@ -2,7 +2,7 @@
  * LMField - 表单字段组件
  * 用于包装表单控件，提供标签、必填标记、帮助文字和错误提示
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMField from './LMField'
 import LMInput from '../LMInput/LMInput'
 import LMSelect from '../LMSelect/LMSelect'

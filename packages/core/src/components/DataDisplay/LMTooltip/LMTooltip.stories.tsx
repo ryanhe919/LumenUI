@@ -2,7 +2,7 @@
  * LMTooltip - 文字提示组件
  * 用于在鼠标悬停时显示额外信息
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMTooltip from './LMTooltip'
 import LMButton from '../../General/LMButton/LMButton'
 

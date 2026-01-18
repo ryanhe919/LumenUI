@@ -2,7 +2,7 @@
  * LMStatCard - 统计卡片组件
  * 用于展示关键指标数据，支持趋势变化和图标
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMStatCard from './LMStatCard'
 
 /** 用户图标 */

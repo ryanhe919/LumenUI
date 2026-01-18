@@ -2,7 +2,7 @@
  * LMCheckbox - 复选框组件
  * 用于多选场景的表单控件
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMCheckbox from './LMCheckbox'
 

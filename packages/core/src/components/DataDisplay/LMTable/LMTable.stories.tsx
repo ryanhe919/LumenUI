@@ -2,7 +2,7 @@
  * LMTable - 表格组件
  * 用于展示结构化数据，支持排序、分页、选择等功能
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMTable from './LMTable'
 import LMBadge from '../../General/LMBadge/LMBadge'

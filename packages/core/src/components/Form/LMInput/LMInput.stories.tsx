@@ -2,7 +2,7 @@
  * LMInput - 输入框组件
  * 用于文本、密码、邮箱等类型的单行输入
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMInput from './LMInput'
 
 const meta: Meta<typeof LMInput> = {

@@ -2,7 +2,7 @@
  * LMEmpty - 空状态组件
  * 数据为空时的占位展示
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMEmpty from './LMEmpty'
 import { LMButton } from '../../General/LMButton'
 

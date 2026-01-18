@@ -2,7 +2,7 @@
  * LMNumberInput - 数字输入框组件
  * 用于数值输入，支持步进、范围限制和精度控制
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMNumberInput from './LMNumberInput'
 

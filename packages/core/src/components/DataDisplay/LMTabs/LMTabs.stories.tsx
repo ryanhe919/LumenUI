@@ -2,7 +2,7 @@
  * LMTabs - 标签页组件
  * 用于在同一页面内切换不同的内容区域
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMTabs from './LMTabs'
 import { LMButton } from '../../General/LMButton'

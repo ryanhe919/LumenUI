@@ -2,7 +2,7 @@
  * LMBadge - 徽章组件
  * 用于展示状态、标签、计数等信息的小型标记元素
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMBadge from './LMBadge'
 
 const meta: Meta<typeof LMBadge> = {

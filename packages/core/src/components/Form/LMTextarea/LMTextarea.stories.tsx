@@ -2,7 +2,7 @@
  * LMTextarea - 文本域组件
  * 用于多行文本输入的表单控件
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMTextarea from './LMTextarea'
 
 const meta: Meta<typeof LMTextarea> = {

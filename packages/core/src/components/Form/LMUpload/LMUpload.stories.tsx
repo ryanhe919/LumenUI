@@ -3,7 +3,7 @@
  * 用于上传文件到服务器的交互组件
  */
 import { useState } from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMUpload from './LMUpload'
 import type { LMUploadFile } from './LMUpload'
 

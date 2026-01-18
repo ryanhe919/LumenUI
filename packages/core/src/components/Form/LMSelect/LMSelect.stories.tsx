@@ -2,7 +2,7 @@
  * LMSelect - 下拉选择框组件
  * 用于从预设选项中进行单选或多选
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMSelect from './LMSelect'
 

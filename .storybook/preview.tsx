@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import type { Preview, Decorator } from '@storybook/react'
+import type { Preview, Decorator } from '@storybook/react-vite'
 // base.css imports tailwindcss and theme.css
 import '../packages/core/src/styles/base.css'
 
@@ -29,7 +29,7 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      disable: true, // Disable backgrounds addon, use theme instead
+      disabled: true,
     },
     layout: 'centered',
   },

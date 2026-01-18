@@ -2,7 +2,7 @@
  * LMDropdown - 下拉菜单组件
  * 向下弹出的菜单列表，用于操作菜单、更多操作等场景
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LMDropdown from './LMDropdown'
 import { LMButton } from '../../General/LMButton'
 

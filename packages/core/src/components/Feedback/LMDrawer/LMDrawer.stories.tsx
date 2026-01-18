@@ -2,7 +2,7 @@
  * LMDrawer - 抽屉组件
  * 从屏幕边缘滑出的浮层面板
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMDrawer from './LMDrawer'
 import { LMButton } from '../../General/LMButton'

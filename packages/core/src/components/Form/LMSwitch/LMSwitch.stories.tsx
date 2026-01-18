@@ -2,7 +2,7 @@
  * LMSwitch - 开关组件
  * 用于切换两种状态的表单控件
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMSwitch from './LMSwitch'
 

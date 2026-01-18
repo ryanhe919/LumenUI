@@ -2,7 +2,7 @@
  * LMMenu - 菜单组件
  * 为页面和功能提供导航的菜单列表
  */
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import LMMenu from './LMMenu'
 import type { LMMenuItem } from './LMMenu'
