@@ -1,6 +1,6 @@
 {
   "name": "@ryanhe919/lumen-ui",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A modern React UI component library with glassmorphism design",
   "type": "module",
   "main": "dist/index.cjs",
@@ -17,7 +17,267 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./styles.css": "./dist/style.css"
+    "./styles.css": "./dist/style.css",
+    "./button": {
+      "import": {
+        "types": "./dist/components/General/LMButton/index.d.ts",
+        "default": "./dist/components/button/index.js"
+      },
+      "require": {
+        "types": "./dist/components/General/LMButton/index.d.cts",
+        "default": "./dist/components/button/index.cjs"
+      }
+    },
+    "./badge": {
+      "import": {
+        "types": "./dist/components/General/LMBadge/index.d.ts",
+        "default": "./dist/components/badge/index.js"
+      },
+      "require": {
+        "types": "./dist/components/General/LMBadge/index.d.cts",
+        "default": "./dist/components/badge/index.cjs"
+      }
+    },
+    "./input": {
+      "import": {
+        "types": "./dist/components/Form/LMInput/index.d.ts",
+        "default": "./dist/components/input/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMInput/index.d.cts",
+        "default": "./dist/components/input/index.cjs"
+      }
+    },
+    "./textarea": {
+      "import": {
+        "types": "./dist/components/Form/LMTextarea/index.d.ts",
+        "default": "./dist/components/textarea/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMTextarea/index.d.cts",
+        "default": "./dist/components/textarea/index.cjs"
+      }
+    },
+    "./number-input": {
+      "import": {
+        "types": "./dist/components/Form/LMNumberInput/index.d.ts",
+        "default": "./dist/components/number-input/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMNumberInput/index.d.cts",
+        "default": "./dist/components/number-input/index.cjs"
+      }
+    },
+    "./search-input": {
+      "import": {
+        "types": "./dist/components/Form/LMSearchInput/index.d.ts",
+        "default": "./dist/components/search-input/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMSearchInput/index.d.cts",
+        "default": "./dist/components/search-input/index.cjs"
+      }
+    },
+    "./select": {
+      "import": {
+        "types": "./dist/components/Form/LMSelect/index.d.ts",
+        "default": "./dist/components/select/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMSelect/index.d.cts",
+        "default": "./dist/components/select/index.cjs"
+      }
+    },
+    "./checkbox": {
+      "import": {
+        "types": "./dist/components/Form/LMCheckbox/index.d.ts",
+        "default": "./dist/components/checkbox/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMCheckbox/index.d.cts",
+        "default": "./dist/components/checkbox/index.cjs"
+      }
+    },
+    "./radio": {
+      "import": {
+        "types": "./dist/components/Form/LMRadio/index.d.ts",
+        "default": "./dist/components/radio/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMRadio/index.d.cts",
+        "default": "./dist/components/radio/index.cjs"
+      }
+    },
+    "./switch": {
+      "import": {
+        "types": "./dist/components/Form/LMSwitch/index.d.ts",
+        "default": "./dist/components/switch/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMSwitch/index.d.cts",
+        "default": "./dist/components/switch/index.cjs"
+      }
+    },
+    "./field": {
+      "import": {
+        "types": "./dist/components/Form/LMField/index.d.ts",
+        "default": "./dist/components/field/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMField/index.d.cts",
+        "default": "./dist/components/field/index.cjs"
+      }
+    },
+    "./date-picker": {
+      "import": {
+        "types": "./dist/components/Form/LMDatePicker/index.d.ts",
+        "default": "./dist/components/date-picker/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMDatePicker/index.d.cts",
+        "default": "./dist/components/date-picker/index.cjs"
+      }
+    },
+    "./upload": {
+      "import": {
+        "types": "./dist/components/Form/LMUpload/index.d.ts",
+        "default": "./dist/components/upload/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Form/LMUpload/index.d.cts",
+        "default": "./dist/components/upload/index.cjs"
+      }
+    },
+    "./table": {
+      "import": {
+        "types": "./dist/components/DataDisplay/LMTable/index.d.ts",
+        "default": "./dist/components/table/index.js"
+      },
+      "require": {
+        "types": "./dist/components/DataDisplay/LMTable/index.d.cts",
+        "default": "./dist/components/table/index.cjs"
+      }
+    },
+    "./stat-card": {
+      "import": {
+        "types": "./dist/components/DataDisplay/LMStatCard/index.d.ts",
+        "default": "./dist/components/stat-card/index.js"
+      },
+      "require": {
+        "types": "./dist/components/DataDisplay/LMStatCard/index.d.cts",
+        "default": "./dist/components/stat-card/index.cjs"
+      }
+    },
+    "./tooltip": {
+      "import": {
+        "types": "./dist/components/DataDisplay/LMTooltip/index.d.ts",
+        "default": "./dist/components/tooltip/index.js"
+      },
+      "require": {
+        "types": "./dist/components/DataDisplay/LMTooltip/index.d.cts",
+        "default": "./dist/components/tooltip/index.cjs"
+      }
+    },
+    "./card": {
+      "import": {
+        "types": "./dist/components/DataDisplay/LMCard/index.d.ts",
+        "default": "./dist/components/card/index.js"
+      },
+      "require": {
+        "types": "./dist/components/DataDisplay/LMCard/index.d.cts",
+        "default": "./dist/components/card/index.cjs"
+      }
+    },
+    "./empty": {
+      "import": {
+        "types": "./dist/components/DataDisplay/LMEmpty/index.d.ts",
+        "default": "./dist/components/empty/index.js"
+      },
+      "require": {
+        "types": "./dist/components/DataDisplay/LMEmpty/index.d.cts",
+        "default": "./dist/components/empty/index.cjs"
+      }
+    },
+    "./tabs": {
+      "import": {
+        "types": "./dist/components/DataDisplay/LMTabs/index.d.ts",
+        "default": "./dist/components/tabs/index.js"
+      },
+      "require": {
+        "types": "./dist/components/DataDisplay/LMTabs/index.d.cts",
+        "default": "./dist/components/tabs/index.cjs"
+      }
+    },
+    "./menu": {
+      "import": {
+        "types": "./dist/components/Navigation/LMMenu/index.d.ts",
+        "default": "./dist/components/menu/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Navigation/LMMenu/index.d.cts",
+        "default": "./dist/components/menu/index.cjs"
+      }
+    },
+    "./dropdown": {
+      "import": {
+        "types": "./dist/components/Navigation/LMDropdown/index.d.ts",
+        "default": "./dist/components/dropdown/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Navigation/LMDropdown/index.d.cts",
+        "default": "./dist/components/dropdown/index.cjs"
+      }
+    },
+    "./pagination": {
+      "import": {
+        "types": "./dist/components/Navigation/LMPagination/index.d.ts",
+        "default": "./dist/components/pagination/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Navigation/LMPagination/index.d.cts",
+        "default": "./dist/components/pagination/index.cjs"
+      }
+    },
+    "./message": {
+      "import": {
+        "types": "./dist/components/Feedback/LMMessage/index.d.ts",
+        "default": "./dist/components/message/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Feedback/LMMessage/index.d.cts",
+        "default": "./dist/components/message/index.cjs"
+      }
+    },
+    "./modal": {
+      "import": {
+        "types": "./dist/components/Feedback/LMModal/index.d.ts",
+        "default": "./dist/components/modal/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Feedback/LMModal/index.d.cts",
+        "default": "./dist/components/modal/index.cjs"
+      }
+    },
+    "./confirm": {
+      "import": {
+        "types": "./dist/components/Feedback/LMConfirm/index.d.ts",
+        "default": "./dist/components/confirm/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Feedback/LMConfirm/index.d.cts",
+        "default": "./dist/components/confirm/index.cjs"
+      }
+    },
+    "./drawer": {
+      "import": {
+        "types": "./dist/components/Feedback/LMDrawer/index.d.ts",
+        "default": "./dist/components/drawer/index.js"
+      },
+      "require": {
+        "types": "./dist/components/Feedback/LMDrawer/index.d.cts",
+        "default": "./dist/components/drawer/index.cjs"
+      }
+    }
   },
   "files": [
     "dist"
@@ -37,7 +297,8 @@
     "glassmorphism",
     "design-system",
     "tailwindcss",
-    "typescript"
+    "typescript",
+    "tree-shaking"
   ],
   "author": "Yufan He",
   "license": "MIT",
