@@ -253,7 +253,7 @@ const LMChatMessage: React.FC<LMChatMessageProps> = ({
               ${ACTION_BUTTON_SIZE[resolvedSize]}
               flex items-center justify-center
               rounded-lg cursor-pointer
-              hover:bg-[var(--lm-bg-hover)]
+              hover:bg-(--lm-bg-hover)
               active:scale-95
               disabled:opacity-50 disabled:cursor-not-allowed
               transition-all duration-150

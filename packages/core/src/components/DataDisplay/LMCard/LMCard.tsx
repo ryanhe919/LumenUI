@@ -218,7 +218,7 @@ const LMCard: React.FC<LMCardProps> = ({
         {actions.map((action, index) => (
           <div
             key={index}
-            className={`flex-1 flex items-center justify-center py-3 transition-colors duration-200 hover:bg-[var(--lm-bg-hover)] ${
+            className={`flex-1 flex items-center justify-center py-3 transition-colors duration-200 hover:bg-(--lm-bg-hover) ${
               index !== actions.length - 1 ? 'border-r' : ''
             }`}
             style={{

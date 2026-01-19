@@ -142,12 +142,12 @@ const LMBadge: React.FC<LMBadgeProps> = ({
     >
       {dot && (
         <span
-          className={`${currentSize.dotSize} rounded-full mr-1.5 flex-shrink-0`}
+          className={`${currentSize.dotSize} rounded-full mr-1.5 shrink-0`}
           style={{ backgroundColor: getDotColor() }}
         />
       )}
       {icon && (
-        <span className={`${currentSize.iconSize} mr-1.5 flex-shrink-0`}>
+        <span className={`${currentSize.iconSize} mr-1.5 shrink-0`}>
           {icon}
         </span>
       )}

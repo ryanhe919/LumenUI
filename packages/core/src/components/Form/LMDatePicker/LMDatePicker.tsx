@@ -142,7 +142,7 @@ const TimeColumn: React.FC<{
         className={`
           w-full h-8 text-sm flex items-center justify-center rounded-md
           transition-colors duration-150
-          hover:bg-[var(--lm-bg-hover)]
+          hover:bg-(--lm-bg-hover)
         `}
         style={{
           backgroundColor: opt === value ? 'var(--lm-primary-500)' : 'transparent',
@@ -536,18 +536,18 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
       <style>{timeScrollbarStyles}</style>
       <div className={hasTime ? 'flex gap-3' : ''}>
         {/* Calendar Panel */}
-        <div className="flex-shrink-0" style={{ width: '256px' }}>
+        <div className="shrink-0" style={{ width: '256px' }}>
           {/* Header */}
           <div className="flex items-center justify-between mb-3">
             <button
-              className="p-1 rounded hover:bg-[var(--lm-bg-hover)] transition-colors"
+              className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handlePrevYear}
               style={{ color: 'var(--lm-text-secondary)' }}
             >
               <DoubleChevronLeftIcon />
             </button>
             <button
-              className="p-1 rounded hover:bg-[var(--lm-bg-hover)] transition-colors"
+              className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handlePrevMonth}
               style={{ color: 'var(--lm-text-secondary)' }}
             >
@@ -560,14 +560,14 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
               {viewDate.getFullYear()} 年 {MONTHS[viewDate.getMonth()]}
             </span>
             <button
-              className="p-1 rounded hover:bg-[var(--lm-bg-hover)] transition-colors"
+              className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handleNextMonth}
               style={{ color: 'var(--lm-text-secondary)' }}
             >
               <ChevronRightIcon />
             </button>
             <button
-              className="p-1 rounded hover:bg-[var(--lm-bg-hover)] transition-colors"
+              className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handleNextYear}
               style={{ color: 'var(--lm-text-secondary)' }}
             >
@@ -598,7 +598,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
                   className={`
                     w-8 h-8 rounded-lg text-sm flex items-center justify-center
                     transition-colors duration-150
-                    ${!isDisabled ? 'hover:bg-[var(--lm-bg-hover)]' : ''}
+                    ${!isDisabled ? 'hover:bg-(--lm-bg-hover)' : ''}
                   `}
                   style={getDayStyles(day)}
                   onClick={() => handleDateSelect(day.date)}
@@ -618,7 +618,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
             style={{ borderColor: 'var(--lm-border-light)', width: '170px' }}
           >
             <div
-              className="text-xs font-medium mb-2 text-center flex-shrink-0"
+              className="text-xs font-medium mb-2 text-center shrink-0"
               style={{ color: 'var(--lm-text-tertiary)' }}
             >
               选择时间
@@ -656,7 +656,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
       {/* Footer */}
       <div className="mt-3 pt-3 border-t flex items-center justify-between" style={{ borderColor: 'var(--lm-border-light)' }}>
         <button
-          className="py-1.5 px-3 text-sm rounded-lg hover:bg-[var(--lm-bg-hover)] transition-colors"
+          className="py-1.5 px-3 text-sm rounded-lg hover:bg-(--lm-bg-hover) transition-colors"
           style={{ color: 'var(--lm-primary-600)' }}
           onClick={hasTime ? handleNow : () => handleDateSelect(new Date())}
         >
@@ -703,7 +703,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
 
         {allowClear && displayValue && isHovered && !disabled ? (
           <span
-            className="flex-shrink-0 p-0.5 rounded hover:bg-[var(--lm-bg-hover)]"
+            className="shrink-0 p-0.5 rounded hover:bg-(--lm-bg-hover)"
             style={{ color: 'var(--lm-text-tertiary)' }}
             onClick={handleClear}
           >
@@ -711,7 +711,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
           </span>
         ) : (
           <span
-            className="flex-shrink-0"
+            className="shrink-0"
             style={{ color: 'var(--lm-text-tertiary)' }}
           >
             <CalendarIcon />

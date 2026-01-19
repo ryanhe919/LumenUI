@@ -278,7 +278,7 @@ const LMCodeBlock: React.FC<LMCodeBlockProps> = ({
             {/* 文件名 */}
             {filename && (
               <span
-                className="text-xs truncate max-w-[180px]"
+                className="text-xs truncate max-w-45"
                 style={{ color: 'var(--lm-code-line-number)' }}
               >
                 {filename}

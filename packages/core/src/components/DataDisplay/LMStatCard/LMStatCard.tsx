@@ -356,7 +356,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
           <div className="flex items-center gap-2 mb-2 min-w-0">
             {icon && (
               <div
-                className={`${iconSizeClasses[resolvedSize]} rounded-lg flex items-center justify-center flex-shrink-0`}
+                className={`${iconSizeClasses[resolvedSize]} rounded-lg flex items-center justify-center shrink-0`}
                 style={getIconStyles()}
               >
                 {icon}
@@ -377,7 +377,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
           >
             {prefix && (
               <span
-                className={`${metaTextClasses[resolvedSize]} flex-shrink-0`}
+                className={`${metaTextClasses[resolvedSize]} shrink-0`}
                 style={{ color: 'var(--lm-text-secondary)' }}
               >
                 {prefix}
@@ -391,7 +391,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
             </span>
             {suffix && (
               <span
-                className={`${metaTextClasses[resolvedSize]} flex-shrink-0`}
+                className={`${metaTextClasses[resolvedSize]} shrink-0`}
                 style={{ color: 'var(--lm-text-secondary)' }}
               >
                 {suffix}

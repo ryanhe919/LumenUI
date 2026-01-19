@@ -218,11 +218,11 @@ const LMDrawer: React.FC<LMDrawerProps> = ({
                 </h3>
               )}
             </div>
-            <div className="flex items-center gap-2 flex-shrink-0">
+            <div className="flex items-center gap-2 shrink-0">
               {extra}
               {closable && (
                 <button
-                  className="p-1.5 rounded-lg transition-colors duration-200 hover:bg-[var(--lm-bg-hover)]"
+                  className="p-1.5 rounded-lg transition-colors duration-200 hover:bg-(--lm-bg-hover)"
                   style={{ color: 'var(--lm-text-secondary)' }}
                   onClick={onClose}
                   aria-label="关闭"

@@ -215,7 +215,7 @@ const LMTabs: React.FC<LMTabsProps> = ({
           Object.assign(e.currentTarget.style, getTabStyles(item, isActive))
         }}
       >
-        {item.icon && <span className="flex-shrink-0">{item.icon}</span>}
+        {item.icon && <span className="shrink-0">{item.icon}</span>}
         <span>{item.label}</span>
       </button>
     )
@@ -265,7 +265,7 @@ const LMTabs: React.FC<LMTabsProps> = ({
 
         {/* Extra content */}
         {tabBarExtraContent && !centered && (
-          <div className="flex-shrink-0 ml-4">{tabBarExtraContent}</div>
+          <div className="shrink-0 ml-4">{tabBarExtraContent}</div>
         )}
       </div>
 

@@ -145,7 +145,7 @@ const LMSwitch: React.FC<LMSwitchProps> = ({
           }
         }}
       >
-        <div className="flex-shrink-0 relative">
+        <div className="shrink-0 relative">
           <input
             type="checkbox"
             id={controlId}

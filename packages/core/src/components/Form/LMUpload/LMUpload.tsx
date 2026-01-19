@@ -348,7 +348,7 @@ const LMUpload: React.FC<LMUploadProps> = ({
         {/* Thumbnail / Icon */}
         {listType === 'picture' && isImage && file.url ? (
           <div
-            className={`${thumbSizeClasses[resolvedSize]} rounded-lg overflow-hidden flex-shrink-0`}
+            className={`${thumbSizeClasses[resolvedSize]} rounded-lg overflow-hidden shrink-0`}
             style={{ backgroundColor: 'var(--lm-bg-elevated)' }}
           >
             <img
@@ -359,7 +359,7 @@ const LMUpload: React.FC<LMUploadProps> = ({
           </div>
         ) : (
           <div
-            className="p-2 rounded-lg flex-shrink-0"
+            className="p-2 rounded-lg shrink-0"
             style={{
               backgroundColor: file.status === 'error' ? 'var(--lm-error-100)' : 'var(--lm-bg-elevated)',
               color: file.status === 'error' ? 'var(--lm-error-500)' : 'var(--lm-text-secondary)',
@@ -423,7 +423,7 @@ const LMUpload: React.FC<LMUploadProps> = ({
         {/* Remove button */}
         <button
           type="button"
-          className="p-1.5 rounded-lg transition-colors duration-200 hover:bg-[var(--lm-bg-hover)] flex-shrink-0"
+          className="p-1.5 rounded-lg transition-colors duration-200 hover:bg-(--lm-bg-hover) shrink-0"
           style={{ color: 'var(--lm-text-tertiary)' }}
           onClick={() => handleRemove(file)}
           aria-label={`删除 ${file.name}`}
@@ -461,7 +461,7 @@ const LMUpload: React.FC<LMUploadProps> = ({
             border-2 border-dashed rounded-2xl
             flex flex-col items-center justify-center
             transition-all duration-200
-            ${disabled ? '' : 'cursor-pointer hover:border-[var(--lm-primary-400)]'}
+            ${disabled ? '' : 'cursor-pointer hover:border-(--lm-primary-400)'}
           `}
           style={getDropzoneStyles()}
           onClick={handleClick}

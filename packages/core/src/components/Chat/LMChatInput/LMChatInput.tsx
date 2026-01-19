@@ -87,7 +87,7 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = ({
       flex items-center gap-1 px-2 py-1 rounded-md cursor-pointer
       transition-all duration-150
       disabled:opacity-40 disabled:cursor-not-allowed
-      hover:bg-[var(--lm-bg-hover)] active:scale-95
+      hover:bg-(--lm-bg-hover) active:scale-95
     `.trim().replace(/\s+/g, ' ')}
     style={{
       backgroundColor: active ? 'var(--lm-primary-50)' : 'transparent',
@@ -342,8 +342,8 @@ const LMChatInput: React.FC<LMChatInputProps> = ({
               w-full resize-none bg-transparent leading-relaxed
               outline-none focus:outline-none focus:ring-0 border-none
               ${SIZE_TEXT_CLASSES[resolvedSize]}
-              placeholder:text-[var(--lm-text-tertiary)]
-              disabled:text-[var(--lm-text-disabled)] disabled:cursor-not-allowed
+              placeholder:text-(--lm-text-tertiary)
+              disabled:text-(--lm-text-disabled) disabled:cursor-not-allowed
             `.trim().replace(/\s+/g, ' ')}
             style={{
               color: 'var(--lm-text-primary)',
