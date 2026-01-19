@@ -8,7 +8,7 @@ const config = {
     content: `MIT ${new Date().getFullYear()} © LumenUI`,
   },
   sidebar: {
-    defaultMenuCollapseLevel: 1,
+    defaultMenuCollapseLevel: 2,
     toggleButton: true,
   },
   toc: {
