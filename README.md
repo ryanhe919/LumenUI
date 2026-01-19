@@ -4,7 +4,7 @@
 
 ## 特性
 
-- 25+ 精心设计的组件
+- 33+ 精心设计的组件
 - **Apple 风格设计**，精致的动画和交互体验
 - 毛玻璃效果，选择性模糊
 - 完整的 TypeScript 支持
@@ -86,6 +86,16 @@ function App() {
 - **LMModal** - 模态框
 - **LMConfirm** - 确认对话框
 - **LMDrawer** - 抽屉面板
+
+### 聊天 Chat
+- **LMChatContainer** - 完整聊天界面容器
+- **LMChatList** - 消息列表
+- **LMChatMessage** - 聊天消息
+- **LMChatBubble** - 聊天气泡
+- **LMChatInput** - 聊天输入框
+- **LMTypingIndicator** - 打字指示器
+- **LMCodeBlock** - 代码块（语法高亮）
+- **LMMarkdownRenderer** - Markdown 渲染器
 
 ## 主题
 
@@ -250,6 +260,58 @@ function App() {
     </>
   )
 }
+```
+
+### 聊天界面
+
+```tsx
+import { LMChatContainer, LMMarkdownRenderer } from '@ryanhe919/lumen-ui'
+
+function ChatApp() {
+  const [messages, setMessages] = useState([
+    { id: '1', role: 'user', content: '你好！', name: '用户' },
+    { id: '2', role: 'assistant', content: '你好！有什么可以帮助你的吗？', name: 'AI' },
+  ])
+  const [isGenerating, setIsGenerating] = useState(false)
+
+  const handleSend = async (content: string) => {
+    // 添加用户消息
+    setMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', content }])
+    setIsGenerating(true)
+    // 调用 AI API...
+  }
+
+  return (
+    <LMChatContainer
+      messages={messages}
+      onSend={handleSend}
+      isGenerating={isGenerating}
+      onStop={() => setIsGenerating(false)}
+      placeholder="输入消息..."
+      height="600px"
+    />
+  )
+}
+```
+
+### Markdown 渲染
+
+```tsx
+import { LMMarkdownRenderer } from '@ryanhe919/lumen-ui'
+
+// 支持代码块语法高亮、表格、列表等
+<LMMarkdownRenderer
+  content={`
+## 标题
+
+这是一段 **Markdown** 文本。
+
+\`\`\`typescript
+const greeting = 'Hello, World!'
+console.log(greeting)
+\`\`\`
+  `}
+/>
 ```
 
 ## 开发

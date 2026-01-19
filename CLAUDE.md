@@ -32,7 +32,7 @@ pnpm clean              # 清理 dist 目录
 LumenUI/
 ├── packages/core/          # 核心组件库 (@ryanhe919/lumen-ui)
 │   └── src/
-│       ├── components/     # 25 个组件，每个组件目录包含:
+│       ├── components/     # 33 个组件，每个组件目录包含:
 │       │                   # *.tsx (组件) + *.stories.tsx (文档) + *.test.tsx (测试)
 │       ├── styles/         # base.css (入口) + theme.css (CSS 变量主题)
 │       ├── utils/          # cn.ts (类名合并) + componentSizes.ts (尺寸配置)
@@ -48,6 +48,7 @@ LumenUI/
 - 数据展示 Data Display: LMTable, LMStatCard, LMTooltip, LMCard, LMEmpty, LMTabs
 - 导航 Navigation: LMMenu, LMDropdown, LMPagination
 - 反馈 Feedback: LMMessage, LMModal, LMConfirm, LMDrawer
+- 聊天 Chat: LMChatContainer, LMChatList, LMChatMessage, LMChatBubble, LMChatInput, LMTypingIndicator, LMCodeBlock, LMMarkdownRenderer
 
 ## 关键技术约定
 

@@ -634,6 +634,343 @@ function DeleteButton({ onDelete }) {
 
 ---
 
+## 聊天 Chat
+
+### LMChatContainer 聊天容器
+
+完整的聊天界面，整合消息列表和输入框，支持流式输出。
+
+```tsx
+interface LMChatContainerProps {
+  messages: ChatMessage[]              // 消息列表 (必填)
+  size?: ComponentSize                 // 默认 'md'
+  variant?: 'default' | 'filled' | 'outline' | 'soft'  // 气泡变体
+  onSend?: (content: string) => void   // 发送消息回调
+  onStop?: () => void                  // 停止生成回调
+  isGenerating?: boolean               // 是否正在生成
+  disabled?: boolean                   // 禁用输入
+  placeholder?: string                 // 输入框占位符
+  inputValue?: string                  // 输入框值 (受控)
+  onInputChange?: (value: string) => void
+  maxInputLength?: number              // 最大输入字符数
+  showInputCount?: boolean             // 显示字符计数
+  showTypingIndicator?: boolean        // 显示打字指示器
+  typingIndicatorText?: string         // 打字指示器文字
+  typingIndicatorAvatar?: ReactNode    // 打字指示器头像
+  header?: ReactNode                   // 头部内容
+  footer?: ReactNode                   // 底部额外内容
+  inputRightSlot?: ReactNode           // 输入框右侧插槽
+  inputToolbar?: ReactNode             // 输入框底部工具栏
+  emptyContent?: ReactNode             // 空状态内容
+  loading?: boolean                    // 加载状态
+  onLoadMore?: () => void              // 加载更多回调
+  hasMore?: boolean                    // 是否有更多消息
+  onMessageRetry?: (messageId: string) => void  // 消息重试回调
+  renderMessage?: (message: ChatMessage, index: number) => ReactNode  // 自定义渲染
+  autoFocus?: boolean                  // 输入框自动聚焦
+  enterToSend?: boolean                // Enter 发送，默认 true
+  height?: string | number             // 容器高度
+  maxHeight?: string | number          // 最大高度
+  bubbleMaxWidth?: string | number     // 气泡最大宽度，默认 '95%'
+}
+
+interface LMChatContainerRef {
+  scrollToBottom: (behavior?: 'auto' | 'smooth') => void
+  scrollToMessage: (messageId: string, behavior?: 'auto' | 'smooth') => void
+  focusInput: () => void
+  getInputValue: () => string
+  setInputValue: (value: string) => void
+  clearInput: () => void
+}
+```
+
+**示例：**
+```tsx
+const [messages, setMessages] = useState<ChatMessage[]>([])
+const [isGenerating, setIsGenerating] = useState(false)
+
+<LMChatContainer
+  messages={messages}
+  onSend={(content) => {
+    setMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', content }])
+    // 调用 AI API...
+  }}
+  isGenerating={isGenerating}
+  onStop={() => setIsGenerating(false)}
+  placeholder="输入消息..."
+  height="600px"
+  header={<div>AI 助手</div>}
+/>
+```
+
+### LMChatList 消息列表
+
+消息列表组件，支持自动滚动和加载更多。
+
+```tsx
+interface ChatMessage {
+  id: string                           // 消息唯一 ID (必填)
+  role?: 'user' | 'assistant' | 'system'
+  content: ReactNode                   // 消息内容
+  avatar?: string | ReactNode          // 头像
+  name?: string                        // 发送者名称
+  timestamp?: string | Date            // 时间戳
+  status?: 'sending' | 'sent' | 'error' | 'streaming'
+  actions?: ChatMessageAction[]        // 操作按钮
+  errorMessage?: string                // 错误信息
+}
+
+interface LMChatListProps {
+  messages: ChatMessage[]              // 消息列表 (必填)
+  size?: ComponentSize                 // 默认 'md'
+  variant?: 'default' | 'filled' | 'outline' | 'soft'
+  showTypingIndicator?: boolean        // 显示打字指示器
+  typingIndicatorVariant?: 'dots' | 'pulse' | 'bounce' | 'wave'
+  typingIndicatorText?: string
+  typingIndicatorAvatar?: ReactNode
+  autoScrollToBottom?: boolean         // 自动滚动到底部，默认 true
+  scrollBehavior?: 'auto' | 'smooth'   // 滚动行为，默认 'smooth'
+  messageGap?: number                  // 消息间距，默认 16
+  emptyContent?: ReactNode             // 空状态内容
+  loading?: boolean                    // 加载状态
+  onLoadMore?: () => void              // 加载更多回调
+  hasMore?: boolean                    // 是否有更多
+  loadMoreText?: string                // 加载更多文字
+  renderMessage?: (message: ChatMessage, index: number) => ReactNode
+  onMessageRetry?: (messageId: string) => void
+  bubbleMaxWidth?: string | number     // 气泡最大宽度
+}
+
+interface LMChatListRef {
+  scrollToBottom: (behavior?: 'auto' | 'smooth') => void
+  scrollToMessage: (messageId: string, behavior?: 'auto' | 'smooth') => void
+  getContainer: () => HTMLDivElement | null
+}
+```
+
+### LMChatMessage 聊天消息
+
+单条聊天消息组件，包含头像、气泡和操作按钮。
+
+```tsx
+interface LMChatMessageProps {
+  id?: string                          // 消息唯一 ID
+  role?: 'user' | 'assistant' | 'system'  // 默认 'user'
+  content: ReactNode                   // 消息内容 (必填)
+  avatar?: string | ReactNode          // 头像 URL 或组件
+  name?: string                        // 发送者名称
+  timestamp?: string | Date            // 时间戳
+  status?: 'sending' | 'sent' | 'error' | 'streaming'
+  size?: ComponentSize                 // 默认 'md'
+  variant?: 'default' | 'filled' | 'outline' | 'soft'
+  actions?: ChatMessageAction[]        // 操作按钮
+  showActions?: boolean                // hover 时显示操作，默认 true
+  errorMessage?: string                // 错误信息
+  onRetry?: () => void                 // 重试回调
+  hideAvatar?: boolean                 // 隐藏头像
+  renderBubble?: (content: ReactNode) => ReactNode  // 自定义气泡渲染
+  bubbleMaxWidth?: string | number     // 气泡最大宽度，默认 '95%'
+}
+
+interface ChatMessageAction {
+  key: string                          // 操作唯一标识
+  icon: ReactNode                      // 图标
+  tooltip?: string                     // 提示文字
+  onClick?: () => void                 // 点击回调
+  disabled?: boolean                   // 是否禁用
+}
+```
+
+**示例：**
+```tsx
+<LMChatMessage
+  role="assistant"
+  content={<LMMarkdownRenderer content={markdownText} />}
+  name="AI 助手"
+  timestamp={new Date()}
+  status="streaming"
+  actions={[
+    { key: 'copy', icon: <CopyIcon />, tooltip: '复制', onClick: handleCopy }
+  ]}
+/>
+```
+
+### LMChatBubble 聊天气泡
+
+聊天气泡容器，支持多种样式和流式输出动画。
+
+```tsx
+interface LMChatBubbleProps {
+  role?: 'user' | 'assistant' | 'system'  // 默认 'assistant'
+  variant?: 'default' | 'filled' | 'outline' | 'soft'  // 默认 'default'
+  size?: ComponentSize                 // 默认 'md'
+  isStreaming?: boolean                // 流式输出状态 (显示光标)
+  error?: boolean                      // 错误状态
+  children: ReactNode                  // 气泡内容 (必填)
+  className?: string
+  style?: CSSProperties
+}
+```
+
+**示例：**
+```tsx
+<LMChatBubble role="user">
+  你好，请帮我写一段代码
+</LMChatBubble>
+
+<LMChatBubble role="assistant" isStreaming>
+  {streamingText}
+</LMChatBubble>
+```
+
+### LMChatInput 聊天输入框
+
+聊天输入框，支持多行输入、工具栏和发送/停止按钮。
+
+```tsx
+interface LMChatInputProps {
+  value?: string                       // 输入值
+  onChange?: (value: string) => void   // 值变化回调
+  onSend?: (value: string) => void     // 发送消息回调
+  placeholder?: string                 // 占位符，默认 '输入消息...'
+  size?: ComponentSize                 // 默认 'md'
+  disabled?: boolean                   // 禁用状态
+  sending?: boolean                    // 加载状态
+  maxLength?: number                   // 最大字符数
+  showCount?: boolean                  // 显示字符计数
+  maxRows?: number                     // 最大行数，默认 6
+  autoFocus?: boolean                  // 自动聚焦
+  sendButtonText?: string              // 发送按钮文本
+  showSendButton?: boolean             // 显示发送按钮，默认 true
+  rightSlot?: ReactNode                // 右侧自定义内容
+  toolbar?: ReactNode                  // 底部工具栏
+  enterToSend?: boolean                // Enter 发送，默认 true
+  onStop?: () => void                  // 停止生成回调
+  isGenerating?: boolean               // 是否正在生成
+}
+
+// 工具栏按钮组件
+interface ToolbarButtonProps {
+  icon: ReactNode                      // 图标 (必填)
+  label?: string                       // 标签文字
+  onClick?: () => void                 // 点击回调
+  disabled?: boolean                   // 禁用状态
+  active?: boolean                     // 激活状态
+}
+```
+
+**示例：**
+```tsx
+<LMChatInput
+  value={inputValue}
+  onChange={setInputValue}
+  onSend={handleSend}
+  placeholder="输入消息..."
+  isGenerating={isGenerating}
+  onStop={handleStop}
+  toolbar={
+    <>
+      <ToolbarButton icon={<AttachIcon />} label="附件" onClick={handleAttach} />
+      <ToolbarButton icon={<ImageIcon />} label="图片" onClick={handleImage} />
+    </>
+  }
+/>
+```
+
+### LMTypingIndicator 打字指示器
+
+显示对方正在输入的动画指示器。
+
+```tsx
+type TypingIndicatorVariant = 'dots' | 'pulse' | 'bounce' | 'wave'
+
+interface LMTypingIndicatorProps {
+  variant?: TypingIndicatorVariant     // 动画变体，默认 'dots'
+  size?: ComponentSize                 // 默认 'md'
+  text?: string                        // 提示文字，如 "正在输入..."
+  avatar?: ReactNode                   // 头像
+  showAvatar?: boolean                 // 显示头像，默认 true
+  className?: string
+}
+```
+
+**示例：**
+```tsx
+<LMTypingIndicator variant="dots" text="AI 正在思考..." />
+<LMTypingIndicator variant="wave" avatar={<Avatar src="ai.png" />} />
+```
+
+### LMCodeBlock 代码块
+
+代码块组件，支持语法高亮和复制功能。
+
+```tsx
+interface LMCodeBlockProps {
+  code: string                         // 代码内容 (必填)
+  language?: string                    // 编程语言，默认 'plaintext'
+  filename?: string                    // 文件名
+  size?: ComponentSize                 // 默认 'md'
+  showLineNumbers?: boolean            // 显示行号，默认 true
+  startLineNumber?: number             // 起始行号，默认 1
+  highlightLines?: number[]            // 高亮行
+  showCopyButton?: boolean             // 显示复制按钮，默认 true
+  maxHeight?: string | number          // 最大高度
+  wrapLines?: boolean                  // 允许换行
+  enableHighlight?: boolean            // 启用语法高亮，默认 true
+}
+```
+
+**示例：**
+```tsx
+<LMCodeBlock
+  code={`function greet(name: string) {
+  return \`Hello, \${name}!\`
+}`}
+  language="typescript"
+  filename="greeting.ts"
+  highlightLines={[2]}
+/>
+```
+
+### LMMarkdownRenderer Markdown 渲染器
+
+渲染 Markdown 内容，支持代码块语法高亮。
+
+```tsx
+interface LMMarkdownRendererProps {
+  content: string                      // Markdown 内容 (必填)
+  size?: ComponentSize                 // 默认 'md'
+  className?: string
+}
+```
+
+**支持的 Markdown 语法：**
+- 标题 (`#`, `##`, `###`, 等)
+- 粗体 (`**text**`)、斜体 (`*text*`)
+- 行内代码 (`` `code` ``)
+- 代码块 (``` ```language ```)
+- 列表（有序、无序）
+- 引用 (`> quote`)
+- 链接 (`[text](url)`)
+- 表格
+
+**示例：**
+```tsx
+<LMMarkdownRenderer
+  content={`
+## 代码示例
+
+这是一段 **Markdown** 文本。
+
+\`\`\`typescript
+const greeting = 'Hello!'
+\`\`\`
+  `}
+/>
+```
+
+---
+
 ## 主题系统
 
 通过 CSS 变量控制主题，支持 5 种主题模式。
