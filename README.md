@@ -1,39 +1,39 @@
 # LumenUI
 
-A modern React UI component library with Apple-like design aesthetics, built with TypeScript and TailwindCSS v4.
+基于 React 的现代 UI 组件库，采用 Apple 风格设计美学，使用 TypeScript 和 TailwindCSS v4 构建。
 
-## Features
+## 特性
 
-- 25+ beautifully crafted components
-- **Apple-like design** with refined animations and interactions
-- Glassmorphism effects with selective blur
-- Full TypeScript support
-- TailwindCSS v4 integration
-- CSS variable-based theming (5 themes: light, dark, blue, green, redWhite)
-- 6 size variants (xs, sm, md, lg, xl, 2xl)
-- **Accessibility**: `prefers-reduced-motion` support, WCAG contrast compliance
-- ESM and CommonJS support
-- Tree-shakeable
+- 25+ 精心设计的组件
+- **Apple 风格设计**，精致的动画和交互体验
+- 毛玻璃效果，选择性模糊
+- 完整的 TypeScript 支持
+- TailwindCSS v4 集成
+- 基于 CSS 变量的主题系统（5 种主题：light、dark、blue、green、redWhite）
+- 6 种尺寸变体（xs、sm、md、lg、xl、2xl）
+- **无障碍支持**：`prefers-reduced-motion` 支持，符合 WCAG 对比度标准
+- 支持 ESM 和 CommonJS
+- 支持 Tree-shaking
 
-## Design Highlights
+## 设计亮点
 
-- **Apple System Blue** primary color (`#007AFF` light / `#0A84FF` dark)
-- **Refined border radius** scale (6px, 10px, 12px, 16px, 20px)
-- **Smooth animations** with spring easing (120ms-250ms)
-- **Subtle hover effects** using scale transforms
-- **Soft, diffuse shadows** for depth
+- **Apple 系统蓝**主色调（亮色 `#007AFF` / 暗色 `#0A84FF`）
+- **精致的圆角**系统（6px、10px、12px、16px、20px）
+- **流畅动画**，弹性缓动（120ms-250ms）
+- **微妙的悬停效果**，使用 scale 变换
+- **柔和的扩散阴影**，营造层次感
 
-## Installation
+## 安装
 
 ```bash
 npm install @ryanhe919/lumen-ui
-# or
+# 或
 pnpm add @ryanhe919/lumen-ui
-# or
+# 或
 yarn add @ryanhe919/lumen-ui
 ```
 
-## Quick Start
+## 快速开始
 
 ```tsx
 import { LMButton, LMInput } from '@ryanhe919/lumen-ui'
@@ -42,94 +42,95 @@ import '@ryanhe919/lumen-ui/styles.css'
 function App() {
   return (
     <div>
-      <LMInput placeholder="Enter your name" />
-      <LMButton variant="primary">Submit</LMButton>
+      <LMInput placeholder="请输入姓名" />
+      <LMButton variant="primary">提交</LMButton>
     </div>
   )
 }
 ```
 
-## Components
+## 组件
 
-### General
-- **LMButton** - Button with multiple variants and sizes
-- **LMBadge** - Status badges and labels
+### 通用 General
+- **LMButton** - 按钮，支持多种变体和尺寸
+- **LMBadge** - 徽章，状态标记和标签
 
-### Form
-- **LMInput** - Text input field
-- **LMTextarea** - Multi-line text input
-- **LMNumberInput** - Numeric input with controls
-- **LMSearchInput** - Search input with icon
-- **LMSelect** - Dropdown select (single/multiple)
-- **LMCheckbox** - Checkbox input
-- **LMRadio** - Radio button input
-- **LMSwitch** - Toggle switch
-- **LMField** - Form field wrapper with label
-- **LMDatePicker** - Date picker with calendar
+### 表单 Form
+- **LMInput** - 文本输入框
+- **LMTextarea** - 多行文本输入
+- **LMNumberInput** - 数字输入框，带增减按钮
+- **LMSearchInput** - 搜索输入框
+- **LMSelect** - 下拉选择器（单选/多选）
+- **LMCheckbox** - 复选框
+- **LMRadio** - 单选按钮
+- **LMSwitch** - 开关
+- **LMField** - 表单字段容器
+- **LMDatePicker** - 日期选择器
+- **LMUpload** - 文件上传
 
-### Data Display
-- **LMTable** - Data table with pagination, sorting, selection
-- **LMStatCard** - Statistics display cards
-- **LMTooltip** - Hover tooltips
-- **LMCard** - Card container with variants
-- **LMEmpty** - Empty state placeholder
-- **LMTabs** - Tab navigation component
+### 数据展示 Data Display
+- **LMTable** - 数据表格，支持分页、排序、选择
+- **LMStatCard** - 统计卡片
+- **LMTooltip** - 文字提示
+- **LMCard** - 卡片容器
+- **LMEmpty** - 空状态占位
+- **LMTabs** - 标签页
 
-### Navigation
-- **LMMenu** - Side navigation menu
-- **LMDropdown** - Dropdown menu
-- **LMPagination** - Pagination component
+### 导航 Navigation
+- **LMMenu** - 侧边导航菜单
+- **LMDropdown** - 下拉菜单
+- **LMPagination** - 分页
 
-### Feedback
-- **LMMessage** - Toast notifications
-- **LMModal** - Modal dialogs
-- **LMConfirm** - Confirmation dialogs
-- **LMDrawer** - Side drawer panel
+### 反馈 Feedback
+- **LMMessage** - 消息提示
+- **LMModal** - 模态框
+- **LMConfirm** - 确认对话框
+- **LMDrawer** - 抽屉面板
 
-## Theming
+## 主题
 
-LumenUI uses CSS variables for theming. Add `data-theme` to switch themes:
+LumenUI 使用 CSS 变量实现主题切换。添加 `data-theme` 属性切换主题：
 
 ```html
-<!-- Available themes: light (default), dark, blue, green, redWhite -->
+<!-- 可用主题：light（默认）、dark、blue、green、redWhite -->
 <html data-theme="dark">
-  <!-- Your app -->
+  <!-- 你的应用 -->
 </html>
 ```
 
-### Custom Theme
+### 自定义主题
 
-Override CSS variables to customize the theme:
+覆盖 CSS 变量来自定义主题：
 
 ```css
 :root {
-  /* Primary color (Apple System Blue by default) */
+  /* 主色调（默认为 Apple 系统蓝） */
   --lm-primary-500: #007AFF;
   --lm-primary-600: #0066d6;
 
-  /* Border radius scale */
+  /* 圆角系统 */
   --lm-radius-sm: 6px;
   --lm-radius-md: 10px;
   --lm-radius-lg: 12px;
   --lm-radius-xl: 16px;
 
-  /* Animation timing */
+  /* 动画时长 */
   --lm-transition-fast: 120ms;
   --lm-transition-normal: 180ms;
   --lm-ease-out: cubic-bezier(0, 0, 0.2, 1);
   --lm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* Soft shadows */
+  /* 柔和阴影 */
   --lm-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 ```
 
-### Accessibility
+### 无障碍支持
 
-LumenUI respects user preferences:
+LumenUI 尊重用户偏好设置：
 
 ```css
-/* Automatically reduces motion for users who prefer it */
+/* 自动为偏好减少动画的用户减少动效 */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -138,32 +139,32 @@ LumenUI respects user preferences:
 }
 ```
 
-## Usage Examples
+## 使用示例
 
-### Button
+### 按钮
 
 ```tsx
 <LMButton variant="primary" size="md">
-  Click me
+  点击我
 </LMButton>
 
 <LMButton variant="outline" loading>
-  Loading...
+  加载中...
 </LMButton>
 ```
 
-### Table
+### 表格
 
 ```tsx
 const columns = [
-  { title: 'Name', dataIndex: 'name', sorter: true },
-  { title: 'Age', dataIndex: 'age' },
-  { title: 'Email', dataIndex: 'email' },
+  { title: '姓名', dataIndex: 'name', sorter: true },
+  { title: '年龄', dataIndex: 'age' },
+  { title: '邮箱', dataIndex: 'email' },
 ]
 
 const data = [
-  { id: 1, name: 'John', age: 25, email: 'john@example.com' },
-  { id: 2, name: 'Jane', age: 30, email: 'jane@example.com' },
+  { id: 1, name: '张三', age: 25, email: 'zhangsan@example.com' },
+  { id: 2, name: '李四', age: 30, email: 'lisi@example.com' },
 ]
 
 <LMTable
@@ -178,32 +179,32 @@ const data = [
 />
 ```
 
-### Tabs
+### 标签页
 
 ```tsx
 <LMTabs
   items={[
-    { key: 'tab1', label: 'Tab 1', children: <div>Content 1</div> },
-    { key: 'tab2', label: 'Tab 2', children: <div>Content 2</div> },
+    { key: 'tab1', label: '标签 1', children: <div>内容 1</div> },
+    { key: 'tab2', label: '标签 2', children: <div>内容 2</div> },
   ]}
   defaultActiveKey="tab1"
 />
 ```
 
-### Menu
+### 菜单
 
 ```tsx
 <LMMenu
   items={[
-    { key: 'home', label: 'Home', icon: <HomeIcon /> },
-    { key: 'settings', label: 'Settings', icon: <SettingsIcon /> },
+    { key: 'home', label: '首页', icon: <HomeIcon /> },
+    { key: 'settings', label: '设置', icon: <SettingsIcon /> },
   ]}
   mode="inline"
   collapsed={false}
 />
 ```
 
-### Message Notifications
+### 消息提示
 
 ```tsx
 import { useMessage, LMMessageContainer } from '@ryanhe919/lumen-ui'
@@ -213,8 +214,8 @@ function App() {
 
   return (
     <>
-      <button onClick={() => success('Operation successful!')}>
-        Show Success
+      <button onClick={() => success('操作成功！')}>
+        显示成功提示
       </button>
       <LMMessageContainer messages={messages} onClose={removeMessage} />
     </>
@@ -222,7 +223,7 @@ function App() {
 }
 ```
 
-### Confirm Dialog
+### 确认对话框
 
 ```tsx
 import { useConfirm } from '@ryanhe919/lumen-ui'
@@ -232,44 +233,44 @@ function App() {
 
   const handleDelete = async () => {
     const confirmed = await confirm({
-      title: 'Delete Item',
-      content: 'Are you sure you want to delete this item?',
+      title: '删除确认',
+      content: '确定要删除这个项目吗？',
       confirmButtonStyle: 'danger',
     })
 
     if (confirmed) {
-      // Perform delete
+      // 执行删除操作
     }
   }
 
   return (
     <>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleDelete}>删除</button>
       <ConfirmDialog />
     </>
   )
 }
 ```
 
-## Development
+## 开发
 
 ```bash
-# Install dependencies
+# 安装依赖
 pnpm install
 
-# Start Storybook
+# 启动 Storybook
 pnpm storybook
 
-# Build
+# 构建
 pnpm build
 
-# Run tests
+# 运行测试
 pnpm test:run
 
-# Type check
+# 类型检查
 pnpm typecheck
 ```
 
-## License
+## 许可证
 
-MIT License - see [LICENSE](./LICENSE) for details.
+MIT License - 详见 [LICENSE](./LICENSE) 文件。

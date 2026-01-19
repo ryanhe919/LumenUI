@@ -169,7 +169,7 @@ const LMMessage: React.FC<LMMessageProps> = ({ id, type, title, content, duratio
                 {title}
               </h4>
             )}
-            <p className="text-sm leading-relaxed break-words" style={{ color: tone.text }}>
+            <p className="text-sm leading-relaxed wrap-break-word" style={{ color: tone.text }}>
               {content}
             </p>
           </div>
@@ -177,7 +177,7 @@ const LMMessage: React.FC<LMMessageProps> = ({ id, type, title, content, duratio
           <button
             onClick={() => onClose(id)}
             aria-label="Close message"
-            className="flex-shrink-0 p-2 rounded-xl transition-all duration-200 hover:bg-black/5 active:bg-black/10"
+            className="shrink-0 p-2 rounded-xl transition-all duration-200 hover:bg-black/5 active:bg-black/10"
             style={{ color: tone.accent }}
           >
             <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">

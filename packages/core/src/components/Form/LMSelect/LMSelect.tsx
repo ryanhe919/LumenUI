@@ -370,7 +370,7 @@ const LMSelect: React.FC<LMSelectProps> = ({
                 )}
                 <span className="truncate flex-1">{option.label}</span>
                 {!multiple && isOptionSelected(option.value) && (
-                  <span className="ml-2 flex-shrink-0" style={{ color: 'var(--lm-primary-600)' }}>
+                  <span className="ml-2 shrink-0" style={{ color: 'var(--lm-primary-600)' }}>
                     <CheckIcon />
                   </span>
                 )}
