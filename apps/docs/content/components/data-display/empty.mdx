@@ -1,0 +1,91 @@
+---
+title: Empty 空状态
+description: 空状态时的占位提示
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Empty 空状态
+
+用于页面或区域没有数据时的占位提示。
+
+## 引入
+
+```tsx
+import { LMEmpty } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMEmpty />
+`} />
+
+## 自定义描述
+
+<LivePreview code={`
+<LMEmpty description="暂无搜索结果" />
+`} />
+
+## 带操作按钮
+
+<LivePreview code={`
+<LMEmpty description="暂无数据">
+  <LMButton>创建新数据</LMButton>
+</LMEmpty>
+`} />
+
+## 简洁模式
+
+<LivePreview code={`
+<LMEmpty simple description="无内容" />
+`} />
+
+## 自定义尺寸
+
+<LivePreview code={`
+<div className="flex gap-8">
+  <LMEmpty size="sm" description="小尺寸" />
+  <LMEmpty size="md" description="中尺寸" />
+  <LMEmpty size="lg" description="大尺寸" />
+</div>
+`} />
+
+## 使用场景
+
+### 表格空数据
+
+```tsx
+const data = []
+
+{data.length > 0 ? (
+  <LMTable columns={columns} data={data} />
+) : (
+  <LMEmpty description="暂无数据">
+    <LMButton onClick={handleAdd}>添加数据</LMButton>
+  </LMEmpty>
+)}
+```
+
+### 搜索无结果
+
+```tsx
+<LMEmpty description="未找到匹配的结果">
+  <LMButton variant="outline" onClick={handleClearSearch}>
+    清除搜索条件
+  </LMButton>
+</LMEmpty>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| description | 描述文字 | `ReactNode` | `'暂无数据'` |
+| image | 自定义图片 | `ReactNode` | - |
+| simple | 简洁模式 | `boolean` | `false` |
+| size | 尺寸 | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| children | 操作区域 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |

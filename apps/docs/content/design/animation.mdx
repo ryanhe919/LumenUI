@@ -1,0 +1,199 @@
+---
+title: 动效系统
+description: LumenUI 的动效设计规范
+---
+
+# 动效系统
+
+LumenUI 采用 Apple-like 的动效设计，追求快速、流畅、自然的交互体验。
+
+## 过渡时长
+
+| 变量 | 值 | 用途 |
+| --- | --- | --- |
+| `--lm-transition-fast` | 120ms | 快速反馈：悬停、聚焦 |
+| `--lm-transition-normal` | 180ms | 常规过渡：按钮、输入框 |
+| `--lm-transition-slow` | 250ms | 较慢过渡：弹窗、抽屉 |
+
+## 缓动曲线
+
+| 变量 | 值 | 用途 |
+| --- | --- | --- |
+| `--lm-ease-default` | `cubic-bezier(0.25, 0.1, 0.25, 1)` | 默认缓动 |
+| `--lm-ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | 弹性效果 |
+| `--lm-ease-out` | `cubic-bezier(0, 0, 0.2, 1)` | 出场动画 |
+
+## 交互动效
+
+### 按钮
+
+```css
+/* 悬停 */
+transform: scale(1.02);
+box-shadow: var(--lm-shadow-lg);
+
+/* 按压 */
+transform: scale(0.98);
+```
+
+### 卡片悬停
+
+```css
+transform: scale(1.02);
+box-shadow: var(--lm-shadow-lg);
+transition: all var(--lm-transition-normal) var(--lm-ease-out);
+```
+
+### 输入框聚焦
+
+```css
+border-color: var(--lm-primary-400);
+box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
+transition: all var(--lm-transition-fast) var(--lm-ease-out);
+```
+
+## 进入/退出动画
+
+### 淡入淡出
+
+```css
+/* 进入 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 退出 */
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+```
+
+### 缩放
+
+```css
+/* 进入 */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 退出 */
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+```
+
+### 滑入
+
+```css
+/* 从底部滑入 */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 从右侧滑入 */
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+```
+
+## 加载动画
+
+### 旋转
+
+```css
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+```
+
+### 脉冲
+
+```css
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+```
+
+### 骨架屏
+
+```css
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--lm-bg-secondary) 0%,
+    var(--lm-bg-tertiary) 50%,
+    var(--lm-bg-secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+```
+
+## 无障碍
+
+LumenUI 支持 `prefers-reduced-motion` 媒体查询，当用户开启"减少动态效果"时，会自动禁用动画。
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+## 最佳实践
+
+1. **快速响应** - 交互反馈应该在 100ms 内开始
+2. **自然流畅** - 使用合适的缓动曲线，避免线性动画
+3. **有意义** - 动画应该帮助用户理解界面变化
+4. **克制使用** - 避免过多或过长的动画
+5. **尊重偏好** - 支持减少动画的系统设置

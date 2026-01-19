@@ -1,0 +1,165 @@
+---
+title: Message 消息提示
+description: 全局消息提示组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Message 消息提示
+
+用于显示全局操作反馈的轻量级提示。
+
+## 引入
+
+```tsx
+import { LMMessage, LMMessageContainer } from '@ryanhe919/lumen-ui'
+import { useMessage } from '@ryanhe919/lumen-ui/hooks'
+```
+
+## 消息类型
+
+<LivePreview code={`
+<div className="flex flex-col gap-3 w-[400px]">
+  <LMMessage
+    id="1"
+    type="success"
+    title="成功"
+    content="操作已成功完成。"
+    duration={0}
+    onClose={() => {}}
+  />
+  <LMMessage
+    id="2"
+    type="error"
+    title="错误"
+    content="操作失败，请重试。"
+    duration={0}
+    onClose={() => {}}
+  />
+  <LMMessage
+    id="3"
+    type="warning"
+    title="警告"
+    content="请注意检查您的输入。"
+    duration={0}
+    onClose={() => {}}
+  />
+  <LMMessage
+    id="4"
+    type="info"
+    title="提示"
+    content="这是一条普通消息。"
+    duration={0}
+    onClose={() => {}}
+  />
+</div>
+`} />
+
+## 无标题消息
+
+<LivePreview code={`
+<div className="w-[400px]">
+  <LMMessage
+    id="1"
+    type="success"
+    content="操作已成功完成。"
+    duration={0}
+    onClose={() => {}}
+  />
+</div>
+`} />
+
+## 使用 Hook
+
+推荐使用 `useMessage` Hook 来管理消息状态：
+
+```tsx
+import { LMMessageContainer } from '@ryanhe919/lumen-ui'
+import { useMessage } from '@ryanhe919/lumen-ui/hooks'
+
+function App() {
+  const { messages, success, error, warning, info, removeMessage } = useMessage()
+
+  return (
+    <div>
+      <button onClick={() => success('操作成功', '成功')}>
+        成功消息
+      </button>
+      <button onClick={() => error('操作失败', '错误')}>
+        错误消息
+      </button>
+      <button onClick={() => warning('请注意', '警告')}>
+        警告消息
+      </button>
+      <button onClick={() => info('提示信息', '提示')}>
+        信息消息
+      </button>
+
+      <LMMessageContainer
+        messages={messages}
+        onClose={removeMessage}
+        position="top-right"
+      />
+    </div>
+  )
+}
+```
+
+## 自定义时长
+
+默认 2 秒后自动关闭，可以自定义时长。
+
+```tsx
+const { success, info } = useMessage()
+
+// 持续 5 秒
+success('操作成功', '成功', 5000)
+
+// 不自动关闭（设置 duration 为 0）
+info('这条消息不会自动关闭', '提示', 0)
+```
+
+## 位置配置
+
+通过 `LMMessageContainer` 的 `position` 属性配置消息显示位置：
+
+```tsx
+<LMMessageContainer
+  messages={messages}
+  onClose={removeMessage}
+  position="top-center" // 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center'
+/>
+```
+
+## API
+
+### LMMessage Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| id | 消息唯一标识 | `string` | - |
+| type | 消息类型 | `'success' \| 'error' \| 'warning' \| 'info'` | - |
+| title | 消息标题 | `string` | - |
+| content | 消息内容 | `string` | - |
+| duration | 持续时间（毫秒），0 表示不自动关闭 | `number` | `2000` |
+| onClose | 关闭回调 | `(id: string) => void` | - |
+
+### LMMessageContainer Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| messages | 消息列表 | `LMMessageItem[]` | - |
+| onClose | 关闭回调 | `(id: string) => void` | - |
+| position | 显示位置 | `'top-right' \| 'top-left' \| 'top-center' \| 'bottom-right' \| 'bottom-left' \| 'bottom-center'` | `'top-right'` |
+
+### useMessage Hook
+
+| 返回值 | 说明 | 类型 |
+| --- | --- | --- |
+| messages | 当前消息列表 | `LMMessageItem[]` |
+| success | 显示成功消息 | `(content: string, title?: string, duration?: number) => string` |
+| error | 显示错误消息 | `(content: string, title?: string, duration?: number) => string` |
+| warning | 显示警告消息 | `(content: string, title?: string, duration?: number) => string` |
+| info | 显示信息消息 | `(content: string, title?: string, duration?: number) => string` |
+| removeMessage | 移除消息 | `(id: string) => void` |
+| clearAll | 清除所有消息 | `() => void` |

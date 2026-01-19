@@ -1,0 +1,95 @@
+---
+title: Tooltip 文字提示
+description: 鼠标悬停时显示的提示信息
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Tooltip 文字提示
+
+鼠标悬停或聚焦时显示的提示信息。
+
+## 引入
+
+```tsx
+import { LMTooltip } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMTooltip content="提示文字">
+  <LMButton>悬停显示</LMButton>
+</LMTooltip>
+`} />
+
+## 位置
+
+使用 `placement` 属性设置提示框位置。
+
+<LivePreview code={`
+<div className="flex gap-4 justify-center py-8">
+  <LMTooltip content="上方提示" placement="top">
+    <LMButton variant="outline">上</LMButton>
+  </LMTooltip>
+  <LMTooltip content="下方提示" placement="bottom">
+    <LMButton variant="outline">下</LMButton>
+  </LMTooltip>
+  <LMTooltip content="左侧提示" placement="left">
+    <LMButton variant="outline">左</LMButton>
+  </LMTooltip>
+  <LMTooltip content="右侧提示" placement="right">
+    <LMButton variant="outline">右</LMButton>
+  </LMTooltip>
+</div>
+`} />
+
+## 触发方式
+
+<LivePreview code={`
+<div className="flex gap-4">
+  <LMTooltip content="悬停触发" trigger="hover">
+    <LMButton>悬停</LMButton>
+  </LMTooltip>
+  <LMTooltip content="点击触发" trigger="click">
+    <LMButton>点击</LMButton>
+  </LMTooltip>
+</div>
+`} />
+
+## 延迟显示
+
+```tsx
+<LMTooltip content="延迟 500ms 显示" delay={500}>
+  <LMButton>延迟显示</LMButton>
+</LMTooltip>
+```
+
+## 富文本内容
+
+```tsx
+<LMTooltip
+  content={
+    <div>
+      <strong>标题</strong>
+      <p>这是详细说明文字</p>
+    </div>
+  }
+>
+  <LMButton>富文本提示</LMButton>
+</LMTooltip>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| content | 提示内容 | `ReactNode` | - |
+| placement | 位置 | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` |
+| trigger | 触发方式 | `'hover' \| 'click' \| 'focus'` | `'hover'` |
+| delay | 延迟显示（毫秒） | `number` | `0` |
+| visible | 受控显示状态 | `boolean` | - |
+| onVisibleChange | 显示状态变化回调 | `(visible: boolean) => void` | - |
+| children | 触发元素 | `ReactElement` | - |

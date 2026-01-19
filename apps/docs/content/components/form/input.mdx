@@ -1,0 +1,81 @@
+---
+title: Input 输入框
+description: 基础文本输入组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Input 输入框
+
+用于接收用户输入的基础表单组件。
+
+## 引入
+
+```tsx
+import { LMInput } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMInput placeholder="请输入内容" />
+`} />
+
+## 输入框尺寸
+
+使用 `size` 属性设置输入框大小。
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMInput size="xs" placeholder="极小输入框" />
+  <LMInput size="sm" placeholder="小输入框" />
+  <LMInput size="md" placeholder="中输入框" />
+  <LMInput size="lg" placeholder="大输入框" />
+  <LMInput size="xl" placeholder="超大输入框" />
+  <LMInput size="2xl" placeholder="最大输入框" />
+</div>
+`} />
+
+## 禁用状态
+
+<LivePreview code={`
+<LMInput disabled placeholder="禁用状态" value="不可编辑的内容" />
+`} />
+
+## 错误状态
+
+使用 `error` 和 `errorMessage` 属性显示错误状态。
+
+<LivePreview code={`
+<LMInput error errorMessage="请输入有效的邮箱地址" placeholder="邮箱" />
+`} />
+
+## 不同类型
+
+支持所有原生 input 类型。
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMInput type="text" placeholder="文本" />
+  <LMInput type="password" placeholder="密码" />
+  <LMInput type="email" placeholder="邮箱" />
+  <LMInput type="number" placeholder="数字" />
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| size | 输入框尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| leftIcon | 左侧图标 | `ReactNode` | - |
+| rightElement | 右侧元素 | `ReactNode` | - |
+| error | 错误状态 | `boolean` | `false` |
+| errorMessage | 错误信息 | `string` | - |
+| includeSeconds | 时间输入显示秒 | `boolean` | `false` |
+| disabled | 禁用状态 | `boolean` | `false` |
+| className | 自定义类名 | `string` | - |
+
+此外，组件还支持所有原生 `<input>` 元素的属性。

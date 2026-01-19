@@ -1,0 +1,93 @@
+---
+title: ChatBubble 消息气泡
+description: 聊天消息气泡组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# ChatBubble 消息气泡
+
+用于显示聊天消息内容的气泡组件。
+
+## 引入
+
+```tsx
+import { LMChatBubble } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMChatBubble role="user">
+    你好，请帮我写一个 React 组件。
+  </LMChatBubble>
+  <LMChatBubble role="assistant">
+    好的，我来帮你创建一个 React 组件。首先，请告诉我你需要什么样的功能？
+  </LMChatBubble>
+</div>
+`} />
+
+## 所有角色
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMChatBubble role="user">这是用户发送的消息</LMChatBubble>
+  <LMChatBubble role="assistant">这是 AI 助手的回复消息</LMChatBubble>
+  <LMChatBubble role="system">这是系统提示消息</LMChatBubble>
+</div>
+`} />
+
+## 流式输出
+
+显示闪烁光标表示正在输入。
+
+<LivePreview code={`
+<LMChatBubble role="assistant" isStreaming>
+  正在生成回复中
+</LMChatBubble>
+`} />
+
+## 错误状态
+
+<LivePreview code={`
+<LMChatBubble role="assistant" error>
+  消息发送失败，请重试。
+</LMChatBubble>
+`} />
+
+## 带尾部信息
+
+<LivePreview code={`
+<LMChatBubble role="assistant" footer="10:30 AM · 已读">
+  这是一条消息内容
+</LMChatBubble>
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMChatBubble size="xs" role="assistant">Extra Small 尺寸</LMChatBubble>
+  <LMChatBubble size="sm" role="assistant">Small 尺寸</LMChatBubble>
+  <LMChatBubble size="md" role="assistant">Medium 尺寸</LMChatBubble>
+  <LMChatBubble size="lg" role="assistant">Large 尺寸</LMChatBubble>
+  <LMChatBubble size="xl" role="assistant">Extra Large 尺寸</LMChatBubble>
+  <LMChatBubble size="2xl" role="assistant">2X Large 尺寸</LMChatBubble>
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| role | 消息角色 | `'user' \| 'assistant' \| 'system'` | `'user'` |
+| variant | 气泡变体 | `'default' \| 'filled' \| 'outline' \| 'soft'` | `'default'` |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| isStreaming | 流式输出中 | `boolean` | `false` |
+| error | 错误状态 | `boolean` | `false` |
+| footer | 尾部装饰 | `ReactNode` | - |
+| children | 内容 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |

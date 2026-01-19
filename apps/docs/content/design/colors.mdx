@@ -1,0 +1,100 @@
+---
+title: 色彩系统
+description: LumenUI 的色彩设计规范
+---
+
+# 色彩系统
+
+LumenUI 采用 Apple-like 的色彩系统，以简洁、优雅为设计原则。
+
+## 主色调
+
+主色采用 Apple System Blue，在明暗主题下有不同的表现。
+
+| 变量 | 浅色模式 | 深色模式 | 用途 |
+| --- | --- | --- | --- |
+| `--lm-primary-500` | `#007AFF` | `#0A84FF` | 主要按钮、链接、选中状态 |
+| `--lm-primary-400` | `#3395FF` | `#409CFF` | 悬停状态 |
+| `--lm-primary-600` | `#0062CC` | `#0077E6` | 按压状态 |
+
+## 功能色
+
+用于表达不同状态和语义的颜色。
+
+### 成功色
+
+```css
+--lm-success-500: #34C759;  /* 主色 */
+--lm-success-100: #E5F8EB;  /* 背景 */
+--lm-success-700: #248A3D;  /* 文字 */
+```
+
+### 警告色
+
+```css
+--lm-warning-500: #FF9500;  /* 主色 */
+--lm-warning-100: #FFF4E5;  /* 背景 */
+--lm-warning-700: #C77700;  /* 文字 */
+```
+
+### 错误色
+
+```css
+--lm-error-500: #FF3B30;    /* 主色 */
+--lm-error-100: #FFEBE9;    /* 背景 */
+--lm-error-700: #C41E16;    /* 文字 */
+```
+
+### 信息色
+
+```css
+--lm-info-500: #5AC8FA;     /* 主色 */
+--lm-info-100: #E5F6FD;     /* 背景 */
+--lm-info-700: #0A7DB9;     /* 文字 */
+```
+
+## 中性色
+
+用于文字、背景、边框等。
+
+### 浅色模式
+
+| 变量 | 值 | 用途 |
+| --- | --- | --- |
+| `--lm-text-primary` | `#1D1D1F` | 主要文字 |
+| `--lm-text-secondary` | `#86868B` | 次要文字 |
+| `--lm-text-tertiary` | `#AEAEB2` | 辅助文字 |
+| `--lm-text-disabled` | `#C7C7CC` | 禁用文字 |
+| `--lm-bg-primary` | `#FFFFFF` | 主背景 |
+| `--lm-bg-secondary` | `#F5F5F7` | 次级背景 |
+| `--lm-bg-elevated` | `#FFFFFF` | 浮层背景 |
+| `--lm-border-default` | `#D2D2D7` | 默认边框 |
+| `--lm-border-light` | `#E5E5EA` | 浅色边框 |
+
+### 深色模式
+
+| 变量 | 值 | 用途 |
+| --- | --- | --- |
+| `--lm-text-primary` | `#F5F5F7` | 主要文字 |
+| `--lm-text-secondary` | `#A1A1A6` | 次要文字 |
+| `--lm-text-tertiary` | `#636366` | 辅助文字 |
+| `--lm-bg-primary` | `#000000` | 主背景 |
+| `--lm-bg-secondary` | `#1C1C1E` | 次级背景 |
+| `--lm-bg-elevated` | `#2C2C2E` | 浮层背景 |
+| `--lm-border-default` | `#38383A` | 默认边框 |
+
+## 阴影系统
+
+```css
+--lm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+--lm-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+--lm-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+--lm-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+```
+
+## 使用建议
+
+1. **保持简洁** - 不要同时使用过多颜色，每个页面控制在 3-5 种主要颜色
+2. **语义化使用** - 功能色要保持语义一致性，成功用绿色，错误用红色
+3. **对比度** - 确保文字与背景的对比度满足 WCAG 4.5:1 标准
+4. **深色模式** - 使用 CSS 变量自动适配深色模式

@@ -1,0 +1,99 @@
+---
+title: Drawer 抽屉
+description: 从屏幕边缘滑出的面板
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Drawer 抽屉
+
+从屏幕边缘滑出的浮层面板。
+
+## 引入
+
+```tsx
+import { LMDrawer } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+由于 Drawer 需要状态控制，这里展示一个代码示例：
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<LMButton onClick={() => setOpen(true)}>打开抽屉</LMButton>
+
+<LMDrawer
+  open={open}
+  onClose={() => setOpen(false)}
+  title="抽屉标题"
+>
+  <p>抽屉内容</p>
+</LMDrawer>
+```
+
+## 不同方向
+
+```tsx
+<LMDrawer placement="right" title="右侧抽屉">内容</LMDrawer>
+<LMDrawer placement="left" title="左侧抽屉">内容</LMDrawer>
+<LMDrawer placement="top" title="顶部抽屉">内容</LMDrawer>
+<LMDrawer placement="bottom" title="底部抽屉">内容</LMDrawer>
+```
+
+## 自定义宽度/高度
+
+```tsx
+// 水平方向抽屉设置宽度
+<LMDrawer placement="right" width={500} title="自定义宽度">
+  内容
+</LMDrawer>
+
+// 垂直方向抽屉设置高度
+<LMDrawer placement="bottom" height={300} title="自定义高度">
+  内容
+</LMDrawer>
+```
+
+## 自定义底部
+
+```tsx
+<LMDrawer
+  open={open}
+  onClose={() => setOpen(false)}
+  title="编辑信息"
+  footer={
+    <div className="flex gap-2 justify-end">
+      <LMButton variant="ghost" onClick={() => setOpen(false)}>
+        取消
+      </LMButton>
+      <LMButton onClick={handleSave}>
+        保存
+      </LMButton>
+    </div>
+  }
+>
+  <LMField label="名称">
+    <LMInput placeholder="请输入名称" />
+  </LMField>
+</LMDrawer>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| open | 是否显示 | `boolean` | `false` |
+| onClose | 关闭回调 | `() => void` | - |
+| title | 标题 | `ReactNode` | - |
+| placement | 方向 | `'left' \| 'right' \| 'top' \| 'bottom'` | `'right'` |
+| width | 宽度（水平方向时） | `number \| string` | `378` |
+| height | 高度（垂直方向时） | `number \| string` | `378` |
+| footer | 底部内容 | `ReactNode \| null` | - |
+| closable | 显示关闭按钮 | `boolean` | `true` |
+| closeOnOverlay | 点击遮罩关闭 | `boolean` | `true` |
+| children | 内容 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |

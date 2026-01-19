@@ -1,0 +1,103 @@
+---
+title: Pagination 分页
+description: 分页导航组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Pagination 分页
+
+用于数据量大时的分页导航。
+
+## 引入
+
+```tsx
+import { LMPagination } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMPagination current={1} total={100} />
+`} />
+
+## 大量页数（显示省略号）
+
+当页数较多且当前页在中间位置时，会显示省略号。
+
+<LivePreview code={`
+<LMPagination current={50} total={1000} />
+`} />
+
+## 自定义每页条数
+
+<LivePreview code={`
+<LMPagination current={1} total={100} pageSize={20} />
+`} />
+
+## 简洁模式
+
+<LivePreview code={`
+<LMPagination current={3} total={100} simple />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMPagination current={5} total={100} size="sm" />
+  <LMPagination current={5} total={100} size="md" />
+  <LMPagination current={5} total={100} size="lg" />
+</div>
+`} />
+
+## 禁用
+
+<LivePreview code={`
+<LMPagination current={5} total={200} disabled />
+`} />
+
+## 显示快速跳转
+
+```tsx
+<LMPagination total={100} showQuickJumper />
+```
+
+## 显示每页条数选择
+
+```tsx
+<LMPagination
+  total={100}
+  showSizeChanger
+  pageSizeOptions={[10, 20, 50, 100]}
+/>
+```
+
+## 显示总数
+
+```tsx
+<LMPagination
+  total={100}
+  showTotal={(total) => `共 ${total} 条`}
+/>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| total | 总条数 | `number` | `0` |
+| current | 当前页 | `number` | - |
+| defaultCurrent | 默认当前页 | `number` | `1` |
+| pageSize | 每页条数 | `number` | `10` |
+| onChange | 页码变化回调 | `(page: number) => void` | - |
+| onPageSizeChange | 每页条数变化回调 | `(size: number) => void` | - |
+| showQuickJumper | 显示快速跳转 | `boolean` | `false` |
+| showSizeChanger | 显示每页条数选择 | `boolean` | `false` |
+| pageSizeOptions | 每页条数选项 | `number[]` | `[10, 20, 50, 100]` |
+| showTotal | 显示总数 | `(total: number) => ReactNode` | - |
+| simple | 简洁模式 | `boolean` | `false` |
+| size | 尺寸 | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| disabled | 禁用 | `boolean` | `false` |

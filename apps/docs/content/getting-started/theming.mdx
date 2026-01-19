@@ -1,0 +1,187 @@
+---
+title: 主题配置
+description: 如何配置和自定义 LumenUI 主题
+---
+
+# 主题配置
+
+LumenUI 使用 CSS 变量实现主题系统，支持 5 种内置主题，并可以轻松自定义。
+
+## 内置主题
+
+LumenUI 提供以下内置主题：
+
+- `light` - 浅色主题（默认）
+- `dark` - 深色主题
+- `blue` - 蓝色主题
+- `green` - 绿色主题
+- `redWhite` - 红白主题
+
+## 切换主题
+
+通过设置 `data-theme` 属性切换主题：
+
+```tsx
+// 在根元素上设置主题
+<html data-theme="dark">
+  {/* ... */}
+</html>
+
+// 或者在任意容器上设置
+<div data-theme="dark">
+  <LMButton>深色模式按钮</LMButton>
+</div>
+```
+
+## 主题切换示例
+
+```tsx
+import { useState } from 'react'
+import { LMButton, LMSelect } from '@ryanhe919/lumen-ui'
+
+export function ThemeSwitcher() {
+  const [theme, setTheme] = useState('light')
+
+  const themes = [
+    { label: '浅色', value: 'light' },
+    { label: '深色', value: 'dark' },
+    { label: '蓝色', value: 'blue' },
+    { label: '绿色', value: 'green' },
+    { label: '红白', value: 'redWhite' },
+  ]
+
+  return (
+    <div data-theme={theme} className="p-4 rounded-xl">
+      <LMSelect
+        value={theme}
+        onChange={(value) => setTheme(value)}
+        options={themes}
+      />
+      <LMButton className="mt-4">示例按钮</LMButton>
+    </div>
+  )
+}
+```
+
+## CSS 变量
+
+LumenUI 使用以下 CSS 变量，你可以覆盖它们来自定义主题：
+
+### 颜色变量
+
+```css
+:root {
+  /* 主色调 */
+  --lm-color-primary: #007AFF;
+  --lm-color-primary-hover: #0A84FF;
+
+  /* 背景色 */
+  --lm-bg-primary: #ffffff;
+  --lm-bg-secondary: #f5f5f7;
+  --lm-bg-tertiary: #e8e8ed;
+
+  /* 文字颜色 */
+  --lm-text-primary: #1d1d1f;
+  --lm-text-secondary: #86868b;
+  --lm-text-tertiary: #aeaeb2;
+
+  /* 边框颜色 */
+  --lm-border-color: #d2d2d7;
+
+  /* 状态颜色 */
+  --lm-color-success: #34c759;
+  --lm-color-warning: #ff9500;
+  --lm-color-error: #ff3b30;
+  --lm-color-info: #5ac8fa;
+}
+```
+
+### 阴影变量
+
+```css
+:root {
+  --lm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --lm-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --lm-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --lm-shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
+}
+```
+
+### 过渡动画变量
+
+```css
+:root {
+  /* 过渡时长 */
+  --lm-transition-fast: 120ms;
+  --lm-transition-normal: 180ms;
+  --lm-transition-slow: 250ms;
+
+  /* 缓动曲线 */
+  --lm-ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --lm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --lm-ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+```
+
+## 自定义主题
+
+创建自定义主题，只需定义对应的 CSS 变量：
+
+```css filename="custom-theme.css"
+[data-theme="custom"] {
+  --lm-color-primary: #6366f1;
+  --lm-color-primary-hover: #4f46e5;
+  --lm-bg-primary: #fafafa;
+  --lm-bg-secondary: #f4f4f5;
+  --lm-text-primary: #18181b;
+  --lm-text-secondary: #71717a;
+  --lm-border-color: #e4e4e7;
+}
+```
+
+然后在你的应用中使用：
+
+```tsx
+<div data-theme="custom">
+  <LMButton>自定义主题按钮</LMButton>
+</div>
+```
+
+## 跟随系统主题
+
+使用 CSS 媒体查询跟随系统主题：
+
+```css
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lm-bg-primary: #1c1c1e;
+    --lm-bg-secondary: #2c2c2e;
+    --lm-text-primary: #f5f5f7;
+    /* ... 其他深色模式变量 */
+  }
+}
+```
+
+或者使用 JavaScript 检测并设置：
+
+```tsx
+import { useEffect, useState } from 'react'
+
+export function useSystemTheme() {
+  const [theme, setTheme] = useState('light')
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    setTheme(mediaQuery.matches ? 'dark' : 'light')
+
+    const handler = (e: MediaQueryListEvent) => {
+      setTheme(e.matches ? 'dark' : 'light')
+    }
+
+    mediaQuery.addEventListener('change', handler)
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
+
+  return theme
+}
+```

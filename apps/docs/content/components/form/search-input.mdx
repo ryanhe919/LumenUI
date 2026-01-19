@@ -1,0 +1,70 @@
+---
+title: SearchInput 搜索框
+description: 带搜索图标和清除按钮的输入框
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# SearchInput 搜索框
+
+专门用于搜索场景的输入框，带有搜索图标和清除按钮。
+
+## 引入
+
+```tsx
+import { LMSearchInput } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMSearchInput placeholder="搜索..." />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMSearchInput size="sm" placeholder="小尺寸搜索框" />
+  <LMSearchInput size="md" placeholder="中尺寸搜索框" />
+  <LMSearchInput size="lg" placeholder="大尺寸搜索框" />
+</div>
+`} />
+
+## 搜索回调
+
+使用 `onSearch` 属性处理搜索事件（按回车触发）。
+
+```tsx
+<LMSearchInput
+  placeholder="按回车搜索"
+  onSearch={(value) => console.log('搜索:', value)}
+/>
+```
+
+## 受控模式
+
+```tsx
+const [value, setValue] = useState('')
+
+<LMSearchInput
+  value={value}
+  onChange={(e) => setValue(e.target.value)}
+  onClear={() => setValue('')}
+  placeholder="搜索..."
+/>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| value | 输入值 | `string` | - |
+| onChange | 值变化回调 | `(e: ChangeEvent) => void` | - |
+| onSearch | 搜索回调 | `(value: string) => void` | - |
+| onClear | 清除回调 | `() => void` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| placeholder | 占位文本 | `string` | - |
+| disabled | 禁用状态 | `boolean` | `false` |

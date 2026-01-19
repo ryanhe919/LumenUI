@@ -1,0 +1,75 @@
+---
+title: 字体排版
+description: LumenUI 的字体排版规范
+---
+
+# 字体排版
+
+LumenUI 采用系统默认字体，确保在各平台上的最佳显示效果。
+
+## 字体族
+
+```css
+--lm-font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, sans-serif;
+--lm-font-mono: 'SF Mono', SFMono-Regular, ui-monospace, Menlo, Monaco,
+  monospace;
+```
+
+## 字体大小
+
+| 名称 | 大小 | 行高 | 用途 |
+| --- | --- | --- | --- |
+| `text-xs` | 12px | 16px | 辅助文字、标签 |
+| `text-sm` | 14px | 20px | 次要文字、描述 |
+| `text-base` | 16px | 24px | 正文 |
+| `text-lg` | 18px | 28px | 小标题 |
+| `text-xl` | 20px | 28px | 标题 |
+| `text-2xl` | 24px | 32px | 大标题 |
+| `text-3xl` | 30px | 36px | 页面标题 |
+
+## 字重
+
+| 名称 | 值 | 用途 |
+| --- | --- | --- |
+| `font-normal` | 400 | 正文 |
+| `font-medium` | 500 | 按钮、标签 |
+| `font-semibold` | 600 | 小标题 |
+| `font-bold` | 700 | 标题 |
+
+## 组件尺寸对应
+
+各组件在不同尺寸下的字体大小：
+
+| 尺寸 | 字体大小 |
+| --- | --- |
+| `xs` | 12px |
+| `sm` | 12px |
+| `md` | 14px |
+| `lg` | 14px |
+| `xl` | 16px |
+| `2xl` | 18px |
+
+## 最佳实践
+
+### 标题层级
+
+```tsx
+<h1 className="text-3xl font-bold">页面标题</h1>
+<h2 className="text-2xl font-semibold">区块标题</h2>
+<h3 className="text-xl font-semibold">小节标题</h3>
+<p className="text-base">正文内容</p>
+<span className="text-sm text-gray-500">辅助说明</span>
+```
+
+### 行高建议
+
+- 标题：使用紧凑的行高（1.2-1.4）
+- 正文：使用舒适的行高（1.5-1.7）
+- 段落：段落间距使用 1em
+
+### 字母间距
+
+- 标题：可以使用稍宽的字母间距（0.02em）
+- 正文：使用默认字母间距
+- 全大写文字：建议增加字母间距（0.05em）

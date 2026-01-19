@@ -1,0 +1,102 @@
+---
+title: CodeBlock 代码块
+description: 用于显示代码的组件，支持语法高亮和复制
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# CodeBlock 代码块
+
+用于显示代码的组件，支持语法高亮和一键复制。
+
+## 引入
+
+```tsx
+import { LMCodeBlock } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMCodeBlock
+  language="javascript"
+  code={\`function hello() {
+  console.log('Hello World')
+}\`}
+/>
+`} />
+
+## 显示行号
+
+<LivePreview code={`
+<LMCodeBlock
+  language="javascript"
+  showLineNumbers
+  code={\`const a = 1
+const b = 2
+const c = a + b
+console.log(c)\`}
+/>
+`} />
+
+## 显示文件名
+
+<LivePreview code={`
+<LMCodeBlock
+  language="typescript"
+  filename="utils.ts"
+  code={\`export function formatDate(date: Date): string {
+  return date.toLocaleDateString()
+}\`}
+/>
+`} />
+
+## 可复制
+
+<LivePreview code={`
+<LMCodeBlock
+  language="bash"
+  showCopyButton
+  code="npm install @ryanhe919/lumen-ui"
+/>
+`} />
+
+## 不同语言
+
+```tsx
+<LMCodeBlock
+  language="python"
+  code={`def hello():
+    print("Hello World")`}
+/>
+
+<LMCodeBlock
+  language="css"
+  code={`.button {
+  background: blue;
+  color: white;
+}`}
+/>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| code | 代码内容 | `string` | - |
+| language | 语言 | `string` | `'plaintext'` |
+| filename | 文件名 | `string` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| showLineNumbers | 显示行号 | `boolean` | `true` |
+| showCopyButton | 显示复制按钮 | `boolean` | `true` |
+| highlightLines | 高亮行 | `number[]` | - |
+| maxHeight | 最大高度 | `number \| string` | - |
+| wrapLines | 允许换行 | `boolean` | `false` |
+| enableHighlight | 启用语法高亮 | `boolean` | `true` |
+| className | 自定义类名 | `string` | - |
+
+### 支持的语言
+
+常用语言：`javascript`、`typescript`、`jsx`、`tsx`、`python`、`java`、`go`、`rust`、`css`、`html`、`json`、`yaml`、`bash`、`sql` 等。

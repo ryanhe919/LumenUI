@@ -1,0 +1,184 @@
+---
+title: Table 表格
+description: 用于展示数据的表格组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Table 表格
+
+用于展示结构化数据的表格组件。
+
+## 引入
+
+```tsx
+import { LMTable } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMTable
+  columns={[
+    { title: '姓名', dataIndex: 'name' },
+    { title: '年龄', dataIndex: 'age' },
+    { title: '邮箱', dataIndex: 'email' },
+  ]}
+  dataSource={[
+    { name: '张三', age: 28, email: 'zhangsan@example.com' },
+    { name: '李四', age: 32, email: 'lisi@example.com' },
+    { name: '王五', age: 24, email: 'wangwu@example.com' },
+  ]}
+  rowKey="name"
+/>
+`} />
+
+## 带边框
+
+<LivePreview code={`
+<LMTable
+  bordered
+  columns={[
+    { title: '姓名', dataIndex: 'name' },
+    { title: '年龄', dataIndex: 'age' },
+    { title: '城市', dataIndex: 'city' },
+  ]}
+  dataSource={[
+    { name: '张三', age: 28, city: '北京' },
+    { name: '李四', age: 32, city: '上海' },
+    { name: '王五', age: 24, city: '广州' },
+  ]}
+  rowKey="name"
+/>
+`} />
+
+## 斑马纹
+
+<LivePreview code={`
+<LMTable
+  striped
+  columns={[
+    { title: '姓名', dataIndex: 'name' },
+    { title: '年龄', dataIndex: 'age' },
+    { title: '职位', dataIndex: 'position' },
+  ]}
+  dataSource={[
+    { name: '张三', age: 28, position: '前端工程师' },
+    { name: '李四', age: 32, position: '后端工程师' },
+    { name: '王五', age: 24, position: '产品经理' },
+    { name: '赵六', age: 35, position: '设计师' },
+  ]}
+  rowKey="name"
+/>
+`} />
+
+## 加载状态
+
+<LivePreview code={`
+<LMTable
+  loading
+  columns={[
+    { title: '姓名', dataIndex: 'name' },
+    { title: '年龄', dataIndex: 'age' },
+  ]}
+  dataSource={[]}
+  rowKey="name"
+/>
+`} />
+
+## 空状态
+
+<LivePreview code={`
+<LMTable
+  columns={[
+    { title: '姓名', dataIndex: 'name' },
+    { title: '年龄', dataIndex: 'age' },
+  ]}
+  dataSource={[]}
+  emptyText="暂无数据"
+  rowKey="name"
+/>
+`} />
+
+## 自定义列渲染
+
+```tsx
+const columns = [
+  { title: '姓名', dataIndex: 'name' },
+  {
+    title: '状态',
+    dataIndex: 'status',
+    render: (value) => (
+      <LMBadge variant={value === 'active' ? 'success' : 'error'}>
+        {value === 'active' ? '在线' : '离线'}
+      </LMBadge>
+    )
+  },
+  {
+    title: '操作',
+    dataIndex: 'action',
+    render: (_, record) => (
+      <LMButton size="sm" variant="ghost" onClick={() => handleEdit(record)}>
+        编辑
+      </LMButton>
+    )
+  },
+]
+```
+
+## 可排序
+
+```tsx
+const columns = [
+  { title: '姓名', dataIndex: 'name', sorter: true },
+  { title: '年龄', dataIndex: 'age', sorter: true },
+]
+
+<LMTable
+  columns={columns}
+  dataSource={data}
+  rowKey="id"
+/>
+```
+
+## 可选择行
+
+```tsx
+<LMTable
+  columns={columns}
+  dataSource={data}
+  selectable
+  selectedRowKeys={selectedKeys}
+  onSelectionChange={(keys) => setSelectedKeys(keys)}
+  rowKey="id"
+/>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| dataSource | 数据源 | `T[]` | `[]` |
+| columns | 列配置 | `LMTableColumn[]` | `[]` |
+| rowKey | 行唯一标识 | `string \| ((record, index) => string)` | - |
+| loading | 加载状态 | `boolean` | `false` |
+| bordered | 带边框 | `boolean` | `false` |
+| striped | 斑马纹 | `boolean` | `false` |
+| selectable | 可选择行 | `boolean` | `false` |
+| selectedRowKeys | 选中的行 key | `string[]` | `[]` |
+| onSelectionChange | 选择变化回调 | `(keys: string[]) => void` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| emptyText | 空状态文本 | `string` | `'暂无数据'` |
+
+### LMTableColumn
+
+| 属性 | 说明 | 类型 | 必填 |
+| --- | --- | --- | --- |
+| title | 列标题 | `string` | 是 |
+| dataIndex | 数据字段名 | `string` | 是 |
+| width | 列宽度 | `number \| string` | 否 |
+| sorter | 可排序 | `boolean` | 否 |
+| align | 对齐方式 | `'left' \| 'center' \| 'right'` | 否 |
+| render | 自定义渲染 | `(value, record, index) => ReactNode` | 否 |

@@ -1,0 +1,84 @@
+---
+title: Field 表单项
+description: 表单项容器组件，包含标签、输入和错误提示
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Field 表单项
+
+表单项容器组件，用于包装表单控件，提供标签、必填标记和错误提示。
+
+## 引入
+
+```tsx
+import { LMField } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMField label="用户名">
+  <LMInput placeholder="请输入用户名" />
+</LMField>
+`} />
+
+## 必填标记
+
+使用 `required` 属性显示必填标记。
+
+<LivePreview code={`
+<LMField label="邮箱" required>
+  <LMInput type="email" placeholder="请输入邮箱" />
+</LMField>
+`} />
+
+## 说明文字
+
+使用 `description` 属性添加说明文字。
+
+<LivePreview code={`
+<LMField label="密码" description="密码长度至少 8 位">
+  <LMInput type="password" placeholder="请输入密码" />
+</LMField>
+`} />
+
+## 错误状态
+
+使用 `error` 属性显示错误信息。
+
+<LivePreview code={`
+<LMField label="用户名" error="用户名已存在">
+  <LMInput error placeholder="请输入用户名" />
+</LMField>
+`} />
+
+## 完整表单示例
+
+<LivePreview code={`
+<div className="space-y-4 max-w-md">
+  <LMField label="用户名" required>
+    <LMInput placeholder="请输入用户名" />
+  </LMField>
+  <LMField label="邮箱" required description="我们不会分享您的邮箱">
+    <LMInput type="email" placeholder="请输入邮箱" />
+  </LMField>
+  <LMField label="密码" required>
+    <LMInput type="password" placeholder="请输入密码" />
+  </LMField>
+  <LMButton fullWidth>提交</LMButton>
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标签文本 | `string` | - |
+| required | 是否必填 | `boolean` | `false` |
+| description | 说明文字 | `string` | - |
+| error | 错误信息 | `string` | - |
+| children | 表单控件 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |

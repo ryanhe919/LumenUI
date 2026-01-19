@@ -1,0 +1,150 @@
+---
+title: 基础用法
+description: 如何使用 LumenUI 组件
+---
+
+# 基础用法
+
+## 引入组件
+
+安装并配置好 LumenUI 后，你可以直接引入组件使用：
+
+```tsx
+import { LMButton, LMInput, LMCard } from '@ryanhe919/lumen-ui'
+
+export function MyComponent() {
+  return (
+    <LMCard>
+      <LMInput placeholder="请输入用户名" />
+      <LMButton>提交</LMButton>
+    </LMCard>
+  )
+}
+```
+
+## 组件尺寸
+
+大部分组件支持 6 种尺寸：`xs`、`sm`、`md`、`lg`、`xl`、`2xl`。
+
+```tsx
+import { LMButton } from '@ryanhe919/lumen-ui'
+
+export function Sizes() {
+  return (
+    <div className="flex gap-2 items-center">
+      <LMButton size="xs">极小</LMButton>
+      <LMButton size="sm">小</LMButton>
+      <LMButton size="md">中</LMButton>
+      <LMButton size="lg">大</LMButton>
+      <LMButton size="xl">超大</LMButton>
+      <LMButton size="2xl">最大</LMButton>
+    </div>
+  )
+}
+```
+
+## 组件变体
+
+部分组件支持多种变体（variant），例如 Button 支持：
+
+```tsx
+import { LMButton } from '@ryanhe919/lumen-ui'
+
+export function Variants() {
+  return (
+    <div className="flex gap-2">
+      <LMButton variant="primary">主要按钮</LMButton>
+      <LMButton variant="secondary">次要按钮</LMButton>
+      <LMButton variant="outline">轮廓按钮</LMButton>
+      <LMButton variant="ghost">幽灵按钮</LMButton>
+      <LMButton variant="danger">危险按钮</LMButton>
+    </div>
+  )
+}
+```
+
+## 响应式设计
+
+LumenUI 组件默认支持响应式设计，配合 TailwindCSS 可以轻松实现响应式布局：
+
+```tsx
+import { LMCard, LMButton } from '@ryanhe919/lumen-ui'
+
+export function Responsive() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <LMCard>卡片 1</LMCard>
+      <LMCard>卡片 2</LMCard>
+      <LMCard>卡片 3</LMCard>
+    </div>
+  )
+}
+```
+
+## 组合使用
+
+LumenUI 组件可以灵活组合使用：
+
+```tsx
+import {
+  LMCard,
+  LMInput,
+  LMButton,
+  LMField,
+  LMSelect
+} from '@ryanhe919/lumen-ui'
+
+export function LoginForm() {
+  return (
+    <LMCard className="max-w-md mx-auto p-6">
+      <h2 className="text-xl font-bold mb-4">用户登录</h2>
+
+      <LMField label="用户名" required>
+        <LMInput placeholder="请输入用户名" />
+      </LMField>
+
+      <LMField label="密码" required>
+        <LMInput type="password" placeholder="请输入密码" />
+      </LMField>
+
+      <LMField label="角色">
+        <LMSelect
+          options={[
+            { label: '管理员', value: 'admin' },
+            { label: '普通用户', value: 'user' },
+          ]}
+          placeholder="请选择角色"
+        />
+      </LMField>
+
+      <LMButton className="w-full mt-4">登录</LMButton>
+    </LMCard>
+  )
+}
+```
+
+## 事件处理
+
+组件事件遵循 React 标准的事件命名规范：
+
+```tsx
+import { LMButton, LMInput } from '@ryanhe919/lumen-ui'
+import { useState } from 'react'
+
+export function EventHandling() {
+  const [value, setValue] = useState('')
+
+  return (
+    <div className="space-y-4">
+      <LMInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="输入内容..."
+      />
+      <LMButton onClick={() => alert(`你输入了: ${value}`)}>
+        提交
+      </LMButton>
+    </div>
+  )
+}
+```

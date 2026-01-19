@@ -1,0 +1,144 @@
+---
+title: MarkdownRenderer Markdown渲染
+description: 用于渲染 Markdown 内容的组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# MarkdownRenderer Markdown渲染
+
+用于渲染 Markdown 内容，适合展示 AI 生成的文本。
+
+## 引入
+
+```tsx
+import { LMMarkdownRenderer } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMMarkdownRenderer
+  content={\`# 标题
+
+这是一段普通文本，包含 **加粗** 和 *斜体*。
+
+## 列表
+
+- 项目一
+- 项目二
+- 项目三
+\`}
+/>
+`} />
+
+## 代码块
+
+<LivePreview code={`
+<LMMarkdownRenderer
+  content={\`## 代码示例
+
+这是一个 JavaScript 代码块：
+
+\\\`\\\`\\\`javascript
+function hello() {
+  console.log('Hello World')
+}
+\\\`\\\`\\\`
+\`}
+/>
+`} />
+
+## 表格
+
+<LivePreview code={`
+<LMMarkdownRenderer
+  content={\`## 数据表格
+
+| 名称 | 类型 | 默认值 |
+| --- | --- | --- |
+| size | string | md |
+| disabled | boolean | false |
+\`}
+/>
+`} />
+
+## 引用
+
+<LivePreview code={`
+<LMMarkdownRenderer
+  content={\`> 这是一段引用文本，通常用于引用他人的话语或重要信息。
+\`}
+/>
+`} />
+
+## 支持的语法
+
+### 标题
+
+```markdown
+# 一级标题
+## 二级标题
+### 三级标题
+```
+
+### 文本样式
+
+```markdown
+**加粗文本**
+*斜体文本*
+~~删除线~~
+`行内代码`
+```
+
+### 列表
+
+```markdown
+- 无序列表项
+- 无序列表项
+
+1. 有序列表项
+2. 有序列表项
+```
+
+### 链接
+
+```markdown
+[链接文本](https://example.com)
+```
+
+### 代码块
+
+````markdown
+```javascript
+const hello = 'world'
+```
+````
+
+### 表格
+
+```markdown
+| 列1 | 列2 |
+| --- | --- |
+| 值1 | 值2 |
+```
+
+### 引用
+
+```markdown
+> 这是一段引用文本
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| content | Markdown 内容 | `string` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| allowHtml | 是否允许 HTML | `boolean` | `false` |
+| renderCodeBlock | 自定义代码块渲染器 | `(code, language, filename) => ReactNode` | - |
+| onLinkClick | 链接点击回调 | `(url, event) => void` | - |
+| openLinksInNewTab | 新窗口打开链接 | `boolean` | `true` |
+| className | 自定义类名 | `string` | - |

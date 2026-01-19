@@ -1,0 +1,86 @@
+---
+title: Upload 上传
+description: 文件上传组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Upload 上传
+
+用于上传文件的组件。
+
+## 引入
+
+```tsx
+import { LMUpload } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMUpload onFileSelect={(files) => console.log(files)}>
+  <LMButton variant="outline">选择文件</LMButton>
+</LMUpload>
+`} />
+
+## 拖拽上传
+
+<LivePreview code={`
+<LMUpload
+  dragDrop
+  onFileSelect={(files) => console.log(files)}
+>
+  <div className="p-8 text-center border-2 border-dashed border-gray-300 rounded-xl">
+    <p className="text-gray-500">将文件拖到此处，或点击选择</p>
+  </div>
+</LMUpload>
+`} />
+
+## 限制文件类型
+
+```tsx
+<LMUpload
+  accept="image/*"
+  onFileSelect={(files) => console.log(files)}
+>
+  选择图片
+</LMUpload>
+```
+
+## 多文件上传
+
+```tsx
+<LMUpload
+  multiple
+  onFileSelect={(files) => console.log(files)}
+>
+  选择多个文件
+</LMUpload>
+```
+
+## 文件大小限制
+
+```tsx
+<LMUpload
+  maxSize={5 * 1024 * 1024} // 5MB
+  onFileSelect={(files) => console.log(files)}
+  onError={(error) => alert(error)}
+>
+  最大 5MB
+</LMUpload>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| accept | 接受的文件类型 | `string` | - |
+| multiple | 允许多选 | `boolean` | `false` |
+| maxSize | 最大文件大小（字节） | `number` | - |
+| dragDrop | 启用拖拽上传 | `boolean` | `false` |
+| onFileSelect | 文件选择回调 | `(files: File[]) => void` | - |
+| onError | 错误回调 | `(error: string) => void` | - |
+| disabled | 禁用状态 | `boolean` | `false` |
+| children | 自定义内容 | `ReactNode` | - |

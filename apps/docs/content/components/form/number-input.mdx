@@ -1,0 +1,74 @@
+---
+title: NumberInput 数字输入
+description: 用于输入数字的组件，支持步进控制
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# NumberInput 数字输入
+
+用于输入数字的组件，带有增减按钮。
+
+## 引入
+
+```tsx
+import { LMNumberInput } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMNumberInput placeholder="请输入数字" />
+`} />
+
+## 设置范围
+
+使用 `min` 和 `max` 属性限制数值范围。
+
+<LivePreview code={`
+<LMNumberInput min={0} max={100} placeholder="0-100" />
+`} />
+
+## 步进值
+
+使用 `step` 属性设置步进值。
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMNumberInput step={10} placeholder="步进 10" />
+  <LMNumberInput step={0.1} placeholder="步进 0.1" />
+</div>
+`} />
+
+## 精度
+
+使用 `precision` 属性设置小数精度。
+
+<LivePreview code={`
+<LMNumberInput precision={2} placeholder="保留 2 位小数" />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMNumberInput size="sm" placeholder="小尺寸" />
+  <LMNumberInput size="md" placeholder="中尺寸" />
+  <LMNumberInput size="lg" placeholder="大尺寸" />
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| value | 当前值 | `number` | - |
+| onChange | 值变化回调 | `(value: number) => void` | - |
+| min | 最小值 | `number` | - |
+| max | 最大值 | `number` | - |
+| step | 步进值 | `number` | `1` |
+| precision | 小数精度 | `number` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| disabled | 禁用状态 | `boolean` | `false` |

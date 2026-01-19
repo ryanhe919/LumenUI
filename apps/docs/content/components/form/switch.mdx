@@ -1,0 +1,81 @@
+---
+title: Switch 开关
+description: 开关组件，用于切换两种状态
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Switch 开关
+
+用于切换两种状态，如开/关、启用/禁用等。
+
+## 引入
+
+```tsx
+import { LMSwitch } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMSwitch label="飞行模式" />
+`} />
+
+## 带描述
+
+<LivePreview code={`
+<LMSwitch label="深色模式" description="启用深色主题获得更好的夜间浏览体验" />
+`} />
+
+## 禁用状态
+
+<LivePreview code={`
+<div className="flex flex-col gap-2">
+  <LMSwitch label="禁用未开启" disabled />
+  <LMSwitch label="禁用已开启" disabled checked />
+</div>
+`} />
+
+## 错误状态
+
+<LivePreview code={`
+<LMSwitch label="启用功能" error errorMessage="此功能需要高级订阅" />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-2">
+  <LMSwitch size="xs" label="超小尺寸" />
+  <LMSwitch size="sm" label="小尺寸" />
+  <LMSwitch size="md" label="中尺寸" />
+  <LMSwitch size="lg" label="大尺寸" />
+  <LMSwitch size="xl" label="超大尺寸" />
+  <LMSwitch size="2xl" label="最大尺寸" />
+</div>
+`} />
+
+## 设置面板示例
+
+<LivePreview code={`
+<div className="flex flex-col gap-1">
+  <LMSwitch label="推送通知" description="在设备上接收推送通知" />
+  <LMSwitch label="深色模式" description="在整个应用中使用深色主题" />
+  <LMSwitch label="自动更新" description="自动下载并安装更新" />
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标签文字 | `string` | - |
+| description | 描述文字 | `string` | - |
+| checked | 开关状态 | `boolean` | - |
+| onChange | 状态变化回调 | `(e: ChangeEvent) => void` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| error | 错误状态 | `boolean` | `false` |
+| errorMessage | 错误提示信息 | `string` | - |
+| disabled | 禁用状态 | `boolean` | `false` |

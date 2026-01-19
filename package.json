@@ -11,12 +11,14 @@
     "prepublishOnly": "pnpm build",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build",
+    "docs": "pnpm --filter @lumen-ui/docs dev",
+    "docs:build": "pnpm --filter @lumen-ui/docs build",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "lint": "eslint packages/",
-    "lint:fix": "eslint packages/ --fix"
+    "lint": "eslint packages/ apps/",
+    "lint:fix": "eslint packages/ apps/ --fix"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",

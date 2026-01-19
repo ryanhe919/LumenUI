@@ -1,0 +1,102 @@
+---
+title: Card 卡片
+description: 通用卡片容器组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Card 卡片
+
+卡片是一个通用容器组件，用于展示相关内容和操作。
+
+## 引入
+
+```tsx
+import { LMCard } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMCard>
+  <p>这是一个基础卡片</p>
+</LMCard>
+`} />
+
+## 带标题的卡片
+
+<LivePreview code={`
+<LMCard title="卡片标题">
+  <p>卡片内容区域，可以放置任意内容。</p>
+</LMCard>
+`} />
+
+## 带副标题
+
+<LivePreview code={`
+<LMCard title="卡片标题" subtitle="这是副标题描述信息">
+  <p>卡片内容</p>
+</LMCard>
+`} />
+
+## 可点击卡片
+
+使用 `hoverable` 属性使卡片可悬停高亮。
+
+<LivePreview code={`
+<LMCard hoverable>
+  <p>悬停试试看效果</p>
+</LMCard>
+`} />
+
+## 无边框
+
+<LivePreview code={`
+<LMCard bordered={false}>
+  <p>无边框卡片，适用于深色背景</p>
+</LMCard>
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMCard size="sm" title="小卡片">
+    <p>小尺寸内容</p>
+  </LMCard>
+  <LMCard size="md" title="中卡片">
+    <p>中尺寸内容</p>
+  </LMCard>
+  <LMCard size="lg" title="大卡片">
+    <p>大尺寸内容</p>
+  </LMCard>
+</div>
+`} />
+
+## 自定义头部和底部
+
+<LivePreview code={`
+<LMCard
+  header={<div className="flex justify-between items-center"><span className="font-semibold">自定义头部</span><LMBadge variant="success">新</LMBadge></div>}
+  footer={<LMButton fullWidth>操作按钮</LMButton>}
+>
+  <p>卡片内容区域</p>
+</LMCard>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| title | 卡片标题 | `ReactNode` | - |
+| subtitle | 卡片副标题 | `ReactNode` | - |
+| header | 自定义头部 | `ReactNode` | - |
+| footer | 自定义底部 | `ReactNode` | - |
+| hoverable | 悬停高亮 | `boolean` | `false` |
+| bordered | 显示边框 | `boolean` | `true` |
+| size | 卡片尺寸 | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| onClick | 点击回调 | `() => void` | - |
+| className | 自定义类名 | `string` | - |
+| children | 卡片内容 | `ReactNode` | - |

@@ -1,0 +1,92 @@
+---
+title: ChatInput 聊天输入
+description: 聊天输入框组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# ChatInput 聊天输入
+
+用于输入聊天消息的组件，支持多行输入和快捷键发送。
+
+## 引入
+
+```tsx
+import { LMChatInput } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMChatInput placeholder="输入消息..." />
+`} />
+
+## 禁用状态
+
+<LivePreview code={`
+<LMChatInput disabled placeholder="AI 正在回复中..." />
+`} />
+
+## 发送中状态
+
+<LivePreview code={`
+<LMChatInput sending placeholder="输入消息..." />
+`} />
+
+## 显示字符计数
+
+<LivePreview code={`
+<LMChatInput showCount maxLength={200} placeholder="最多 200 字..." />
+`} />
+
+## 正在生成（显示停止按钮）
+
+<LivePreview code={`
+<LMChatInput placeholder="输入消息..." isGenerating />
+`} />
+
+## 不显示发送按钮
+
+<LivePreview code={`
+<LMChatInput placeholder="输入消息..." showSendButton={false} />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMChatInput size="xs" placeholder="Extra Small" />
+  <LMChatInput size="sm" placeholder="Small" />
+  <LMChatInput size="md" placeholder="Medium" />
+  <LMChatInput size="lg" placeholder="Large" />
+  <LMChatInput size="xl" placeholder="Extra Large" />
+  <LMChatInput size="2xl" placeholder="2X Large" />
+</div>
+`} />
+
+## 快捷键
+
+- `Enter` - 发送消息
+- `Shift + Enter` - 换行
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| value | 输入值 | `string` | - |
+| onChange | 值变化回调 | `(value: string) => void` | - |
+| onSend | 发送回调 | `(value: string) => void` | - |
+| placeholder | 占位文本 | `string` | `'输入消息...'` |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| disabled | 禁用状态 | `boolean` | `false` |
+| sending | 发送中状态 | `boolean` | `false` |
+| maxLength | 最大字符数 | `number` | - |
+| showCount | 显示字符计数 | `boolean` | `false` |
+| showSendButton | 显示发送按钮 | `boolean` | `true` |
+| enterToSend | Enter 发送 | `boolean` | `true` |
+| isGenerating | 正在生成 | `boolean` | `false` |
+| onStop | 停止生成回调 | `() => void` | - |
+| toolbar | 底部工具栏 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |

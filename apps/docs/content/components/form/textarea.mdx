@@ -1,0 +1,72 @@
+---
+title: Textarea 多行输入
+description: 多行文本输入组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Textarea 多行输入
+
+用于输入多行文本内容。
+
+## 引入
+
+```tsx
+import { LMTextarea } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMTextarea placeholder="请输入内容" />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMTextarea size="sm" placeholder="小尺寸" />
+  <LMTextarea size="md" placeholder="中尺寸" />
+  <LMTextarea size="lg" placeholder="大尺寸" />
+</div>
+`} />
+
+## 行数
+
+使用 `rows` 属性设置默认行数。
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMTextarea rows={3} placeholder="3 行" />
+  <LMTextarea rows={5} placeholder="5 行" />
+</div>
+`} />
+
+## 禁用和只读
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMTextarea disabled placeholder="禁用状态" />
+  <LMTextarea readOnly value="只读内容，不可编辑" />
+</div>
+`} />
+
+## 错误状态
+
+<LivePreview code={`
+<LMTextarea error errorMessage="内容不能为空" placeholder="必填字段" />
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| rows | 行数 | `number` | `3` |
+| error | 错误状态 | `boolean` | `false` |
+| errorMessage | 错误信息 | `string` | - |
+| disabled | 禁用状态 | `boolean` | `false` |
+
+此外，组件还支持所有原生 `<textarea>` 元素的属性。

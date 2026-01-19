@@ -1,0 +1,85 @@
+---
+title: StatCard 统计卡片
+description: 用于展示统计数据的卡片组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# StatCard 统计卡片
+
+用于展示关键统计指标的卡片组件。
+
+## 引入
+
+```tsx
+import { LMStatCard } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMStatCard title="总用户数" value={12345} />
+`} />
+
+## 带前缀和后缀
+
+<LivePreview code={`
+<div className="flex gap-4">
+  <LMStatCard title="销售额" value={99.9} prefix="¥" suffix="万" />
+  <LMStatCard title="转化率" value={24.5} suffix="%" />
+</div>
+`} />
+
+## 带趋势
+
+<LivePreview code={`
+<div className="flex gap-4">
+  <LMStatCard
+    title="月增长率"
+    value={12.5}
+    suffix="%"
+    trend="up"
+    trendValue="+2.5%"
+  />
+  <LMStatCard
+    title="退货率"
+    value={3.2}
+    suffix="%"
+    trend="down"
+    trendValue="-0.8%"
+  />
+</div>
+`} />
+
+## 加载状态
+
+<LivePreview code={`
+<LMStatCard title="加载中" loading />
+`} />
+
+## 布局组合
+
+<LivePreview code={`
+<div className="grid grid-cols-2 gap-4">
+  <LMStatCard title="总用户" value={12345} trend="up" trendValue="+12%" />
+  <LMStatCard title="订单数" value={892} trend="up" trendValue="+5%" />
+  <LMStatCard title="销售额" value={98.5} prefix="¥" suffix="万" trend="down" trendValue="-3%" />
+  <LMStatCard title="转化率" value={24.5} suffix="%" />
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| title | 标题 | `string` | - |
+| value | 数值 | `number \| string` | - |
+| prefix | 前缀 | `ReactNode` | - |
+| suffix | 后缀 | `ReactNode` | - |
+| trend | 趋势方向 | `'up' \| 'down'` | - |
+| trendValue | 趋势数值 | `string` | - |
+| icon | 图标 | `ReactNode` | - |
+| loading | 加载状态 | `boolean` | `false` |
+| className | 自定义类名 | `string` | - |

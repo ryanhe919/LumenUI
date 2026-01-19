@@ -1,0 +1,111 @@
+---
+title: Select 选择器
+description: 下拉选择组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Select 选择器
+
+从下拉菜单中选择一个或多个选项。
+
+## 引入
+
+```tsx
+import { LMSelect } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMSelect
+  options={[
+    { label: '选项一', value: 'option1' },
+    { label: '选项二', value: 'option2' },
+    { label: '选项三', value: 'option3' },
+  ]}
+  placeholder="请选择"
+/>
+`} />
+
+## 禁用选项
+
+<LivePreview code={`
+<LMSelect
+  options={[
+    { label: '选项一', value: 'option1' },
+    { label: '选项二（禁用）', value: 'option2', disabled: true },
+    { label: '选项三', value: 'option3' },
+  ]}
+  placeholder="部分选项禁用"
+/>
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-3">
+  <LMSelect
+    size="sm"
+    options={[
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+    ]}
+    placeholder="小尺寸"
+  />
+  <LMSelect
+    size="md"
+    options={[
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+    ]}
+    placeholder="中尺寸"
+  />
+  <LMSelect
+    size="lg"
+    options={[
+      { label: '选项一', value: '1' },
+      { label: '选项二', value: '2' },
+    ]}
+    placeholder="大尺寸"
+  />
+</div>
+`} />
+
+## 错误状态
+
+<LivePreview code={`
+<LMSelect
+  options={[
+    { label: '选项一', value: '1' },
+    { label: '选项二', value: '2' },
+  ]}
+  error
+  errorMessage="请选择一个选项"
+  placeholder="错误状态"
+/>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| options | 选项列表 | `LMSelectOption[]` | `[]` |
+| value | 当前值 | `string \| number \| (string \| number)[]` | - |
+| onChange | 值变化回调 | `(value) => void` | - |
+| placeholder | 占位文本 | `string` | `'Select...'` |
+| multiple | 多选模式 | `boolean` | `false` |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| error | 错误状态 | `boolean` | `false` |
+| errorMessage | 错误信息 | `string` | - |
+| disabled | 禁用状态 | `boolean` | `false` |
+
+### LMSelectOption
+
+| 属性 | 说明 | 类型 | 必填 |
+| --- | --- | --- | --- |
+| label | 选项标签 | `string` | 是 |
+| value | 选项值 | `string \| number` | 是 |
+| disabled | 禁用选项 | `boolean` | 否 |

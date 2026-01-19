@@ -1,0 +1,57 @@
+---
+title: TypingIndicator 输入指示器
+description: 显示对方正在输入的动画指示器
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# TypingIndicator 输入指示器
+
+用于显示对方正在输入的动画效果。
+
+## 引入
+
+```tsx
+import { LMTypingIndicator } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMTypingIndicator />
+`} />
+
+## 带文本
+
+<LivePreview code={`
+<LMTypingIndicator text="AI 正在思考中" />
+`} />
+
+## 不同尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMTypingIndicator size="sm" text="小尺寸" />
+  <LMTypingIndicator size="md" text="中尺寸" />
+  <LMTypingIndicator size="lg" text="大尺寸" />
+</div>
+`} />
+
+## 在聊天中使用
+
+```tsx
+<LMChatList messages={messages}>
+  {loading && <LMTypingIndicator text="AI 正在输入..." />}
+</LMChatList>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| text | 提示文本 | `string` | - |
+| size | 尺寸 | `'sm' \| 'md' \| 'lg'` | `'md'` |
+| color | 圆点颜色 | `string` | - |
+| className | 自定义类名 | `string` | - |

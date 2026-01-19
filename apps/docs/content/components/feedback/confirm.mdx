@@ -1,0 +1,172 @@
+---
+title: Confirm 确认框
+description: 确认对话框组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Confirm 确认框
+
+用于需要用户确认的简单场景。
+
+## 引入
+
+```tsx
+import { LMConfirm } from '@ryanhe919/lumen-ui'
+import { useConfirm } from '@ryanhe919/lumen-ui/hooks'
+```
+
+## 基础用法
+
+<LivePreview code={`
+function Demo() {
+  const [visible, setVisible] = React.useState(false)
+  return (
+    <>
+      <LMButton onClick={() => setVisible(true)}>打开确认框</LMButton>
+      <LMConfirm
+        visible={visible}
+        title="确认操作"
+        content="确定要执行此操作吗？"
+        confirmText="确定"
+        cancelText="取消"
+        onConfirm={() => setVisible(false)}
+        onCancel={() => setVisible(false)}
+      />
+    </>
+  )
+}
+`} />
+
+## 危险操作样式
+
+<LivePreview code={`
+function Demo() {
+  const [visible, setVisible] = React.useState(false)
+  return (
+    <>
+      <LMButton variant="danger" onClick={() => setVisible(true)}>删除</LMButton>
+      <LMConfirm
+        visible={visible}
+        title="删除确认"
+        content="此操作不可撤销，确定要删除吗？"
+        confirmText="删除"
+        cancelText="取消"
+        confirmButtonStyle="danger"
+        onConfirm={() => setVisible(false)}
+        onCancel={() => setVisible(false)}
+      />
+    </>
+  )
+}
+`} />
+
+## 使用 Hook
+
+推荐使用 `useConfirm` Hook 来管理确认框状态：
+
+```tsx
+import { useConfirm } from '@ryanhe919/lumen-ui/hooks'
+
+function App() {
+  const { confirm, ConfirmDialog } = useConfirm()
+
+  const handleDelete = async () => {
+    const result = await confirm({
+      title: '删除确认',
+      content: '确定要删除这条记录吗？',
+      confirmText: '删除',
+      confirmButtonStyle: 'danger',
+    })
+
+    if (result) {
+      console.log('用户确认删除')
+      // 执行删除操作
+    } else {
+      console.log('用户取消')
+    }
+  }
+
+  return (
+    <>
+      <button onClick={handleDelete}>删除</button>
+      <ConfirmDialog />
+    </>
+  )
+}
+```
+
+## 受控组件用法
+
+```tsx
+import { LMConfirm } from '@ryanhe919/lumen-ui'
+import { useState } from 'react'
+
+function App() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <button onClick={() => setVisible(true)}>打开确认框</button>
+      <LMConfirm
+        visible={visible}
+        title="保存更改"
+        content="是否保存当前更改？"
+        confirmText="保存"
+        cancelText="不保存"
+        onConfirm={() => {
+          console.log('已保存')
+          setVisible(false)
+        }}
+        onCancel={() => setVisible(false)}
+      />
+    </>
+  )
+}
+```
+
+## 禁止遮罩关闭
+
+```tsx
+<LMConfirm
+  visible={visible}
+  title="重要操作"
+  content="请通过按钮确认或取消，点击遮罩不会关闭对话框。"
+  closeOnOverlayClick={false}
+  onConfirm={handleConfirm}
+  onCancel={handleCancel}
+/>
+```
+
+## API
+
+### LMConfirm Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| visible | 是否显示 | `boolean` | - |
+| title | 标题 | `string` | `'Confirm'` |
+| content | 内容 | `string` | - |
+| confirmText | 确认按钮文本 | `string` | `'Confirm'` |
+| cancelText | 取消按钮文本 | `string` | `'Cancel'` |
+| confirmButtonStyle | 确认按钮样式 | `'primary' \| 'danger'` | `'primary'` |
+| closeOnOverlayClick | 点击遮罩是否关闭 | `boolean` | `true` |
+| onConfirm | 确认回调 | `() => void` | - |
+| onCancel | 取消回调 | `() => void` | - |
+
+### useConfirm Hook
+
+| 返回值 | 说明 | 类型 |
+| --- | --- | --- |
+| confirm | 打开确认框（返回 Promise） | `(config: ConfirmConfig) => Promise<boolean>` |
+| ConfirmDialog | 确认框组件（需要渲染到页面中） | `React.FC` |
+
+### ConfirmConfig
+
+| 属性 | 说明 | 类型 |
+| --- | --- | --- |
+| title | 标题 | `string` |
+| content | 内容 | `string` |
+| confirmText | 确认按钮文本 | `string` |
+| cancelText | 取消按钮文本 | `string` |
+| confirmButtonStyle | 确认按钮样式 | `'primary' \| 'danger'` |

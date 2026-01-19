@@ -7,7 +7,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
-export default tseslint.config({ ignores: ['**/dist', '**/node_modules', '**/*.d.ts'] }, {
+export default tseslint.config({ ignores: ['**/dist', '**/node_modules', '**/*.d.ts', '**/.next/**'] }, {
   extends: [js.configs.recommended, ...tseslint.configs.recommended],
   files: ['**/*.{ts,tsx}'],
   languageOptions: {
@@ -36,5 +36,11 @@ export default tseslint.config({ ignores: ['**/dist', '**/node_modules', '**/*.d
   files: ['**/*.stories.{ts,tsx}'],
   rules: {
     'react-hooks/rules-of-hooks': 'off',
+  },
+}, // Disable react-refresh for Next.js app directory (Next.js has its own fast refresh)
+{
+  files: ['apps/**/app/**/*.{ts,tsx}', 'apps/**/*.tsx'],
+  rules: {
+    'react-refresh/only-export-components': 'off',
   },
 }, storybook.configs["flat/recommended"]);

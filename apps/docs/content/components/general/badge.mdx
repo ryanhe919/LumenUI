@@ -1,0 +1,102 @@
+---
+title: Badge 徽章
+description: 徽章用于展示状态、标签、计数等信息
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Badge 徽章
+
+徽章用于展示状态、标签、计数等信息，通常出现在按钮、图标或文本旁边。
+
+## 引入
+
+```tsx
+import { LMBadge } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+使用 `variant` 属性设置徽章的颜色变体。
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMBadge variant="primary">主要</LMBadge>
+  <LMBadge variant="secondary">次要</LMBadge>
+  <LMBadge variant="success">成功</LMBadge>
+  <LMBadge variant="warning">警告</LMBadge>
+  <LMBadge variant="error">错误</LMBadge>
+  <LMBadge variant="info">信息</LMBadge>
+  <LMBadge variant="neutral">中性</LMBadge>
+</div>
+`} />
+
+## 徽章尺寸
+
+使用 `size` 属性设置徽章大小，支持 `xs`、`sm`、`md`、`lg`、`xl`、`2xl` 六种尺寸。
+
+<LivePreview code={`
+<div className="flex flex-wrap items-center gap-3">
+  <LMBadge size="xs">极小</LMBadge>
+  <LMBadge size="sm">小</LMBadge>
+  <LMBadge size="md">中</LMBadge>
+  <LMBadge size="lg">大</LMBadge>
+  <LMBadge size="xl">超大</LMBadge>
+  <LMBadge size="2xl">最大</LMBadge>
+</div>
+`} />
+
+## 带小圆点
+
+使用 `dot` 属性在徽章前添加小圆点，常用于状态指示。
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMBadge dot variant="success">在线</LMBadge>
+  <LMBadge dot variant="warning">离开</LMBadge>
+  <LMBadge dot variant="error">离线</LMBadge>
+  <LMBadge dot variant="neutral">未知</LMBadge>
+</div>
+`} />
+
+## 使用场景
+
+### 状态标签
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMBadge dot variant="success">已发布</LMBadge>
+  <LMBadge dot variant="warning">草稿</LMBadge>
+  <LMBadge dot variant="error">已下架</LMBadge>
+</div>
+`} />
+
+### 分类标签
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMBadge variant="primary">React</LMBadge>
+  <LMBadge variant="info">TypeScript</LMBadge>
+  <LMBadge variant="secondary">TailwindCSS</LMBadge>
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| children | 徽章内容 | `ReactNode` | - |
+| variant | 颜色变体 | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| 'info' \| 'neutral'` | `'primary'` |
+| size | 徽章尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'sm'` |
+| dot | 显示小圆点 | `boolean` | `false` |
+| icon | 前置图标 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |
+
+## 设计规范
+
+- 使用圆角 `rounded-full` 实现胶囊形状
+- 颜色使用对应变体的 100 色作为背景，700 色作为文字
+- 边框使用对应变体的 200 色
+- 过渡动画使用 120ms 的 ease-out 缓动曲线

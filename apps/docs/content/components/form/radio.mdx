@@ -1,0 +1,81 @@
+---
+title: Radio 单选框
+description: 单选框组件，用于单选
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Radio 单选框
+
+用于在多个选项中选择一项。
+
+## 引入
+
+```tsx
+import { LMRadio } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<div className="flex flex-col gap-1">
+  <LMRadio name="demo" value="1" label="选项一" defaultChecked />
+  <LMRadio name="demo" value="2" label="选项二" />
+  <LMRadio name="demo" value="3" label="选项三" />
+</div>
+`} />
+
+## 带描述
+
+<LivePreview code={`
+<div className="flex flex-col gap-1">
+  <LMRadio name="plan" value="free" label="免费版" description="基础功能，永久免费" />
+  <LMRadio name="plan" value="pro" label="专业版" description="高级功能，每月 ¥99" />
+  <LMRadio name="plan" value="enterprise" label="企业版" description="全部功能，定制服务" />
+</div>
+`} />
+
+## 禁用状态
+
+<LivePreview code={`
+<div className="flex flex-col gap-1">
+  <LMRadio label="禁用未选中" disabled />
+  <LMRadio label="禁用已选中" disabled checked />
+</div>
+`} />
+
+## 错误状态
+
+<LivePreview code={`
+<LMRadio label="选择此选项" error errorMessage="此选项暂不可用" />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-2">
+  <LMRadio size="xs" name="size" value="xs" label="超小尺寸" />
+  <LMRadio size="sm" name="size" value="sm" label="小尺寸" />
+  <LMRadio size="md" name="size" value="md" label="中尺寸" />
+  <LMRadio size="lg" name="size" value="lg" label="大尺寸" />
+  <LMRadio size="xl" name="size" value="xl" label="超大尺寸" />
+  <LMRadio size="2xl" name="size" value="2xl" label="最大尺寸" />
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标签文字 | `string` | - |
+| description | 描述文字 | `string` | - |
+| name | 单选框组名称 | `string` | - |
+| value | 选项值 | `string` | - |
+| checked | 选中状态 | `boolean` | - |
+| onChange | 状态变化回调 | `(e: ChangeEvent) => void` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| error | 错误状态 | `boolean` | `false` |
+| errorMessage | 错误提示信息 | `string` | - |
+| disabled | 禁用状态 | `boolean` | `false` |

@@ -1,0 +1,116 @@
+---
+title: Button 按钮
+description: 按钮用于触发一个操作或事件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Button 按钮
+
+按钮用于触发一个操作或事件，如提交表单、打开对话框、取消操作等。
+
+## 引入
+
+```tsx
+import { LMButton } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+按钮的 `variant` 属性用于设置按钮的类型。
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMButton variant="primary">主要按钮</LMButton>
+  <LMButton variant="secondary">次要按钮</LMButton>
+  <LMButton variant="outline">轮廓按钮</LMButton>
+  <LMButton variant="ghost">幽灵按钮</LMButton>
+  <LMButton variant="danger">危险按钮</LMButton>
+  <LMButton variant="success">成功按钮</LMButton>
+  <LMButton variant="warning">警告按钮</LMButton>
+</div>
+`} />
+
+## 按钮尺寸
+
+使用 `size` 属性设置按钮大小，支持 `xs`、`sm`、`md`、`lg`、`xl`、`2xl` 六种尺寸。
+
+<LivePreview code={`
+<div className="flex flex-wrap items-center gap-3">
+  <LMButton size="xs">极小按钮</LMButton>
+  <LMButton size="sm">小按钮</LMButton>
+  <LMButton size="md">中按钮</LMButton>
+  <LMButton size="lg">大按钮</LMButton>
+  <LMButton size="xl">超大按钮</LMButton>
+  <LMButton size="2xl">最大按钮</LMButton>
+</div>
+`} />
+
+## 禁用状态
+
+使用 `disabled` 属性禁用按钮。
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMButton disabled>禁用按钮</LMButton>
+  <LMButton variant="outline" disabled>禁用轮廓按钮</LMButton>
+</div>
+`} />
+
+## 加载状态
+
+使用 `loading` 属性设置按钮的加载状态。可以使用 `loadingText` 自定义加载文本。
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMButton loading>加载中</LMButton>
+  <LMButton loading loadingText="正在提交...">提交</LMButton>
+</div>
+`} />
+
+## 全宽按钮
+
+使用 `fullWidth` 属性使按钮宽度占满容器。
+
+<LivePreview code={`
+<div className="w-full max-w-md">
+  <LMButton fullWidth>全宽按钮</LMButton>
+</div>
+`} />
+
+## 圆角按钮
+
+使用 `rounded` 属性设置圆角按钮（胶囊形状）。
+
+<LivePreview code={`
+<div className="flex flex-wrap gap-3">
+  <LMButton rounded>圆角按钮</LMButton>
+  <LMButton rounded variant="outline">轮廓圆角</LMButton>
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| variant | 按钮类型 | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger' \| 'success' \| 'warning'` | `'primary'` |
+| size | 按钮尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| loading | 加载状态 | `boolean` | `false` |
+| loadingText | 加载文本 | `string` | - |
+| leftIcon | 左侧图标 | `ReactNode` | - |
+| rightIcon | 右侧图标 | `ReactNode` | - |
+| fullWidth | 全宽 | `boolean` | `false` |
+| rounded | 圆角 | `boolean` | `false` |
+| disabled | 禁用 | `boolean` | `false` |
+| className | 自定义类名 | `string` | - |
+
+此外，按钮还支持所有原生 `<button>` 元素的属性，如 `onClick`、`type` 等。
+
+## 设计规范
+
+- 悬停效果使用 `scale(1.02)` 配合阴影增强
+- 按压效果使用 `scale(0.98)` 提供触觉反馈
+- 过渡动画使用 180ms 的 ease-out 缓动曲线
+- 主要按钮使用 Apple System Blue (`#007AFF`) 作为主色

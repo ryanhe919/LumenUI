@@ -1,0 +1,99 @@
+---
+title: ChatList 消息列表
+description: 显示聊天消息列表的组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# ChatList 消息列表
+
+用于显示聊天消息列表，支持自动滚动到底部。
+
+## 引入
+
+```tsx
+import { LMChatList } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMChatList
+  messages={[
+    { id: 1, role: 'user', content: '你好' },
+    { id: 2, role: 'assistant', content: '你好！有什么可以帮助你的吗？' },
+    { id: 3, role: 'user', content: '帮我写一段代码' },
+  ]}
+/>
+`} />
+
+## 加载状态
+
+显示 AI 正在输入的指示器。
+
+<LivePreview code={`
+<LMChatList
+  messages={[
+    { id: 1, role: 'user', content: '请帮我写一个函数' },
+  ]}
+  loading={true}
+/>
+`} />
+
+## 空状态
+
+```tsx
+<LMChatList
+  messages={[]}
+  emptyContent={
+    <div className="text-center text-gray-500">
+      <p>开始一段新对话</p>
+    </div>
+  }
+/>
+```
+
+## 自定义消息渲染
+
+```tsx
+<LMChatList
+  messages={messages}
+  renderMessage={(message) => (
+    <LMChatMessage
+      key={message.id}
+      role={message.role}
+      content={message.content}
+      avatar={message.role === 'assistant' ? <BotAvatar /> : <UserAvatar />}
+    />
+  )}
+/>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| messages | 消息列表 | `Message[]` | `[]` |
+| loading | 加载状态 | `boolean` | `false` |
+| renderMessage | 自定义消息渲染 | `(message: Message) => ReactNode` | - |
+| emptyContent | 空状态内容 | `ReactNode` | - |
+| autoScroll | 自动滚动到底部 | `boolean` | `true` |
+| className | 自定义类名 | `string` | - |
+
+### Message
+
+| 属性 | 说明 | 类型 | 必填 |
+| --- | --- | --- | --- |
+| id | 消息 ID | `string \| number` | 是 |
+| role | 角色 | `'user' \| 'assistant' \| 'system'` | 是 |
+| content | 消息内容 | `string` | 是 |
+| timestamp | 时间戳 | `Date \| string` | 否 |
+
+### Ref Methods
+
+| 方法 | 说明 |
+| --- | --- |
+| `scrollToBottom()` | 滚动到底部 |
+| `scrollToTop()` | 滚动到顶部 |

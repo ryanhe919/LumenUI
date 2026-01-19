@@ -1,0 +1,81 @@
+---
+title: Checkbox 复选框
+description: 复选框组件，用于多选
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Checkbox 复选框
+
+用于在多个选项中选择多项。
+
+## 引入
+
+```tsx
+import { LMCheckbox } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMCheckbox label="同意条款和条件" />
+`} />
+
+## 带描述
+
+<LivePreview code={`
+<LMCheckbox label="邮件通知" description="接收关于账户活动和安全的邮件" />
+`} />
+
+## 禁用状态
+
+<LivePreview code={`
+<div className="flex flex-col gap-2">
+  <LMCheckbox label="禁用未选中" disabled />
+  <LMCheckbox label="禁用已选中" disabled checked />
+</div>
+`} />
+
+## 错误状态
+
+<LivePreview code={`
+<LMCheckbox label="同意条款和条件" error errorMessage="您必须接受条款才能继续" />
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-2">
+  <LMCheckbox size="xs" label="超小尺寸" />
+  <LMCheckbox size="sm" label="小尺寸" />
+  <LMCheckbox size="md" label="中尺寸" />
+  <LMCheckbox size="lg" label="大尺寸" />
+  <LMCheckbox size="xl" label="超大尺寸" />
+  <LMCheckbox size="2xl" label="最大尺寸" />
+</div>
+`} />
+
+## 复选框组
+
+<LivePreview code={`
+<div className="flex flex-col gap-1">
+  <LMCheckbox label="邮件通知" description="通过邮件接收通知" />
+  <LMCheckbox label="短信通知" description="通过短信接收通知" />
+  <LMCheckbox label="推送通知" description="通过推送接收通知" />
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label | 标签文字 | `string` | - |
+| description | 描述文字 | `string` | - |
+| checked | 选中状态 | `boolean` | - |
+| onChange | 状态变化回调 | `(e: ChangeEvent) => void` | - |
+| size | 尺寸 | `'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' \| '2xl'` | `'md'` |
+| error | 错误状态 | `boolean` | `false` |
+| errorMessage | 错误提示信息 | `string` | - |
+| disabled | 禁用状态 | `boolean` | `false` |

@@ -1,0 +1,128 @@
+---
+title: Tabs 标签页
+description: 标签页组件，用于内容分组切换
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Tabs 标签页
+
+用于在同一区域内切换显示不同内容。
+
+## 引入
+
+```tsx
+import { LMTabs } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<LMTabs
+  items={[
+    { key: 'tab1', label: '标签一', children: <p className="p-4">内容一</p> },
+    { key: 'tab2', label: '标签二', children: <p className="p-4">内容二</p> },
+    { key: 'tab3', label: '标签三', children: <p className="p-4">内容三</p> },
+  ]}
+/>
+`} />
+
+## 禁用标签
+
+<LivePreview code={`
+<LMTabs
+  items={[
+    { key: 'tab1', label: '标签一', children: <p className="p-4">内容一</p> },
+    { key: 'tab2', label: '标签二（禁用）', children: <p className="p-4">内容二</p>, disabled: true },
+    { key: 'tab3', label: '标签三', children: <p className="p-4">内容三</p> },
+  ]}
+/>
+`} />
+
+## 尺寸
+
+<LivePreview code={`
+<div className="flex flex-col gap-6">
+  <LMTabs
+    size="sm"
+    items={[
+      { key: '1', label: '小尺寸', children: <p className="p-4">内容</p> },
+      { key: '2', label: '标签二', children: <p className="p-4">内容</p> },
+    ]}
+  />
+  <LMTabs
+    size="md"
+    items={[
+      { key: '1', label: '中尺寸', children: <p className="p-4">内容</p> },
+      { key: '2', label: '标签二', children: <p className="p-4">内容</p> },
+    ]}
+  />
+  <LMTabs
+    size="lg"
+    items={[
+      { key: '1', label: '大尺寸', children: <p className="p-4">内容</p> },
+      { key: '2', label: '标签二', children: <p className="p-4">内容</p> },
+    ]}
+  />
+</div>
+`} />
+
+## 类型
+
+<LivePreview code={`
+<div className="flex flex-col gap-6">
+  <div>
+    <p className="text-sm text-gray-500 mb-2">Line 类型</p>
+    <LMTabs
+      type="line"
+      items={[
+        { key: '1', label: '标签一', children: <p className="p-4">Line 类型内容</p> },
+        { key: '2', label: '标签二', children: <p className="p-4">内容</p> },
+      ]}
+    />
+  </div>
+  <div>
+    <p className="text-sm text-gray-500 mb-2">Card 类型</p>
+    <LMTabs
+      type="card"
+      items={[
+        { key: '1', label: '标签一', children: <p className="p-4">Card 类型内容</p> },
+        { key: '2', label: '标签二', children: <p className="p-4">内容</p> },
+      ]}
+    />
+  </div>
+  <div>
+    <p className="text-sm text-gray-500 mb-2">Pills 类型</p>
+    <LMTabs
+      type="pills"
+      items={[
+        { key: '1', label: '标签一', children: <p className="p-4">Pills 类型内容</p> },
+        { key: '2', label: '标签二', children: <p className="p-4">内容</p> },
+      ]}
+    />
+  </div>
+</div>
+`} />
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| items | 标签项配置 | `TabItem[]` | `[]` |
+| activeKey | 当前激活标签 | `string` | - |
+| defaultActiveKey | 默认激活标签 | `string` | - |
+| onChange | 切换回调 | `(key: string) => void` | - |
+| type | 标签类型 | `'line' \| 'card' \| 'pills'` | `'line'` |
+| size | 尺寸 | `'sm' \| 'md' \| 'lg'` | `'md'` |
+
+### TabItem
+
+| 属性 | 说明 | 类型 | 必填 |
+| --- | --- | --- | --- |
+| key | 标签标识 | `string` | 是 |
+| label | 标签标题 | `ReactNode` | 是 |
+| children | 标签内容 | `ReactNode` | 是 |
+| icon | 标签图标 | `ReactNode` | 否 |
+| disabled | 禁用标签 | `boolean` | 否 |

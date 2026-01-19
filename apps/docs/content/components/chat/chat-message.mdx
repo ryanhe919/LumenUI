@@ -1,0 +1,100 @@
+---
+title: ChatMessage 聊天消息
+description: 单条聊天消息组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# ChatMessage 聊天消息
+
+显示单条聊天消息，包含头像、内容和时间戳。
+
+## 引入
+
+```tsx
+import { LMChatMessage } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+<LivePreview code={`
+<div className="flex flex-col gap-4">
+  <LMChatMessage role="user" content="你好，请问有什么可以帮助我的？" />
+  <LMChatMessage role="assistant" content="你好！我是 AI 助手，很高兴为你服务。有什么问题可以问我。" />
+</div>
+`} />
+
+## 系统消息
+
+<LivePreview code={`
+<LMChatMessage role="system" content="这是一条系统提示消息" />
+`} />
+
+## 带头像
+
+```tsx
+<LMChatMessage
+  role="user"
+  content="你好"
+  avatar={<img src="/user-avatar.png" alt="user" />}
+/>
+
+<LMChatMessage
+  role="assistant"
+  content="你好！"
+  avatar={<BotIcon className="w-6 h-6" />}
+/>
+```
+
+## 带时间戳
+
+```tsx
+<LMChatMessage
+  role="user"
+  content="你好"
+  timestamp={new Date()}
+/>
+```
+
+## Markdown 内容
+
+```tsx
+<LMChatMessage
+  role="assistant"
+  content={`
+# 标题
+
+这是一段 **加粗** 文本和 *斜体* 文本。
+
+\`\`\`javascript
+console.log('Hello World')
+\`\`\`
+  `}
+  markdown
+/>
+```
+
+## 流式输出
+
+```tsx
+<LMChatMessage
+  role="assistant"
+  content={streamingContent}
+  streaming
+/>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| role | 消息角色 | `'user' \| 'assistant' \| 'system'` | - |
+| content | 消息内容 | `string` | - |
+| avatar | 头像 | `ReactNode` | - |
+| timestamp | 时间戳 | `Date \| string` | - |
+| markdown | 渲染为 Markdown | `boolean` | `false` |
+| streaming | 流式输出状态 | `boolean` | `false` |
+| actions | 操作按钮 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |

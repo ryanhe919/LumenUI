@@ -1,0 +1,98 @@
+---
+title: Modal 对话框
+description: 模态对话框组件
+---
+
+import { LivePreview } from '../../../components/LivePreview'
+
+# Modal 对话框
+
+用于显示重要内容或需要用户确认的操作。
+
+## 引入
+
+```tsx
+import { LMModal } from '@ryanhe919/lumen-ui'
+```
+
+## 基础用法
+
+由于 Modal 需要状态控制，这里展示一个简化的示例：
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<LMButton onClick={() => setOpen(true)}>打开对话框</LMButton>
+
+<LMModal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="对话框标题"
+>
+  <p>对话框内容</p>
+</LMModal>
+```
+
+## 自定义底部
+
+```tsx
+<LMModal
+  open={open}
+  onClose={() => setOpen(false)}
+  title="确认操作"
+  footer={
+    <div className="flex gap-2 justify-end">
+      <LMButton variant="ghost" onClick={() => setOpen(false)}>
+        取消
+      </LMButton>
+      <LMButton onClick={handleConfirm}>
+        确定
+      </LMButton>
+    </div>
+  }
+>
+  <p>确定要执行此操作吗？</p>
+</LMModal>
+```
+
+## 无底部
+
+```tsx
+<LMModal title="仅查看" footer={null}>
+  <p>这是只读内容</p>
+</LMModal>
+```
+
+## 尺寸
+
+```tsx
+<LMModal size="sm" title="小对话框">内容</LMModal>
+<LMModal size="md" title="中对话框">内容</LMModal>
+<LMModal size="lg" title="大对话框">内容</LMModal>
+<LMModal size="xl" title="超大对话框">内容</LMModal>
+```
+
+## 居中显示
+
+```tsx
+<LMModal centered title="居中对话框">
+  <p>内容垂直居中</p>
+</LMModal>
+```
+
+## API
+
+### Props
+
+| 属性 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| open | 是否显示 | `boolean` | `false` |
+| onClose | 关闭回调 | `() => void` | - |
+| title | 标题 | `ReactNode` | - |
+| footer | 底部内容 | `ReactNode \| null` | 默认按钮 |
+| size | 尺寸 | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` |
+| centered | 垂直居中 | `boolean` | `false` |
+| closable | 显示关闭按钮 | `boolean` | `true` |
+| closeOnOverlay | 点击遮罩关闭 | `boolean` | `true` |
+| children | 内容 | `ReactNode` | - |
+| className | 自定义类名 | `string` | - |
