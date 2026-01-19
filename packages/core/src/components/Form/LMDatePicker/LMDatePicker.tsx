@@ -97,6 +97,30 @@ const DoubleChevronRightIcon: React.FC = () => (
 const WEEKDAYS = ['日', '一', '二', '三', '四', '五', '六']
 const MONTHS = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
 
+// Scrollbar styles for time columns
+const timeScrollbarStyles = `
+  .lm-time-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .lm-time-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .lm-time-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--lm-border-default);
+    border-radius: 4px;
+  }
+  .lm-time-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--lm-text-tertiary);
+  }
+  .lm-time-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--lm-border-default) transparent;
+  }
+`
+
+// Fixed height for time columns to match calendar height
+const TIME_COLUMN_HEIGHT = 252
+
 // TimeColumn component moved outside to avoid re-creation during render
 const TimeColumn: React.FC<{
   options: number[]
@@ -106,14 +130,17 @@ const TimeColumn: React.FC<{
 }> = ({ options, value, onChange, listRef }) => (
   <div
     ref={listRef as React.RefObject<HTMLDivElement>}
-    className="flex-1 h-[168px] overflow-y-auto scrollbar-thin"
-    style={{ scrollbarWidth: 'thin' }}
+    className="flex-1 overflow-y-auto lm-time-scrollbar"
+    style={{
+      height: `${TIME_COLUMN_HEIGHT}px`,
+      maxHeight: `${TIME_COLUMN_HEIGHT}px`,
+    }}
   >
     {options.map((opt) => (
       <button
         key={opt}
         className={`
-          w-full h-7 text-sm flex items-center justify-center
+          w-full h-8 text-sm flex items-center justify-center rounded-md
           transition-colors duration-150
           hover:bg-[var(--lm-bg-hover)]
         `}
@@ -229,7 +256,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
         const scrollToSelected = (ref: React.RefObject<HTMLDivElement | null>, value: number, step: number) => {
           if (ref.current) {
             const index = Math.floor(value / step)
-            const itemHeight = 28 // height of each item
+            const itemHeight = 32 // height of each item (h-8)
             ref.current.scrollTop = index * itemHeight
           }
         }
@@ -503,12 +530,13 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
         zIndex: 1000,
         backgroundColor: 'var(--lm-bg-elevated)',
         borderColor: 'var(--lm-border-default)',
-        width: hasTime ? '420px' : '280px',
+        width: hasTime ? '460px' : '280px',
       }}
     >
+      <style>{timeScrollbarStyles}</style>
       <div className={hasTime ? 'flex gap-3' : ''}>
         {/* Calendar Panel */}
-        <div style={{ width: '256px' }}>
+        <div className="flex-shrink-0" style={{ width: '256px' }}>
           {/* Header */}
           <div className="flex items-center justify-between mb-3">
             <button
@@ -586,11 +614,11 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
         {/* Time Picker Panel */}
         {hasTime && (
           <div
-            className="border-l pl-3"
-            style={{ borderColor: 'var(--lm-border-light)', width: '130px' }}
+            className="border-l pl-3 flex flex-col"
+            style={{ borderColor: 'var(--lm-border-light)', width: '170px' }}
           >
             <div
-              className="text-xs font-medium mb-2 text-center"
+              className="text-xs font-medium mb-2 text-center flex-shrink-0"
               style={{ color: 'var(--lm-text-tertiary)' }}
             >
               选择时间
