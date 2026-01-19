@@ -257,13 +257,13 @@ const LMDropdown: React.FC<LMDropdownProps> = ({
     }
   }
 
+  // Apple-like refined dropdown styling
   const dropdownContent = visible && (
     <div
       ref={dropdownRef}
       className={`
         ${minWidthClasses[resolvedSize]}
-        rounded-xl border backdrop-blur-md
-        shadow-lg py-1
+        rounded-xl border py-1
       `}
       style={{
         position: 'absolute',
@@ -272,6 +272,9 @@ const LMDropdown: React.FC<LMDropdownProps> = ({
         zIndex: 1000,
         backgroundColor: 'var(--lm-bg-elevated)',
         borderColor: 'var(--lm-border-default)',
+        boxShadow: 'var(--lm-shadow-lg)',
+        backdropFilter: 'blur(20px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(20px) saturate(180%)',
       }}
       onMouseEnter={handleDropdownMouseEnter}
       onMouseLeave={handleDropdownMouseLeave}
@@ -342,15 +345,18 @@ const MenuItem: React.FC<MenuItemProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false)
 
+  // Apple-like refined menu item styling
   return (
     <div
       className={`
         ${paddingClass} ${textClass}
         flex items-center ${gapClass}
-        transition-colors duration-150
-        cursor-pointer
+        cursor-pointer select-none
       `}
-      style={getStyles(item, isHovered)}
+      style={{
+        ...getStyles(item, isHovered),
+        transition: 'all var(--lm-transition-fast) var(--lm-ease-out)',
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => onClick(item)}

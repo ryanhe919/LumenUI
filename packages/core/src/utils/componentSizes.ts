@@ -15,34 +15,34 @@ export const COMPONENT_SIZE_ORDER: ComponentSize[] = [
   '2xl',
 ]
 
-/** Text size classes */
+/** Text size classes with Apple-like line heights */
 export const SIZE_TEXT_CLASSES: Record<ComponentSize, string> = {
-  xs: 'text-xs',
-  sm: 'text-sm',
-  md: 'text-base',
-  lg: 'text-lg',
-  xl: 'text-xl',
-  '2xl': 'text-2xl',
+  xs: 'text-xs leading-relaxed',
+  sm: 'text-sm leading-relaxed',
+  md: 'text-base leading-relaxed',
+  lg: 'text-lg leading-relaxed',
+  xl: 'text-xl leading-relaxed',
+  '2xl': 'text-2xl leading-relaxed',
 }
 
-/** Heading size classes */
+/** Heading size classes with tight tracking */
 export const SIZE_HEADING_CLASSES: Record<ComponentSize, string> = {
-  xs: 'text-lg',
-  sm: 'text-xl',
-  md: 'text-2xl',
-  lg: 'text-3xl',
-  xl: 'text-4xl',
-  '2xl': 'text-5xl',
+  xs: 'text-lg leading-tight tracking-tight',
+  sm: 'text-xl leading-tight tracking-tight',
+  md: 'text-2xl leading-tight tracking-tight',
+  lg: 'text-3xl leading-tight tracking-tight',
+  xl: 'text-4xl leading-tight tracking-tighter',
+  '2xl': 'text-5xl leading-tight tracking-tighter',
 }
 
-/** Display size classes */
+/** Display size classes with extra tight tracking */
 export const SIZE_DISPLAY_CLASSES: Record<ComponentSize, string> = {
-  xs: 'text-xl',
-  sm: 'text-2xl',
-  md: 'text-3xl',
-  lg: 'text-4xl',
-  xl: 'text-5xl',
-  '2xl': 'text-6xl',
+  xs: 'text-xl leading-none tracking-tight',
+  sm: 'text-2xl leading-none tracking-tight',
+  md: 'text-3xl leading-none tracking-tight',
+  lg: 'text-4xl leading-none tracking-tighter',
+  xl: 'text-5xl leading-none tracking-tighter',
+  '2xl': 'text-6xl leading-none tracking-tighter',
 }
 
 /** Gap classes */

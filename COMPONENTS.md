@@ -4,9 +4,15 @@
 
 ## 安装与引入
 
+```bash
+npm install @ryanhe919/lumen-ui
+# or
+pnpm add @ryanhe919/lumen-ui
+```
+
 ```tsx
-import { LMButton, LMInput, LMSelect, ... } from '@lumen-ui/core'
-import '@lumen-ui/core/styles.css'
+import { LMButton, LMInput, LMSelect, ... } from '@ryanhe919/lumen-ui'
+import '@ryanhe919/lumen-ui/styles.css'
 ```
 
 ## 通用属性
@@ -630,21 +636,84 @@ function DeleteButton({ onDelete }) {
 
 ## 主题系统
 
-通过 CSS 变量控制主题，支持亮色和暗色模式。
+通过 CSS 变量控制主题，支持 5 种主题模式。
 
 ```html
-<!-- 切换暗色模式 -->
+<!-- 切换主题: light (默认), dark, blue, green, redWhite -->
 <html data-theme="dark">
 ```
 
-**主要颜色变量：**
-- `--lm-primary-*`: 主色系 (50-900)
-- `--lm-success-*`: 成功色
-- `--lm-warning-*`: 警告色
-- `--lm-error-*`: 错误色
+### 颜色变量
+
+**主色调** (Apple System Blue):
+- `--lm-primary-500`: `#007AFF` (亮色) / `#0A84FF` (暗色)
+- `--lm-primary-*`: 50-950 完整色阶
+
+**语义色**:
+- `--lm-success-*`: 成功色 (绿色系)
+- `--lm-warning-*`: 警告色 (黄色系)
+- `--lm-error-*`: 错误色 (红色系)
+- `--lm-info-*`: 信息色 (蓝色系)
 - `--lm-gray-*`: 灰色系
+
+**背景与文字**:
 - `--lm-bg-elevated`: 浮层背景
 - `--lm-bg-paper`: 卡片背景
+- `--lm-bg-hover`: 悬停背景
 - `--lm-text-primary`: 主要文字
 - `--lm-text-secondary`: 次要文字
 - `--lm-border-default`: 默认边框
+- `--lm-border-focus`: 焦点边框
+
+### 圆角系统
+
+```css
+--lm-radius-sm: 6px;    /* 小元素 */
+--lm-radius-md: 10px;   /* 中等元素 */
+--lm-radius-lg: 12px;   /* 主要组件 (按钮、输入框) */
+--lm-radius-xl: 16px;   /* 大型组件 (卡片、模态框) */
+--lm-radius-2xl: 20px;  /* 超大组件 */
+```
+
+### 阴影系统
+
+```css
+/* 柔和的多层阴影 */
+--lm-shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+--lm-shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+--lm-shadow-lg: 0 8px 24px rgba(0,0,0,0.08), 0 4px 8px rgba(0,0,0,0.04);
+--lm-shadow-xl: 0 16px 48px rgba(0,0,0,0.10), 0 8px 16px rgba(0,0,0,0.06);
+```
+
+### 动效系统
+
+**过渡时长**:
+```css
+--lm-transition-fast: 120ms;    /* 微交互 */
+--lm-transition-normal: 180ms;  /* 标准过渡 */
+--lm-transition-slow: 250ms;    /* 复杂动画 */
+```
+
+**缓动曲线**:
+```css
+--lm-ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
+--lm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);  /* 弹性效果 */
+--lm-ease-out: cubic-bezier(0, 0, 0.2, 1);
+--lm-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+```
+
+### 工具类
+
+```css
+.lm-transition      /* 标准过渡效果 */
+.lm-transition-fast /* 快速过渡效果 */
+.lm-hover-lift      /* 悬停提升效果 (scale + shadow) */
+.lm-glass           /* 毛玻璃效果 */
+.lm-tracking-tight  /* 紧凑字间距 */
+```
+
+### 无障碍支持
+
+- 自动支持 `prefers-reduced-motion` 减少动画
+- 使用 `:focus-visible` 显示键盘焦点
+- 文字对比度满足 WCAG 4.5:1 标准

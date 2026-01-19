@@ -59,30 +59,34 @@ const LMCard: React.FC<LMCardProps> = ({
     '2xl': 'text-2xl',
   }
 
-  const roundedClasses = 'rounded-2xl'
+  // Apple-like refined border radius
+  const roundedClasses = 'rounded-xl'
   const borderClasses = bordered ? 'border' : ''
-  const hoverableClasses = hoverable ? 'cursor-pointer transition-all duration-300' : ''
+  const hoverableClasses = hoverable ? 'cursor-pointer' : ''
 
+  // Apple-like card styling
   const baseClassName = `
     ${roundedClasses} ${borderClasses} ${hoverableClasses}
-    backdrop-blur-md transition-all duration-300 overflow-hidden
+    overflow-hidden
     ${className}
   `
     .trim()
     .replace(/\s+/g, ' ')
 
   const getCardStyles = (): React.CSSProperties => {
+    // Apple-like refined card styles with smooth transitions
     const baseStyles: React.CSSProperties = {
       backgroundColor: 'var(--lm-bg-elevated)',
       borderColor: 'var(--lm-border-default)',
       boxShadow: 'var(--lm-shadow-sm)',
+      transition: 'all var(--lm-transition-normal) var(--lm-ease-out)',
     }
 
     switch (variant) {
       case 'elevated':
         return {
           ...baseStyles,
-          boxShadow: 'var(--lm-shadow-lg)',
+          boxShadow: 'var(--lm-shadow-md)',
         }
       case 'outline':
         return {
@@ -103,13 +107,14 @@ const LMCard: React.FC<LMCardProps> = ({
     }
   }
 
+  // Apple-like subtle hover with scale effect (not translateY)
   const getHoverStyles = (): React.CSSProperties => {
     if (!hoverable) return {}
 
     const baseHover: React.CSSProperties = {
       boxShadow: 'var(--lm-shadow-lg)',
       borderColor: 'var(--lm-border-strong)',
-      transform: 'translateY(-2px)',
+      transform: 'scale(1.01)',
     }
 
     switch (variant) {

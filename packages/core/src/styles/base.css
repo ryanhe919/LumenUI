@@ -1,2 +1,93 @@
 @import "tailwindcss";
 @import "./theme.css";
+
+/* ========================================
+   Global Apple-like Base Styles
+   ======================================== */
+
+/* Font smoothing for crisp text rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--lm-primary-500);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ========================================
+   Reduced Motion Support (Accessibility)
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   Apple-like Utility Classes
+   ======================================== */
+
+/* Refined border radius classes */
+.lm-rounded-apple {
+  border-radius: var(--lm-radius-lg);
+}
+
+.lm-rounded-apple-lg {
+  border-radius: var(--lm-radius-xl);
+}
+
+/* Apple-like transition */
+.lm-transition {
+  transition-property: all;
+  transition-duration: var(--lm-transition-normal);
+  transition-timing-function: var(--lm-ease-out);
+}
+
+.lm-transition-fast {
+  transition-property: all;
+  transition-duration: var(--lm-transition-fast);
+  transition-timing-function: var(--lm-ease-out);
+}
+
+/* Subtle hover scale effect */
+.lm-hover-lift {
+  transition: transform var(--lm-transition-normal) var(--lm-ease-spring),
+              box-shadow var(--lm-transition-normal) var(--lm-ease-out);
+}
+
+.lm-hover-lift:hover {
+  transform: scale(1.02);
+}
+
+/* Glass effect - use sparingly */
+.lm-glass {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+[data-theme="dark"] .lm-glass {
+  background: rgba(30, 30, 30, 0.72);
+}
+
+/* Letter spacing for headings */
+.lm-tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+.lm-tracking-tighter {
+  letter-spacing: -0.05em;
+}

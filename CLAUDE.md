@@ -51,9 +51,23 @@ LumenUI/
 
 ## 关键技术约定
 
+**设计风格**: Apple-like 现代设计，特点包括:
+- 精致的圆角系统 (6px, 10px, 12px, 16px, 20px)
+- 柔和的阴影效果
+- 快速流畅的过渡动画 (120ms-250ms)
+- Apple System Blue 主色调 (`#007AFF` / `#0A84FF`)
+- 支持 `prefers-reduced-motion` 无障碍
+
 **尺寸系统**: 所有组件支持 6 个尺寸: `xs | sm | md | lg | xl | 2xl`，配置在 `utils/componentSizes.ts`
 
 **主题系统**: 使用 CSS 变量，通过 `data-theme="dark"` 切换暗色模式，变量定义在 `styles/theme.css`
+- 支持 5 个主题: light, dark, blue, green, redWhite
+- 新增缓动曲线变量: `--lm-ease-default`, `--lm-ease-spring`, `--lm-ease-out`
+
+**动效系统**:
+- 过渡时长: `--lm-transition-fast` (120ms), `--lm-transition-normal` (180ms), `--lm-transition-slow` (250ms)
+- 悬停效果: 使用 `scale(1.02)` 而非 `translateY`
+- 按压效果: 使用 `scale(0.98)` 提供反馈
 
 **构建输出**:
 - ESM: `dist/index.js`
@@ -75,3 +89,21 @@ LumenUI/
 - 使用中文描述和注释
 - 标题格式: `分类 Category/LMComponent 组件名`
 - 每个 story 使用 JSDoc 注释: `/** 中文名称 - 简短说明 */`
+
+## 设计规范
+
+**圆角**: 使用 `rounded-xl` (12px) 作为主要圆角，避免过大的 `rounded-2xl`
+
+**过渡**: 使用 CSS 变量控制，如 `transition: all var(--lm-transition-normal) var(--lm-ease-out)`
+
+**阴影**: 使用柔和的多层阴影，如 `--lm-shadow-md: 0 4px 12px rgba(0,0,0,0.06)`
+
+**交互**:
+- 所有可点击元素添加 `cursor-pointer`
+- 悬停使用 `scale(1.02)` 配合阴影增强
+- 按压使用 `scale(0.98)` 提供触觉反馈
+
+**无障碍**:
+- 支持 `prefers-reduced-motion` 减少动画
+- 使用 `:focus-visible` 显示键盘焦点
+- 文字对比度满足 WCAG 4.5:1 标准

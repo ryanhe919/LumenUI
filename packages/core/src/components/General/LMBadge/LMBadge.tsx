@@ -131,10 +131,14 @@ const LMBadge: React.FC<LMBadgeProps> = ({
 
   const currentSize = sizeConfig[size]
 
+  // Apple-like refined badge styling
   return (
     <span
-      className={`inline-flex items-center justify-center ${currentSize.padding} ${currentSize.fontSize} rounded-full border font-medium transition-all duration-200 ${className}`}
-      style={getVariantStyles()}
+      className={`inline-flex items-center justify-center ${currentSize.padding} ${currentSize.fontSize} rounded-full border font-medium select-none ${className}`}
+      style={{
+        ...getVariantStyles(),
+        transition: 'all var(--lm-transition-fast) var(--lm-ease-out)',
+      }}
     >
       {dot && (
         <span

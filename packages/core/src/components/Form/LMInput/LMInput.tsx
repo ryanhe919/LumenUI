@@ -42,11 +42,11 @@ const LMInput: React.FC<LMInputProps> = ({
     return {}
   }
 
+  // Apple-like refined input styling
   const baseClassName = `
     w-full ${SIZE_INPUT_CONFIG[size].padding} ${SIZE_INPUT_CONFIG[size].height} ${SIZE_INPUT_CONFIG[size].fontSize}
-    backdrop-blur-md border rounded-2xl
-    focus:ring-2 focus:outline-none transition-all duration-300
-    shadow-sm
+    border rounded-xl
+    focus:ring-2 focus:outline-none
     ${hasLeftIcon ? 'pl-10' : ''}
     ${hasRightElement ? 'pr-10' : ''}
     ${className}
@@ -55,6 +55,7 @@ const LMInput: React.FC<LMInputProps> = ({
     .replace(/\s+/g, ' ')
 
   const getInputStyles = () => {
+    // Apple-like refined input styles
     const baseStyles = {
       backgroundColor: 'var(--lm-bg-elevated)',
       color: 'var(--lm-text-primary)',
@@ -62,6 +63,7 @@ const LMInput: React.FC<LMInputProps> = ({
         ? 'var(--lm-error-300)'
         : 'var(--lm-border-default)',
       boxShadow: 'var(--lm-shadow-sm)',
+      transition: 'all var(--lm-transition-fast) var(--lm-ease-out)',
     } as React.CSSProperties
 
     return {
@@ -69,7 +71,7 @@ const LMInput: React.FC<LMInputProps> = ({
       '--tw-ring-color': error
         ? 'var(--lm-error-400)'
         : 'var(--lm-primary-400)',
-      '--tw-ring-opacity': '0.3',
+      '--tw-ring-opacity': '0.4',
     }
   }
 

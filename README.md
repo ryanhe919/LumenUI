@@ -1,17 +1,27 @@
 # LumenUI
 
-A modern React UI component library with glassmorphism design, built with TypeScript and TailwindCSS v4.
+A modern React UI component library with Apple-like design aesthetics, built with TypeScript and TailwindCSS v4.
 
 ## Features
 
-- 25 beautifully crafted components
-- Glassmorphism design language
+- 25+ beautifully crafted components
+- **Apple-like design** with refined animations and interactions
+- Glassmorphism effects with selective blur
 - Full TypeScript support
 - TailwindCSS v4 integration
-- CSS variable-based theming (light/dark mode)
+- CSS variable-based theming (5 themes: light, dark, blue, green, redWhite)
 - 6 size variants (xs, sm, md, lg, xl, 2xl)
+- **Accessibility**: `prefers-reduced-motion` support, WCAG contrast compliance
 - ESM and CommonJS support
 - Tree-shakeable
+
+## Design Highlights
+
+- **Apple System Blue** primary color (`#007AFF` light / `#0A84FF` dark)
+- **Refined border radius** scale (6px, 10px, 12px, 16px, 20px)
+- **Smooth animations** with spring easing (120ms-250ms)
+- **Subtle hover effects** using scale transforms
+- **Soft, diffuse shadows** for depth
 
 ## Installation
 
@@ -78,9 +88,10 @@ function App() {
 
 ## Theming
 
-LumenUI uses CSS variables for theming. Add `data-theme="dark"` to enable dark mode:
+LumenUI uses CSS variables for theming. Add `data-theme` to switch themes:
 
 ```html
+<!-- Available themes: light (default), dark, blue, green, redWhite -->
 <html data-theme="dark">
   <!-- Your app -->
 </html>
@@ -92,9 +103,38 @@ Override CSS variables to customize the theme:
 
 ```css
 :root {
-  --lm-primary-500: #6366f1;
-  --lm-primary-600: #4f46e5;
-  /* ... */
+  /* Primary color (Apple System Blue by default) */
+  --lm-primary-500: #007AFF;
+  --lm-primary-600: #0066d6;
+
+  /* Border radius scale */
+  --lm-radius-sm: 6px;
+  --lm-radius-md: 10px;
+  --lm-radius-lg: 12px;
+  --lm-radius-xl: 16px;
+
+  /* Animation timing */
+  --lm-transition-fast: 120ms;
+  --lm-transition-normal: 180ms;
+  --lm-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --lm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Soft shadows */
+  --lm-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+```
+
+### Accessibility
+
+LumenUI respects user preferences:
+
+```css
+/* Automatically reduces motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 ```
 

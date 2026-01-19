@@ -77,27 +77,32 @@ const LMButton: React.FC<LMButtonProps> = ({
   const isDisabled = disabled || loading
   const resolvedSize = clampComponentSize(size, COMPONENT_SIZE_ORDER)
 
-  const roundedClasses = rounded ? 'rounded-full' : 'rounded-2xl'
+  // Apple-like refined border radius (12px default, full for pill)
+  const roundedClasses = rounded ? 'rounded-full' : 'rounded-xl'
   const widthClasses = fullWidth ? 'w-full' : ''
 
+  // Apple-like base styling with refined transitions
   const baseClassName = `
     ${SIZE_BUTTON_CONFIG[resolvedSize].padding} ${SIZE_TEXT_CLASSES[resolvedSize]} ${SIZE_GAP_CLASSES[resolvedSize]}
     ${roundedClasses} ${widthClasses}
-    backdrop-blur-md border transition-all duration-300
-    shadow-sm font-medium focus:ring-2 focus:ring-offset-0
-    focus:outline-none disabled:cursor-not-allowed
+    border font-medium
+    focus:ring-2 focus:ring-offset-0 focus:outline-none
+    disabled:cursor-not-allowed
     flex items-center justify-center
+    cursor-pointer select-none
     ${className}
   `
     .trim()
     .replace(/\s+/g, ' ')
 
   const getButtonStyles = () => {
+    // Apple-like base styles with refined shadows and transitions
     const baseStyles = {
       backgroundColor: 'var(--lm-bg-elevated)',
       color: 'var(--lm-text-primary)',
       borderColor: 'var(--lm-border-default)',
       boxShadow: 'var(--lm-shadow-sm)',
+      transition: 'all var(--lm-transition-normal) var(--lm-ease-out)',
     }
 
     switch (variant) {
@@ -106,14 +111,15 @@ const LMButton: React.FC<LMButtonProps> = ({
           ...baseStyles,
           backgroundColor: 'var(--lm-primary-500)',
           color: 'white',
-          borderColor: 'var(--lm-primary-500)',
+          borderColor: 'transparent',
+          boxShadow: 'var(--lm-shadow-md)',
           '--tw-ring-color': 'var(--lm-primary-400)',
-          '--tw-ring-opacity': '0.3',
+          '--tw-ring-opacity': '0.4',
         }
       case 'secondary':
         return {
           ...baseStyles,
-          backgroundColor: 'var(--lm-bg-paper)',
+          backgroundColor: 'var(--lm-bg-elevated)',
           color: 'var(--lm-text-primary)',
           borderColor: 'var(--lm-border-default)',
           '--tw-ring-color': 'var(--lm-primary-400)',
@@ -123,8 +129,9 @@ const LMButton: React.FC<LMButtonProps> = ({
         return {
           ...baseStyles,
           backgroundColor: 'transparent',
-          color: 'var(--lm-primary-600)',
-          borderColor: 'var(--lm-primary-300)',
+          color: 'var(--lm-primary-500)',
+          borderColor: 'var(--lm-primary-400)',
+          boxShadow: 'none',
           '--tw-ring-color': 'var(--lm-primary-400)',
           '--tw-ring-opacity': '0.3',
         }
@@ -134,6 +141,7 @@ const LMButton: React.FC<LMButtonProps> = ({
           backgroundColor: 'transparent',
           color: 'var(--lm-text-primary)',
           borderColor: 'transparent',
+          boxShadow: 'none',
           '--tw-ring-color': 'var(--lm-primary-400)',
           '--tw-ring-opacity': '0.3',
         }
@@ -142,27 +150,30 @@ const LMButton: React.FC<LMButtonProps> = ({
           ...baseStyles,
           backgroundColor: 'var(--lm-error-500)',
           color: 'white',
-          borderColor: 'var(--lm-error-500)',
+          borderColor: 'transparent',
+          boxShadow: 'var(--lm-shadow-md)',
           '--tw-ring-color': 'var(--lm-error-400)',
-          '--tw-ring-opacity': '0.3',
+          '--tw-ring-opacity': '0.4',
         }
       case 'success':
         return {
           ...baseStyles,
           backgroundColor: 'var(--lm-success-500)',
           color: 'white',
-          borderColor: 'var(--lm-success-500)',
+          borderColor: 'transparent',
+          boxShadow: 'var(--lm-shadow-md)',
           '--tw-ring-color': 'var(--lm-success-400)',
-          '--tw-ring-opacity': '0.3',
+          '--tw-ring-opacity': '0.4',
         }
       case 'warning':
         return {
           ...baseStyles,
           backgroundColor: 'var(--lm-warning-500)',
           color: 'white',
-          borderColor: 'var(--lm-warning-500)',
+          borderColor: 'transparent',
+          boxShadow: 'var(--lm-shadow-md)',
           '--tw-ring-color': 'var(--lm-warning-400)',
-          '--tw-ring-opacity': '0.3',
+          '--tw-ring-opacity': '0.4',
         }
       default:
         return baseStyles
@@ -182,87 +193,107 @@ const LMButton: React.FC<LMButtonProps> = ({
     return {}
   }
 
+  // Apple-like subtle hover with scale effect
   const getHoverStyles = () => {
     if (isDisabled) return {}
+
+    const baseHover = {
+      transform: 'scale(1.02)',
+    }
+
     switch (variant) {
       case 'primary':
         return {
+          ...baseHover,
           backgroundColor: 'var(--lm-primary-600)',
-          borderColor: 'var(--lm-primary-600)',
+          boxShadow: 'var(--lm-shadow-lg)',
         }
       case 'secondary':
         return {
-          backgroundColor: 'var(--lm-bg-elevated)',
+          ...baseHover,
+          backgroundColor: 'var(--lm-bg-hover)',
           borderColor: 'var(--lm-border-strong)',
         }
       case 'outline':
         return {
+          ...baseHover,
           backgroundColor: 'var(--lm-primary-50)',
-          borderColor: 'var(--lm-primary-400)',
-        }
-      case 'ghost':
-        return {
-          backgroundColor: 'var(--lm-bg-paper)',
-        }
-      case 'danger':
-        return {
-          backgroundColor: 'var(--lm-error-600)',
-          borderColor: 'var(--lm-error-600)',
-        }
-      case 'success':
-        return {
-          backgroundColor: 'var(--lm-success-600)',
-          borderColor: 'var(--lm-success-600)',
-        }
-      case 'warning':
-        return {
-          backgroundColor: 'var(--lm-warning-600)',
-          borderColor: 'var(--lm-warning-600)',
-        }
-      default:
-        return {}
-    }
-  }
-
-  const getActiveStyles = () => {
-    if (isDisabled) return {}
-    switch (variant) {
-      case 'primary':
-        return {
-          backgroundColor: 'var(--lm-primary-700)',
-          borderColor: 'var(--lm-primary-700)',
-        }
-      case 'secondary':
-        return {
-          backgroundColor: 'var(--lm-bg-paper)',
-          borderColor: 'var(--lm-border-default)',
-        }
-      case 'outline':
-        return {
-          backgroundColor: 'var(--lm-primary-100)',
           borderColor: 'var(--lm-primary-500)',
         }
       case 'ghost':
         return {
-          backgroundColor: 'var(--lm-bg-elevated)',
+          ...baseHover,
+          backgroundColor: 'var(--lm-bg-hover)',
         }
       case 'danger':
         return {
-          backgroundColor: 'var(--lm-error-700)',
-          borderColor: 'var(--lm-error-700)',
+          ...baseHover,
+          backgroundColor: 'var(--lm-error-600)',
+          boxShadow: 'var(--lm-shadow-lg)',
         }
       case 'success':
         return {
-          backgroundColor: 'var(--lm-success-700)',
-          borderColor: 'var(--lm-success-700)',
+          ...baseHover,
+          backgroundColor: 'var(--lm-success-600)',
+          boxShadow: 'var(--lm-shadow-lg)',
         }
       case 'warning':
         return {
-          backgroundColor: 'var(--lm-warning-700)',
-          borderColor: 'var(--lm-warning-700)',
+          ...baseHover,
+          backgroundColor: 'var(--lm-warning-600)',
+          boxShadow: 'var(--lm-shadow-lg)',
         }
       default:
-        return {}
+        return baseHover
+    }
+  }
+
+  // Apple-like pressed state with scale down
+  const getActiveStyles = () => {
+    if (isDisabled) return {}
+
+    const baseActive = {
+      transform: 'scale(0.98)',
+    }
+
+    switch (variant) {
+      case 'primary':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-primary-700)',
+        }
+      case 'secondary':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-bg-active)',
+        }
+      case 'outline':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-primary-100)',
+        }
+      case 'ghost':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-bg-active)',
+        }
+      case 'danger':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-error-700)',
+        }
+      case 'success':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-success-700)',
+        }
+      case 'warning':
+        return {
+          ...baseActive,
+          backgroundColor: 'var(--lm-warning-700)',
+        }
+      default:
+        return baseActive
     }
   }
 

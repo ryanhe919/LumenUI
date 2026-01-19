@@ -113,23 +113,27 @@ const LMModal: React.FC<LMModalProps> = ({
   style,
   centered = true,
   fullscreen = false,
-  animationDuration = 300,
+  animationDuration: _animationDuration = 300,
   animation = true,
 }) => {
+  // Note: animationDuration is kept for API compatibility but uses CSS variables now
+  void _animationDuration
   const modalRef = useRef<HTMLDivElement>(null)
   const backdropRef = useRef<HTMLDivElement>(null)
   const resolvedSize = clampComponentSize(size, COMPONENT_SIZE_ORDER)
   const footerButtonSize = MODAL_FOOTER_SIZE_MAP[resolvedSize]
 
   const getModalStyles = () => {
+    // Apple-like refined modal styling
     const baseStyles: React.CSSProperties = {
       backgroundColor: 'var(--lm-bg-elevated)',
       color: 'var(--lm-text-primary)',
       borderColor: 'var(--lm-border-default)',
       boxShadow: 'var(--lm-shadow-xl)',
-      borderRadius: '1rem',
+      borderRadius: 'var(--lm-radius-xl)',
       border: '1px solid var(--lm-border-default)',
-      backdropFilter: 'blur(10px)',
+      backdropFilter: 'blur(20px) saturate(180%)',
+      WebkitBackdropFilter: 'blur(20px) saturate(180%)',
       ...style,
     }
 
@@ -154,9 +158,14 @@ const LMModal: React.FC<LMModalProps> = ({
     return baseStyles
   }
 
+  // Apple-like refined backdrop
   const getBackdropStyles = () =>
     mask
-      ? { backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(4px)' }
+      ? {
+          backgroundColor: 'rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(8px) saturate(150%)',
+          WebkitBackdropFilter: 'blur(8px) saturate(150%)',
+        }
       : { backgroundColor: 'transparent', backdropFilter: 'none' }
 
   const handleOk = () => (onOk ? onOk() : onClose?.())
@@ -214,22 +223,11 @@ const LMModal: React.FC<LMModalProps> = ({
     </div>
   )
 
+  // Apple-like refined animation with spring easing
   const getAnimationClasses = () => {
     if (!animation) return ''
-    const ms = animationDuration
-    const durationClass =
-      ms <= 150
-        ? 'duration-150'
-        : ms <= 200
-          ? 'duration-200'
-          : ms <= 300
-            ? 'duration-300'
-            : ms <= 500
-              ? 'duration-500'
-              : ms <= 700
-                ? 'duration-700'
-                : 'duration-1000'
-    return `transition-all ${durationClass} ease-in-out`
+    // Use faster, snappier duration for Apple-like feel
+    return 'transition-all duration-200 ease-out'
   }
 
   if (!visible) return null
@@ -254,7 +252,7 @@ const LMModal: React.FC<LMModalProps> = ({
           >
             {title && (
               <h3
-                className={`font-bold flex items-center gap-2 ${SIZE_HEADING_CLASSES[resolvedSize]}`}
+                className={`font-semibold flex items-center gap-2 ${SIZE_HEADING_CLASSES[resolvedSize]}`}
                 style={{ color: 'var(--lm-text-primary)' }}
               >
                 <span style={{ color: 'var(--lm-text-secondary)' }}>

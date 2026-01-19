@@ -130,10 +130,11 @@ const LMSelect: React.FC<LMSelectProps> = ({
     }
   }
 
+  // Apple-like refined select styling
   const baseClassName = `
     w-full ${SIZE_SELECTOR_CONFIG[size].padding} ${SIZE_SELECTOR_CONFIG[size].height} ${SIZE_SELECTOR_CONFIG[size].fontSize}
-    backdrop-blur-md border rounded-2xl
-    transition-all duration-300 shadow-sm cursor-pointer
+    border rounded-xl
+    cursor-pointer select-none
     flex items-center justify-between
     ${className}
   `
@@ -141,17 +142,19 @@ const LMSelect: React.FC<LMSelectProps> = ({
     .replace(/\s+/g, ' ')
 
   const getSelectorStyles = () => {
+    // Apple-like refined select styles
     const baseStyles = {
       backgroundColor: 'var(--lm-bg-elevated)',
       color: 'var(--lm-text-primary)',
       borderColor: error ? 'var(--lm-error-300)' : 'var(--lm-border-default)',
       boxShadow: 'var(--lm-shadow-sm)',
+      transition: 'all var(--lm-transition-fast) var(--lm-ease-out)',
     }
 
     return {
       ...baseStyles,
       '--tw-ring-color': error ? 'var(--lm-error-400)' : 'var(--lm-primary-400)',
-      '--tw-ring-opacity': '0.3',
+      '--tw-ring-opacity': '0.4',
     }
   }
 
@@ -168,10 +171,13 @@ const LMSelect: React.FC<LMSelectProps> = ({
   const getIconStyles = () =>
     error ? { color: 'var(--lm-error-400)' } : { color: 'var(--lm-text-secondary)' }
 
+  // Apple-like refined dropdown styles
   const getDropdownStyles = () => ({
     backgroundColor: 'var(--lm-bg-elevated)',
     borderColor: 'var(--lm-border-default)',
     boxShadow: 'var(--lm-shadow-lg)',
+    backdropFilter: 'blur(20px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
   })
 
   const isOptionSelected = (optionValue: string | number): boolean => {
@@ -316,7 +322,7 @@ const LMSelect: React.FC<LMSelectProps> = ({
 
       {isOpen && (
         <div
-          className={`absolute left-0 right-0 z-50 backdrop-blur-md border rounded-xl overflow-y-auto ${SIZE_DROPDOWN_CONFIG[size].maxHeight}`}
+          className={`absolute left-0 right-0 z-50 border rounded-xl overflow-y-auto ${SIZE_DROPDOWN_CONFIG[size].maxHeight}`}
           style={{
             ...getDropdownStyles(),
             top: 'calc(100% + 4px)',
