@@ -64,11 +64,11 @@ const BUBBLE_CONFIG: Record<ChatRole, {
 }> = {
   user: {
     align: 'right',
-    borderRadius: '20px 20px 4px 20px',
+    borderRadius: '20px 4px 20px 20px',
   },
   assistant: {
     align: 'left',
-    borderRadius: '20px 20px 20px 4px',
+    borderRadius: '4px 20px 20px 20px',
   },
   system: {
     align: 'left',
@@ -218,37 +218,37 @@ const LMChatBubble: React.FC<LMChatBubbleProps> = ({
         }}
       >
         {/* 内容 */}
-      <div className="relative leading-relaxed">
-        {children}
+        <div className="relative leading-relaxed">
+          {children}
 
-        {/* 流式输出光标 - 更精致的动画 */}
-        {isStreaming && (
-          <span
-            className="inline-block w-0.5 h-[1.1em] ml-1 align-middle rounded-full"
-            style={{
-              backgroundColor: role === 'user' ? 'rgba(255, 255, 255, 0.8)' : 'var(--lm-primary-500)',
-              animation: 'lm-cursor-blink 1s ease-in-out infinite',
-            }}
-          />
-        )}
-      </div>
-
-      {/* 尾部装饰 */}
-      {footer && (
-        <div
-          className="mt-2 text-xs font-medium"
-          style={{
-            color: role === 'user'
-              ? 'rgba(255, 255, 255, 0.7)'
-              : 'var(--lm-text-tertiary)'
-          }}
-        >
-          {footer}
+          {/* 流式输出光标 - 更精致的动画 */}
+          {isStreaming && (
+            <span
+              className="inline-block w-0.5 h-[1.1em] ml-1 align-middle rounded-full"
+              style={{
+                backgroundColor: role === 'user' ? 'rgba(255, 255, 255, 0.8)' : 'var(--lm-primary-500)',
+                animation: 'lm-cursor-blink 1s ease-in-out infinite',
+              }}
+            />
+          )}
         </div>
-      )}
 
-      {/* 光标闪烁动画样式 */}
-      <style>{`
+        {/* 尾部装饰 */}
+        {footer && (
+          <div
+            className="mt-2 text-xs font-medium"
+            style={{
+              color: role === 'user'
+                ? 'rgba(255, 255, 255, 0.7)'
+                : 'var(--lm-text-tertiary)'
+            }}
+          >
+            {footer}
+          </div>
+        )}
+
+        {/* 光标闪烁动画样式 */}
+        <style>{`
         @keyframes lm-cursor-blink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0.3; }
