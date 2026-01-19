@@ -3,17 +3,57 @@ import type { Preview, Decorator } from '@storybook/react-vite'
 // base.css imports tailwindcss and theme.css
 import '../packages/core/src/styles/base.css'
 
-// Theme decorator - applies data-theme attribute to html element
+// Additional styles for Storybook docs background
+const storybookThemeStyles = `
+  /* Override Storybook docs background to follow theme */
+  .docs-story,
+  .sb-story,
+  .sbdocs-preview,
+  .sbdocs .sb-story,
+  #storybook-root,
+  #storybook-docs {
+    background-color: var(--lm-bg-paper) !important;
+    transition: background-color var(--lm-transition-normal);
+  }
+
+  /* Canvas wrapper */
+  .sb-main-padded {
+    background-color: var(--lm-bg-paper) !important;
+  }
+`
+
+// Theme decorator - applies data-theme attribute to html element and updates backgrounds
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme || 'light'
 
   useEffect(() => {
     const html = document.documentElement
+    const body = document.body
+
     // Set data-theme for all themes (light uses :root defaults, others use specific theme)
     if (theme === 'light') {
       html.removeAttribute('data-theme')
     } else {
       html.setAttribute('data-theme', theme)
+    }
+
+    // Force update body and root backgrounds
+    body.style.backgroundColor = 'var(--lm-bg-paper)'
+    body.style.color = 'var(--lm-text-primary)'
+
+    // Also update any Storybook-specific containers
+    const storybookRoot = document.getElementById('storybook-root')
+    if (storybookRoot) {
+      storybookRoot.style.backgroundColor = 'var(--lm-bg-paper)'
+    }
+
+    // Inject theme styles if not already present
+    const styleId = 'lm-storybook-theme-styles'
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style')
+      style.id = styleId
+      style.textContent = storybookThemeStyles
+      document.head.appendChild(style)
     }
   }, [theme])
 
