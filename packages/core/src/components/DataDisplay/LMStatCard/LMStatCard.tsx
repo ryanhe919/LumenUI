@@ -6,6 +6,7 @@ import {
   clampComponentSize,
 } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 export interface LMStatCardProps {
   /** Title */
@@ -166,13 +167,11 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
   const shadowClasses = shadow ? 'shadow-sm' : ''
   const clickableClasses = clickable ? 'cursor-pointer transition-transform hover:scale-105' : ''
 
-  const baseClassName = `
-    ${SIZE_PADDING_CLASSES[resolvedSize]} ${roundedClasses} ${borderClasses} ${shadowClasses} ${clickableClasses}
-    backdrop-blur-md transition-all duration-300
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    SIZE_PADDING_CLASSES[resolvedSize], roundedClasses, borderClasses, shadowClasses, clickableClasses,
+    'backdrop-blur-md transition-all duration-300',
+    className
+  )
 
   const getCardStyles = () => {
     const baseStyles = {

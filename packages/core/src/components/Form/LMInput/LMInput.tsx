@@ -1,6 +1,8 @@
 import React, { useId } from 'react'
+import { cn } from '../../../utils/cn'
 import { SIZE_INPUT_CONFIG } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { ErrorMessage } from '../../_internal/ErrorMessage'
 
 export interface LMInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -18,7 +20,7 @@ export interface LMInputProps
   includeSeconds?: boolean
 }
 
-const LMInput: React.FC<LMInputProps> = ({
+const LMInput = React.forwardRef<HTMLInputElement, LMInputProps>(({
   leftIcon,
   rightElement,
   error = false,
@@ -27,7 +29,7 @@ const LMInput: React.FC<LMInputProps> = ({
   size = 'md',
   includeSeconds = false,
   ...props
-}) => {
+}, ref) => {
   const hasLeftIcon = !!leftIcon
   const hasRightElement = !!rightElement
   const errorId = `lm-input-err-${useId()}`
@@ -43,16 +45,17 @@ const LMInput: React.FC<LMInputProps> = ({
   }
 
   // Apple-like refined input styling
-  const baseClassName = `
-    w-full ${SIZE_INPUT_CONFIG[size].padding} ${SIZE_INPUT_CONFIG[size].height} ${SIZE_INPUT_CONFIG[size].fontSize}
-    border rounded-xl
-    focus:ring-2 focus:outline-none
-    ${hasLeftIcon ? 'pl-10' : ''}
-    ${hasRightElement ? 'pr-10' : ''}
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    'w-full',
+    SIZE_INPUT_CONFIG[size].padding,
+    SIZE_INPUT_CONFIG[size].height,
+    SIZE_INPUT_CONFIG[size].fontSize,
+    'border rounded-xl',
+    'focus:ring-2 focus:outline-none',
+    hasLeftIcon && 'pl-10',
+    hasRightElement && 'pr-10',
+    className
+  )
 
   const getInputStyles = () => {
     // Apple-like refined input styles
@@ -105,6 +108,7 @@ const LMInput: React.FC<LMInputProps> = ({
         )}
 
         <input
+          ref={ref}
           {...props}
           {...timeInputProps()}
           className={baseClassName}
@@ -151,31 +155,11 @@ const LMInput: React.FC<LMInputProps> = ({
         )}
       </div>
 
-      {errorMessage && (
-        <p
-          id={errorId}
-          className="text-xs flex items-center gap-1"
-          style={{ color: 'var(--lm-error-500)' }}
-          role="alert"
-          aria-live="polite"
-        >
-          <svg
-            className="w-3 h-3"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-          {errorMessage}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} id={errorId} />}
     </div>
   )
-}
+})
+
+LMInput.displayName = 'LMInput'
 
 export default LMInput

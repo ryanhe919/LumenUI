@@ -5,6 +5,7 @@ import {
   clampComponentSize,
 } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 export interface LMEmptyProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Custom image or preset type */
@@ -158,13 +159,11 @@ const LMEmpty: React.FC<LMEmptyProps> = ({
     '2xl': 'py-16',
   }
 
-  const baseClassName = `
-    flex flex-col items-center justify-center
-    ${paddingClasses[resolvedSize]}
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    'flex flex-col items-center justify-center',
+    paddingClasses[resolvedSize],
+    className
+  )
 
   const renderImage = () => {
     if (image === 'default') {

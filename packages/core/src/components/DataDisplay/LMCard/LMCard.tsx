@@ -7,6 +7,7 @@ import {
   clampComponentSize,
 } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 export interface LMCardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Card title */
@@ -65,13 +66,11 @@ const LMCard: React.FC<LMCardProps> = ({
   const hoverableClasses = hoverable ? 'cursor-pointer' : ''
 
   // Apple-like card styling
-  const baseClassName = `
-    ${roundedClasses} ${borderClasses} ${hoverableClasses}
-    overflow-hidden
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    roundedClasses, borderClasses, hoverableClasses,
+    'overflow-hidden',
+    className
+  )
 
   const getCardStyles = (): React.CSSProperties => {
     // Apple-like refined card styles with smooth transitions

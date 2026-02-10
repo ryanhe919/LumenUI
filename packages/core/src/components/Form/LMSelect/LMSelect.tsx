@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { cn } from '../../../utils/cn'
 import { SIZE_SELECTOR_CONFIG } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { ErrorMessage } from '../../_internal/ErrorMessage'
 
 export interface LMSelectOption {
   value: string | number
@@ -50,6 +52,18 @@ const SIZE_DROPDOWN_CONFIG: Record<
   xl: { maxHeight: 'max-h-64', optionPadding: 'px-5 py-3', optionTextSize: 'text-base' },
   '2xl': { maxHeight: 'max-h-72', optionPadding: 'px-6 py-4', optionTextSize: 'text-lg' },
 }
+
+const ChevronDownIcon: React.FC = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+)
+
+const CheckIcon: React.FC = () => (
+  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+)
 
 const LMSelect: React.FC<LMSelectProps> = ({
   options,
@@ -131,15 +145,16 @@ const LMSelect: React.FC<LMSelectProps> = ({
   }
 
   // Apple-like refined select styling
-  const baseClassName = `
-    w-full ${SIZE_SELECTOR_CONFIG[size].padding} ${SIZE_SELECTOR_CONFIG[size].height} ${SIZE_SELECTOR_CONFIG[size].fontSize}
-    border rounded-xl
-    cursor-pointer select-none
-    flex items-center justify-between
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    'w-full',
+    SIZE_SELECTOR_CONFIG[size].padding,
+    SIZE_SELECTOR_CONFIG[size].height,
+    SIZE_SELECTOR_CONFIG[size].fontSize,
+    'border rounded-xl',
+    'cursor-pointer select-none',
+    'flex items-center justify-between',
+    className
+  )
 
   const getSelectorStyles = () => {
     // Apple-like refined select styles
@@ -223,24 +238,6 @@ const LMSelect: React.FC<LMSelectProps> = ({
     return selectedOption ? selectedOption.label : placeholder
   }
 
-  const ChevronDown = () => (
-    <svg
-      className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      style={getIconStyles()}
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-    </svg>
-  )
-
-  const CheckIcon = () => (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-  )
-
   return (
     <div className="relative" ref={dropdownRef}>
       <select
@@ -254,6 +251,7 @@ const LMSelect: React.FC<LMSelectProps> = ({
               ? String(value)
               : ''
         }
+        // Empty handler to suppress React controlled component warning for hidden native select
         onChange={() => {}}
         className="sr-only"
         disabled={disabled}
@@ -270,7 +268,9 @@ const LMSelect: React.FC<LMSelectProps> = ({
       <div
         className={baseClassName}
         onClick={toggleDropdown}
-        role="button"
+        role="combobox"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
         tabIndex={disabled ? -1 : 0}
         style={{
           ...getSelectorStyles(),
@@ -317,11 +317,17 @@ const LMSelect: React.FC<LMSelectProps> = ({
         >
           {getDisplayText()}
         </span>
-        <ChevronDown />
+        <span
+          className={`transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          style={getIconStyles()}
+        >
+          <ChevronDownIcon />
+        </span>
       </div>
 
       {isOpen && (
         <div
+          role="listbox"
           className={`absolute left-0 right-0 z-50 border rounded-xl overflow-y-auto ${SIZE_DROPDOWN_CONFIG[size].maxHeight}`}
           style={{
             ...getDropdownStyles(),
@@ -331,14 +337,15 @@ const LMSelect: React.FC<LMSelectProps> = ({
           {options.map((option, index) => (
             <div
               key={option.value}
-              className={`
-                ${SIZE_DROPDOWN_CONFIG[size].optionPadding} ${SIZE_DROPDOWN_CONFIG[size].optionTextSize} font-medium
-                cursor-pointer transition-all duration-150
-                ${option.disabled ? 'cursor-not-allowed' : ''}
-                ${index === 0 ? 'rounded-t-xl' : ''}
-                ${index === options.length - 1 ? 'rounded-b-xl' : ''}
-                ${index > 0 ? 'border-t' : ''}
-              `}
+              className={cn(
+                SIZE_DROPDOWN_CONFIG[size].optionPadding,
+                SIZE_DROPDOWN_CONFIG[size].optionTextSize,
+                'font-medium cursor-pointer transition-all duration-150',
+                option.disabled && 'cursor-not-allowed',
+                index === 0 && 'rounded-t-xl',
+                index === options.length - 1 && 'rounded-b-xl',
+                index > 0 && 'border-t'
+              )}
               style={{
                 ...getOptionStyles(option),
                 borderTopColor: index > 0 ? 'var(--lm-border-light)' : 'transparent',
@@ -362,6 +369,7 @@ const LMSelect: React.FC<LMSelectProps> = ({
                   <input
                     type="checkbox"
                     checked={isOptionSelected(option.value)}
+                    // Empty handler: selection is handled by parent div onClick
                     onChange={() => {}}
                     className="mr-2 cursor-pointer"
                     style={{ accentColor: 'var(--lm-primary-500)' }}
@@ -380,21 +388,7 @@ const LMSelect: React.FC<LMSelectProps> = ({
         </div>
       )}
 
-      {errorMessage && (
-        <p
-          className="text-xs flex items-center gap-1 mt-2"
-          style={{ color: 'var(--lm-error-500)' }}
-        >
-          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-          {errorMessage}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} className="mt-2" />}
     </div>
   )
 }

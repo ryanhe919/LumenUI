@@ -1,6 +1,7 @@
 import React, { memo, useMemo } from 'react'
 import type { ComponentSize } from '../../../utils/componentSizes'
 import { clampComponentSize, COMPONENT_SIZE_ORDER } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 import { LMCodeBlock } from '../LMCodeBlock'
 
 export interface LMMarkdownRendererProps {
@@ -356,11 +357,11 @@ const LMMarkdownRenderer: React.FC<LMMarkdownRendererProps> = ({
         return (
           <HeadingTag
             key={index}
-            className={`
-              ${headingSizeClass}
-              font-semibold leading-tight tracking-tight
-              mt-6 mb-3 first:mt-0
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              headingSizeClass,
+              'font-semibold leading-tight tracking-tight',
+              'mt-6 mb-3 first:mt-0'
+            )}
             style={{ color: 'var(--lm-text-primary)' }}
           >
             {parseInlineStyles(token.content, onLinkClick, openLinksInNewTab)}
@@ -372,10 +373,10 @@ const LMMarkdownRenderer: React.FC<LMMarkdownRendererProps> = ({
         return (
           <p
             key={index}
-            className={`
-              ${sizeConfig.base}
-              leading-relaxed my-3 first:mt-0 last:mb-0
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              sizeConfig.base,
+              'leading-relaxed my-3 first:mt-0 last:mb-0'
+            )}
             style={{ color: 'var(--lm-text-primary)' }}
           >
             {parseInlineStyles(token.content, onLinkClick, openLinksInNewTab)}
@@ -420,11 +421,11 @@ const LMMarkdownRenderer: React.FC<LMMarkdownRendererProps> = ({
         return (
           <ListTag
             key={index}
-            className={`
-              ${sizeConfig.base}
-              my-3 pl-6
-              ${token.ordered ? 'list-decimal' : 'list-disc'}
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              sizeConfig.base,
+              'my-3 pl-6',
+              token.ordered ? 'list-decimal' : 'list-disc'
+            )}
             style={{ color: 'var(--lm-text-primary)' }}
           >
             {token.items?.map((item, i) => (
@@ -497,7 +498,7 @@ const LMMarkdownRenderer: React.FC<LMMarkdownRendererProps> = ({
   }
 
   return (
-    <div className={`${sizeConfig.base} ${className}`.trim()}>
+    <div className={cn(sizeConfig.base, className)}>
       {tokens.map((token, index) => renderToken(token, index))}
     </div>
   )

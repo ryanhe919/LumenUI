@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import type { ComponentSize } from '../../../utils/componentSizes'
 import { clampComponentSize, COMPONENT_SIZE_ORDER } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 /** 打字指示器主题样式 */
 const typingIndicatorThemeStyles = `
@@ -149,20 +150,20 @@ const LMTypingIndicator: React.FC<LMTypingIndicatorProps> = ({
       <style>{typingIndicatorThemeStyles}</style>
       <style>{animationStyles}</style>
       <div
-        className={`
-          flex items-center ${config.avatarGap}
-          ${className}
-        `.trim().replace(/\s+/g, ' ')}
+        className={cn(
+          'flex items-center', config.avatarGap,
+          className
+        )}
         data-typing-indicator
       >
         {/* 头像 */}
         {avatar && (
           <div
-            className={`
-              ${AVATAR_SIZE[resolvedSize]}
-              rounded-full overflow-hidden shrink-0
-              flex items-center justify-center
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              AVATAR_SIZE[resolvedSize],
+              'rounded-full overflow-hidden shrink-0',
+              'flex items-center justify-center'
+            )}
             style={{
               background: 'var(--lm-typing-avatar-bg)',
               boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
@@ -174,10 +175,10 @@ const LMTypingIndicator: React.FC<LMTypingIndicatorProps> = ({
 
         {/* 指示器主体 - glassmorphism 效果 */}
         <div
-          className={`
-            inline-flex items-center
-            ${config.padding}
-          `.trim().replace(/\s+/g, ' ')}
+          className={cn(
+            'inline-flex items-center',
+            config.padding
+          )}
           style={{
             backgroundColor: 'var(--lm-typing-bg)',
             backdropFilter: 'blur(20px) saturate(180%)',
@@ -192,10 +193,10 @@ const LMTypingIndicator: React.FC<LMTypingIndicatorProps> = ({
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={`
-                  ${config.dotSize}
-                  rounded-full
-                `.trim()}
+                className={cn(
+                  config.dotSize,
+                  'rounded-full'
+                )}
                 style={{
                   backgroundColor: color || 'var(--lm-primary-500)',
                   ...getDotAnimation(i),

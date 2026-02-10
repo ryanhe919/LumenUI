@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import type { ComponentSize } from '../../../utils/componentSizes'
 import { clampComponentSize, COMPONENT_SIZE_ORDER, SIZE_TEXT_CLASSES, SIZE_PADDING_CLASSES } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 /** 聊天气泡主题样式 */
 const chatBubbleThemeStyles = `
@@ -206,12 +207,12 @@ const LMChatBubble: React.FC<LMChatBubbleProps> = ({
     <>
       <style>{chatBubbleThemeStyles}</style>
       <div
-        className={`
-          w-full
-          ${SIZE_PADDING_CLASSES[resolvedSize]}
-          ${SIZE_TEXT_CLASSES[resolvedSize]}
-          ${className}
-        `.trim().replace(/\s+/g, ' ')}
+        className={cn(
+          'w-full',
+          SIZE_PADDING_CLASSES[resolvedSize],
+          SIZE_TEXT_CLASSES[resolvedSize],
+          className
+        )}
         style={{
           ...getBubbleStyles(),
           ...style,

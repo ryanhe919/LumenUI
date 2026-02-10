@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { cn } from '../../../utils/cn'
 import { SIZE_INPUT_CONFIG } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { ErrorMessage } from '../../_internal/ErrorMessage'
 
 export interface LMSearchInputProps {
   /** Current search value */
@@ -33,7 +35,7 @@ export interface LMSearchInputProps {
   debounceDelay?: number
 }
 
-const LMSearchInput: React.FC<LMSearchInputProps> = ({
+const LMSearchInput = React.forwardRef<HTMLInputElement, LMSearchInputProps>(({
   value,
   onChange,
   onSearch,
@@ -48,11 +50,16 @@ const LMSearchInput: React.FC<LMSearchInputProps> = ({
   showSearchButton = true,
   searchButtonText = 'Search',
   debounceDelay = 300,
-}) => {
+}, ref) => {
   const [inputValue, setInputValue] = useState(value || '')
   const [isFocused, setIsFocused] = useState(false)
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement | null>(null)
+  const setRefs = useCallback((node: HTMLInputElement | null) => {
+    inputRef.current = node
+    if (typeof ref === 'function') ref(node)
+    else if (ref) (ref as { current: HTMLInputElement | null }).current = node
+  }, [ref])
   const searchBtnRef = useRef<HTMLButtonElement>(null)
   const [searchBtnWidth, setSearchBtnWidth] = useState(0)
 
@@ -68,16 +75,17 @@ const LMSearchInput: React.FC<LMSearchInputProps> = ({
     }
   }, [showSearchButton, searchButtonText])
 
-  const baseClassName = `
-    w-full ${SIZE_INPUT_CONFIG[size].padding} ${SIZE_INPUT_CONFIG[size].height} backdrop-blur-md border rounded-2xl
-    focus:ring-2 focus:outline-none transition-all duration-300
-    shadow-sm
-    ${showSearchButton ? 'pr-20' : showClear ? 'pr-10' : 'pr-4'}
-    pl-12
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    'w-full',
+    SIZE_INPUT_CONFIG[size].padding,
+    SIZE_INPUT_CONFIG[size].height,
+    'backdrop-blur-md border rounded-2xl',
+    'focus:ring-2 focus:outline-none transition-all duration-300',
+    'shadow-sm',
+    showSearchButton ? 'pr-20' : showClear ? 'pr-10' : 'pr-4',
+    'pl-12',
+    className
+  )
 
   const getSearchInputStyles = () => {
     const baseStyles = {
@@ -184,7 +192,7 @@ const LMSearchInput: React.FC<LMSearchInputProps> = ({
         </div>
 
         <input
-          ref={inputRef}
+          ref={setRefs}
           type="search"
           name={name}
           value={inputValue}
@@ -260,23 +268,11 @@ const LMSearchInput: React.FC<LMSearchInputProps> = ({
         )}
       </div>
 
-      {errorMessage && (
-        <p
-          className="text-xs flex items-center gap-1"
-          style={{ color: 'var(--lm-error-500)' }}
-        >
-          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-              clipRule="evenodd"
-            />
-          </svg>
-          {errorMessage}
-        </p>
-      )}
+      {errorMessage && <ErrorMessage message={errorMessage} />}
     </div>
   )
-}
+})
+
+LMSearchInput.displayName = 'LMSearchInput'
 
 export default LMSearchInput

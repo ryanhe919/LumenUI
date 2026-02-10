@@ -1,6 +1,7 @@
 import React, { memo, useRef, useCallback, forwardRef, useImperativeHandle } from 'react'
 import type { ComponentSize } from '../../../utils/componentSizes'
 import { clampComponentSize, COMPONENT_SIZE_ORDER } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 import { LMChatList, type LMChatListRef, type ChatMessage, type LMChatListProps } from '../LMChatList'
 import { LMChatInput } from '../LMChatInput'
 
@@ -165,10 +166,10 @@ const LMChatContainer = forwardRef<LMChatContainerRef, LMChatContainerProps>(({
 
   return (
     <div
-      className={`
-        flex flex-col border rounded-2xl overflow-hidden
-        ${className}
-      `.trim().replace(/\s+/g, ' ')}
+      className={cn(
+        'flex flex-col border rounded-2xl overflow-hidden',
+        className
+      )}
       style={getContainerStyles()}
     >
       {/* 头部 */}

@@ -1,6 +1,7 @@
 import React, { memo, useRef, useCallback, useState, useEffect } from 'react'
 import type { ComponentSize } from '../../../utils/componentSizes'
 import { clampComponentSize, COMPONENT_SIZE_ORDER, SIZE_TEXT_CLASSES } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 /** 聊天输入框主题样式 */
 const chatInputThemeStyles = `
@@ -83,12 +84,12 @@ export const ToolbarButton: React.FC<ToolbarButtonProps> = ({
     type="button"
     onClick={onClick}
     disabled={disabled}
-    className={`
-      flex items-center gap-1 px-2 py-1 rounded-md cursor-pointer
-      transition-all duration-150
-      disabled:opacity-40 disabled:cursor-not-allowed
-      hover:bg-(--lm-bg-hover) active:scale-95
-    `.trim().replace(/\s+/g, ' ')}
+    className={cn(
+      'flex items-center gap-1 px-2 py-1 rounded-md cursor-pointer',
+      'transition-all duration-150',
+      'disabled:opacity-40 disabled:cursor-not-allowed',
+      'hover:bg-(--lm-bg-hover) active:scale-95'
+    )}
     style={{
       backgroundColor: active ? 'var(--lm-primary-50)' : 'transparent',
       color: active ? 'var(--lm-primary-600)' : 'var(--lm-text-tertiary)',
@@ -316,11 +317,11 @@ const LMChatInput: React.FC<LMChatInputProps> = ({
     <>
       <style>{chatInputThemeStyles}</style>
       <div
-        className={`
-          relative flex flex-col border rounded-2xl
-          ${config.padding}
-          ${className}
-        `.trim().replace(/\s+/g, ' ')}
+        className={cn(
+          'relative flex flex-col border rounded-2xl',
+          config.padding,
+          className
+        )}
         style={getContainerStyles()}
       >
       {/* 输入区域 */}
@@ -338,13 +339,13 @@ const LMChatInput: React.FC<LMChatInputProps> = ({
             disabled={isDisabled}
             autoFocus={autoFocus}
             rows={1}
-            className={`
-              w-full resize-none bg-transparent leading-relaxed
-              outline-none focus:outline-none focus:ring-0 border-none
-              ${SIZE_TEXT_CLASSES[resolvedSize]}
-              placeholder:text-(--lm-text-tertiary)
-              disabled:text-(--lm-text-disabled) disabled:cursor-not-allowed
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              'w-full resize-none bg-transparent leading-relaxed',
+              'outline-none focus:outline-none focus:ring-0 border-none',
+              SIZE_TEXT_CLASSES[resolvedSize],
+              'placeholder:text-(--lm-text-tertiary)',
+              'disabled:text-(--lm-text-disabled) disabled:cursor-not-allowed'
+            )}
             style={{
               color: 'var(--lm-text-primary)',
               minHeight: config.minHeight,
@@ -392,14 +393,14 @@ const LMChatInput: React.FC<LMChatInputProps> = ({
               type="button"
               onClick={showStopButton ? handleStop : handleSend}
               disabled={!showStopButton && !canSend}
-              className={`
-                ${config.sendButtonSize}
-                flex items-center justify-center shrink-0
-                cursor-pointer select-none
-                focus:outline-none
-                disabled:cursor-not-allowed disabled:opacity-50
-                hover:scale-105 active:scale-95
-              `.trim().replace(/\s+/g, ' ')}
+              className={cn(
+                config.sendButtonSize,
+                'flex items-center justify-center shrink-0',
+                'cursor-pointer select-none',
+                'focus:outline-none',
+                'disabled:cursor-not-allowed disabled:opacity-50',
+                'hover:scale-105 active:scale-95'
+              )}
               style={getSendButtonStyles()}
               aria-label={showStopButton ? '停止生成' : '发送消息'}
             >

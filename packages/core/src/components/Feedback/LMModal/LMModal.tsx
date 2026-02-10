@@ -81,7 +81,7 @@ export interface LMModalProps {
   centered?: boolean
   /** Fullscreen mode */
   fullscreen?: boolean
-  /** Animation duration (ms) */
+  /** @deprecated Animation duration is now controlled by CSS variables. This prop is kept for backward compatibility. */
   animationDuration?: number
   /** Enable animation */
   animation?: boolean

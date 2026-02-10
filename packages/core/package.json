@@ -18,6 +18,7 @@
       }
     },
     "./styles.css": "./dist/style.css",
+    "./style.css": "./dist/style.css",
     "./button": {
       "import": {
         "types": "./dist/components/General/LMButton/index.d.ts",

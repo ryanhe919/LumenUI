@@ -1,4 +1,5 @@
 import React, { memo } from 'react'
+import { cn } from '../../../utils/cn'
 import {
   COMPONENT_SIZE_ORDER,
   SIZE_GAP_CLASSES,
@@ -82,18 +83,19 @@ const LMButton: React.FC<LMButtonProps> = ({
   const widthClasses = fullWidth ? 'w-full' : ''
 
   // Apple-like base styling with refined transitions
-  const baseClassName = `
-    ${SIZE_BUTTON_CONFIG[resolvedSize].padding} ${SIZE_TEXT_CLASSES[resolvedSize]} ${SIZE_GAP_CLASSES[resolvedSize]}
-    ${roundedClasses} ${widthClasses}
-    border font-medium
-    focus:ring-2 focus:ring-offset-0 focus:outline-none
-    disabled:cursor-not-allowed
-    flex items-center justify-center
-    cursor-pointer select-none
-    ${className}
-  `
-    .trim()
-    .replace(/\s+/g, ' ')
+  const baseClassName = cn(
+    SIZE_BUTTON_CONFIG[resolvedSize].padding,
+    SIZE_TEXT_CLASSES[resolvedSize],
+    SIZE_GAP_CLASSES[resolvedSize],
+    roundedClasses,
+    widthClasses,
+    'border font-medium',
+    'focus:ring-2 focus:ring-offset-0 focus:outline-none',
+    'disabled:cursor-not-allowed',
+    'flex items-center justify-center',
+    'cursor-pointer select-none',
+    className
+  )
 
   const getButtonStyles = () => {
     // Apple-like base styles with refined shadows and transitions

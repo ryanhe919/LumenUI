@@ -543,6 +543,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
               className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handlePrevYear}
               style={{ color: 'var(--lm-text-secondary)' }}
+              aria-label="上一年"
             >
               <DoubleChevronLeftIcon />
             </button>
@@ -550,6 +551,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
               className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handlePrevMonth}
               style={{ color: 'var(--lm-text-secondary)' }}
+              aria-label="上一月"
             >
               <ChevronLeftIcon />
             </button>
@@ -563,6 +565,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
               className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handleNextMonth}
               style={{ color: 'var(--lm-text-secondary)' }}
+              aria-label="下一月"
             >
               <ChevronRightIcon />
             </button>
@@ -570,6 +573,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
               className="p-1 rounded hover:bg-(--lm-bg-hover) transition-colors"
               onClick={handleNextYear}
               style={{ color: 'var(--lm-text-secondary)' }}
+              aria-label="下一年"
             >
               <DoubleChevronRightIcon />
             </button>

@@ -1,6 +1,7 @@
 import React, { memo, useState, useCallback } from 'react'
 import type { ComponentSize } from '../../../utils/componentSizes'
 import { clampComponentSize, COMPONENT_SIZE_ORDER, SIZE_TEXT_CLASSES } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 import { LMChatBubble, type ChatRole, type ChatBubbleVariant } from '../LMChatBubble'
 
 export type MessageStatus = 'sending' | 'sent' | 'error' | 'streaming'
@@ -196,11 +197,11 @@ const LMChatMessage: React.FC<LMChatMessageProps> = ({
   const renderAvatar = () => {
     if (hideAvatar) return null
 
-    const avatarClasses = `
-      ${AVATAR_SIZE[resolvedSize]}
-      rounded-full overflow-hidden shrink-0
-      flex items-center justify-center
-    `.trim().replace(/\s+/g, ' ')
+    const avatarClasses = cn(
+      AVATAR_SIZE[resolvedSize],
+      'rounded-full overflow-hidden shrink-0',
+      'flex items-center justify-center'
+    )
 
     if (typeof avatar === 'string') {
       return (
@@ -238,26 +239,26 @@ const LMChatMessage: React.FC<LMChatMessageProps> = ({
 
     return (
       <div
-        className={`
-          flex items-center gap-1 mt-1
-          transition-opacity duration-150
-          ${isHovered ? 'opacity-100' : 'opacity-0'}
-        `.trim().replace(/\s+/g, ' ')}
+        className={cn(
+          'flex items-center gap-1 mt-1',
+          'transition-opacity duration-150',
+          isHovered ? 'opacity-100' : 'opacity-0'
+        )}
       >
         {finalActions.map((action) => (
           <button
             key={action.key}
             onClick={action.onClick}
             disabled={action.disabled}
-            className={`
-              ${ACTION_BUTTON_SIZE[resolvedSize]}
-              flex items-center justify-center
-              rounded-lg cursor-pointer
-              hover:bg-(--lm-bg-hover)
-              active:scale-95
-              disabled:opacity-50 disabled:cursor-not-allowed
-              transition-all duration-150
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              ACTION_BUTTON_SIZE[resolvedSize],
+              'flex items-center justify-center',
+              'rounded-lg cursor-pointer',
+              'hover:bg-(--lm-bg-hover)',
+              'active:scale-95',
+              'disabled:opacity-50 disabled:cursor-not-allowed',
+              'transition-all duration-150'
+            )}
             style={{ color: 'var(--lm-text-tertiary)' }}
             title={action.tooltip}
             aria-label={action.tooltip}
@@ -327,11 +328,11 @@ const LMChatMessage: React.FC<LMChatMessageProps> = ({
   return (
     <div
       id={id}
-      className={`
-        flex gap-3
-        ${isUser ? 'flex-row-reverse' : 'flex-row'}
-        ${className}
-      `.trim().replace(/\s+/g, ' ')}
+      className={cn(
+        'flex gap-3',
+        isUser ? 'flex-row-reverse' : 'flex-row',
+        className
+      )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -340,10 +341,10 @@ const LMChatMessage: React.FC<LMChatMessageProps> = ({
 
       {/* 消息主体 */}
       <div
-        className={`
-          flex flex-col min-w-0
-          ${isUser ? 'items-end' : 'items-start'}
-        `.trim().replace(/\s+/g, ' ')}
+        className={cn(
+          'flex flex-col min-w-0',
+          isUser ? 'items-end' : 'items-start'
+        )}
         style={{
           maxWidth: typeof bubbleMaxWidth === 'number' ? `${bubbleMaxWidth}px` : bubbleMaxWidth,
           width: typeof bubbleMaxWidth === 'number' ? `${bubbleMaxWidth}px` : bubbleMaxWidth,
@@ -352,10 +353,10 @@ const LMChatMessage: React.FC<LMChatMessageProps> = ({
         {/* 名称和时间 */}
         {(name || timestamp) && (
           <div
-            className={`
-              flex items-center gap-2 mb-1
-              ${isUser ? 'flex-row-reverse' : 'flex-row'}
-            `.trim().replace(/\s+/g, ' ')}
+            className={cn(
+              'flex items-center gap-2 mb-1',
+              isUser ? 'flex-row-reverse' : 'flex-row'
+            )}
           >
             {name && (
               <span

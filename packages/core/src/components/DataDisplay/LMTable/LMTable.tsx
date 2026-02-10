@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, memo } from 'react'
 import { SIZE_TABLE_CONFIG, SIZE_TEXT_CLASSES } from '../../../utils/componentSizes'
 import type { ComponentSize } from '../../../utils/componentSizes'
+import { cn } from '../../../utils/cn'
 
 export interface LMTableColumn<T = Record<string, unknown>> {
   /** Column title */
@@ -459,26 +460,20 @@ const LMTable = <T = unknown,>({
     color: 'var(--lm-text-secondary)',
   })
 
-  const tableClassName = `w-full ${SIZE_TEXT_CLASSES[size]} border-collapse ${className}`
-    .trim()
-    .replace(/\s+/g, ' ')
+  const tableClassName = cn('w-full', SIZE_TEXT_CLASSES[size], 'border-collapse', className)
 
   const isAllSelected = dataSource.length > 0 && selectedRowKeys.length === dataSource.length
 
   const isIndeterminate =
     selectedRowKeys.length > 0 && selectedRowKeys.length < dataSource.length
 
-  const rootClassName = `space-y-4 ${fullHeight ? 'h-full flex flex-col min-h-0' : ''}`
-    .trim()
-    .replace(/\s+/g, ' ')
+  const rootClassName = cn('space-y-4', fullHeight && 'h-full flex flex-col min-h-0')
 
-  const tableContainerClassName = `${
+  const tableContainerClassName = cn(
     fullHeight
       ? 'flex-1 min-h-0 overflow-auto'
-      : `overflow-auto ${loadMore?.enabled ? 'max-h-96' : ''}`
-  }`
-    .trim()
-    .replace(/\s+/g, ' ')
+      : cn('overflow-auto', loadMore?.enabled && 'max-h-96')
+  )
 
   const wrapperVariantClasses = (() => {
     switch (variant) {

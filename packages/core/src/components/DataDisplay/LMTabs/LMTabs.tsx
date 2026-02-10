@@ -254,7 +254,7 @@ const LMTabs: React.FC<LMTabsProps> = ({
           {/* Ink bar for line type */}
           {type === 'line' && (
             <div
-              className="absolute bottom-0 h-0.5 transition-all duration-300"
+              className="absolute bottom-0 h-0.5 transition-all duration-300 motion-reduce:transition-none"
               style={{
                 ...inkStyle,
                 backgroundColor: 'var(--lm-primary-500)',

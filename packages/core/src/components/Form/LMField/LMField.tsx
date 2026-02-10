@@ -1,4 +1,5 @@
 import React from 'react'
+import { cn } from '../../../utils/cn'
 
 export interface LMFieldProps {
   /** Field label */
@@ -35,7 +36,7 @@ const LMField: React.FC<LMFieldProps> = ({
     controlId = firstChild.props.id
   }
 
-  const containerClass = `space-y-2 ${className}`.trim().replace(/\s+/g, ' ')
+  const containerClass = cn('space-y-2', className)
 
   return (
     <div className={containerClass}>
