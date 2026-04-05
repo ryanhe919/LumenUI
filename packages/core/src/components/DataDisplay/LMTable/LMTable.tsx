@@ -478,7 +478,7 @@ const LMTable = <T = unknown,>({
   const wrapperVariantClasses = (() => {
     switch (variant) {
       case 'elevated':
-        return 'rounded-2xl border shadow-lg'
+        return 'rounded-xl border shadow-lg'
       case 'outline':
         return 'rounded-xl border'
       case 'soft':
@@ -639,7 +639,7 @@ const LMTable = <T = unknown,>({
 
       {pagination?.showPagination && (
         <div
-          className={`flex items-center justify-between ${paginationUiClasses[size].container} rounded-2xl border`}
+          className={`flex items-center justify-between ${paginationUiClasses[size].container} rounded-xl border`}
           style={getPaginationStyles()}
         >
           {(() => {
@@ -674,7 +674,8 @@ const LMTable = <T = unknown,>({
                       <select
                         value={pageSize}
                         onChange={(e) => handlePageSizeChange(Number(e.target.value))}
-                        className={`${paginationUiClasses[size].select} border rounded-lg focus:ring-2 focus:ring-primary-400 focus:outline-none`}
+                        className={`${paginationUiClasses[size].select} border rounded-lg focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:outline-none`}
+                        aria-label="每页显示条数"
                         style={{
                           backgroundColor: 'var(--lm-bg-paper)',
                           color: 'var(--lm-text-primary)',
@@ -766,7 +767,7 @@ const LMTable = <T = unknown,>({
           <button
             onClick={loadMore.onLoadMore}
             disabled={loadMore.loading}
-            className="px-6 py-2 text-sm border rounded-2xl transition-colors"
+            className="px-6 py-2 text-sm border rounded-xl transition-colors"
             style={getButtonStyles(loadMore.loading)}
           >
             {loadMore.loading ? (

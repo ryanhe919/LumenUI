@@ -128,7 +128,7 @@ const LMMessage: React.FC<LMMessageProps> = ({ id, type, title, content, duratio
   }, [id, duration, onClose])
 
   const icon = useMemo(() => ICONS[type], [type])
-  const ariaRole = 'status'
+  const ariaRole = type === 'error' || type === 'warning' ? 'alert' : 'status'
   const ariaLabel = useMemo(() => {
     switch (type) {
       case 'success':
@@ -145,7 +145,7 @@ const LMMessage: React.FC<LMMessageProps> = ({ id, type, title, content, duratio
   return (
     <div className="max-w-sm mx-auto will-change-transform" role={ariaRole} aria-label={ariaLabel}>
       <div
-        className="rounded-3xl shadow-lg p-5 mb-3 backdrop-blur-md border transition-all duration-300 ease-out"
+        className="rounded-xl shadow-lg p-5 mb-3 backdrop-blur-md border transition-all duration-300 ease-out"
         style={{
           backgroundColor: tone.background,
           borderColor: 'var(--lm-border-light)',

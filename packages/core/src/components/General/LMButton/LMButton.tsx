@@ -90,7 +90,7 @@ const LMButton: React.FC<LMButtonProps> = ({
     roundedClasses,
     widthClasses,
     'border font-medium',
-    'focus:ring-2 focus:ring-offset-0 focus:outline-none',
+    'focus-visible:ring-2 focus-visible:ring-offset-0 focus-visible:outline-none',
     'disabled:cursor-not-allowed',
     'flex items-center justify-center',
     'cursor-pointer select-none',

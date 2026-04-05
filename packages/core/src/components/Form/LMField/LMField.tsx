@@ -44,7 +44,6 @@ const LMField: React.FC<LMFieldProps> = ({
         htmlFor={controlId}
         className="block text-xs font-semibold tracking-wide"
         style={{ color: 'var(--lm-text-primary)' }}
-        aria-required={required || undefined}
       >
         {label}
         {required && (

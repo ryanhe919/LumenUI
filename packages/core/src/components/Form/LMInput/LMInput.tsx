@@ -51,7 +51,7 @@ const LMInput = React.forwardRef<HTMLInputElement, LMInputProps>(({
     SIZE_INPUT_CONFIG[size].height,
     SIZE_INPUT_CONFIG[size].fontSize,
     'border rounded-xl',
-    'focus:ring-2 focus:outline-none',
+    'focus-visible:ring-2 focus-visible:outline-none',
     hasLeftIcon && 'pl-10',
     hasRightElement && 'pr-10',
     className

@@ -240,7 +240,7 @@ const LMMenu: React.FC<LMMenuProps> = ({
         ...containerStyles,
         flexDirection,
       }}
-      role="menu"
+      aria-label="导航菜单"
     >
       {items.map((item) => renderMenuItem(item))}
     </nav>

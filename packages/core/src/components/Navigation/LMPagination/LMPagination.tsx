@@ -70,7 +70,7 @@ const LMPagination: React.FC<LMPaginationProps> = ({
   const [jumpValue, setJumpValue] = useState('')
   const [internalPageSize, setInternalPageSize] = useState(pageSize)
 
-  const totalPages = Math.ceil(total / internalPageSize)
+  const totalPages = internalPageSize > 0 ? Math.max(1, Math.ceil(total / internalPageSize)) : 1
 
   const buttonSizeClasses: Record<ComponentSize, string> = {
     xs: 'w-6 h-6 text-xs',
@@ -230,7 +230,7 @@ const LMPagination: React.FC<LMPaginationProps> = ({
   }
 
   return (
-    <div className={`flex items-center flex-wrap ${SIZE_GAP_CLASSES[resolvedSize]} ${className}`}>
+    <nav aria-label="分页导航" className={`flex items-center flex-wrap ${SIZE_GAP_CLASSES[resolvedSize]} ${className}`}>
       {/* Total count */}
       {showTotal && (
         <span
@@ -366,7 +366,7 @@ const LMPagination: React.FC<LMPaginationProps> = ({
           </span>
         </div>
       )}
-    </div>
+    </nav>
   )
 }
 

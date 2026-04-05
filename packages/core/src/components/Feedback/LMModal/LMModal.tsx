@@ -241,6 +241,9 @@ const LMModal: React.FC<LMModalProps> = ({
     >
       <div
         ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={title ? 'lm-modal-title' : undefined}
         className={`relative ${getAnimationClasses()} ${className}`}
         style={getModalStyles()}
         onClick={(e) => e.stopPropagation()}
@@ -252,6 +255,7 @@ const LMModal: React.FC<LMModalProps> = ({
           >
             {title && (
               <h3
+                id="lm-modal-title"
                 className={`font-semibold flex items-center gap-2 ${SIZE_HEADING_CLASSES[resolvedSize]}`}
                 style={{ color: 'var(--lm-text-primary)' }}
               >

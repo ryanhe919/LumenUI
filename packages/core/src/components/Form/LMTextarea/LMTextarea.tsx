@@ -57,8 +57,8 @@ const LMTextarea = React.forwardRef<HTMLTextAreaElement, LMTextareaProps>(({
     'w-full',
     sizeConfig[size].padding,
     sizeConfig[size].fontSize,
-    'backdrop-blur-md border rounded-2xl',
-    'focus:ring-2 focus:outline-none transition-all duration-300',
+    'backdrop-blur-md border rounded-xl',
+    'focus-visible:ring-2 focus-visible:outline-none transition-all duration-300',
     'shadow-sm resize-none',
     !className.includes('h-full') && sizeConfig[size].minHeight,
     className

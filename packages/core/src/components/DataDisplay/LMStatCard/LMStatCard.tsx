@@ -162,10 +162,10 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
         '2xl': 'text-6xl',
       }
 
-  const roundedClasses = 'rounded-2xl'
+  const roundedClasses = 'rounded-xl'
   const borderClasses = bordered ? 'border' : ''
   const shadowClasses = shadow ? 'shadow-sm' : ''
-  const clickableClasses = clickable ? 'cursor-pointer transition-transform hover:scale-105' : ''
+  const clickableClasses = clickable ? 'cursor-pointer transition-transform hover:scale-[1.02]' : ''
 
   const baseClassName = cn(
     SIZE_PADDING_CLASSES[resolvedSize], roundedClasses, borderClasses, shadowClasses, clickableClasses,

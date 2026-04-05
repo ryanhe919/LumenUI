@@ -183,7 +183,7 @@ const LMTabs: React.FC<LMTabsProps> = ({
       ${SIZE_TEXT_CLASSES[resolvedSize]}
       flex items-center ${SIZE_GAP_CLASSES[resolvedSize]}
       font-medium transition-all duration-200
-      outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--lm-primary-400)]
+      outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-[var(--lm-primary-400)]
     `
 
     const typeClasses = {

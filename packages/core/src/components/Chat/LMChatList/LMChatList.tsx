@@ -202,7 +202,7 @@ const LMChatList = forwardRef<LMChatListRef, LMChatListProps>(({
       bottomRef.current?.scrollIntoView({ behavior })
     },
     scrollToMessage: (messageId: string, behavior: 'auto' | 'smooth' = scrollBehavior) => {
-      const element = containerRef.current?.querySelector(`[id="${messageId}"]`)
+      const element = document.getElementById(messageId)
       element?.scrollIntoView({ behavior, block: 'center' })
     },
     getContainer: () => containerRef.current,

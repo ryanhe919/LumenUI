@@ -136,7 +136,7 @@ const LMCheckbox: React.FC<LMCheckboxProps> = ({
   const checkboxClassName = cn(
     checkboxSizeClass,
     'border-2 rounded-md',
-    'focus:ring-2 focus:ring-offset-0',
+    'focus-visible:ring-2 focus-visible:ring-offset-0',
     'transition-all duration-200',
     className
   )
@@ -144,7 +144,7 @@ const LMCheckbox: React.FC<LMCheckboxProps> = ({
   return (
     <div>
       <label
-        className={`flex items-center rounded-2xl transition-colors duration-200 ${currentSize.container} ${
+        className={`flex items-center rounded-xl transition-colors duration-200 ${currentSize.container} ${
           props.disabled ? '' : 'cursor-pointer'
         }`}
         style={getContainerStyles()}

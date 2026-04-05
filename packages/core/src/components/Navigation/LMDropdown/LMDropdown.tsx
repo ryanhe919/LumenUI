@@ -311,10 +311,23 @@ const LMDropdown: React.FC<LMDropdownProps> = ({
       <div
         ref={triggerRef}
         className={`inline-block ${className}`}
+        tabIndex={disabled ? -1 : 0}
+        role="button"
+        aria-haspopup="true"
+        aria-expanded={visible}
         onClick={handleTriggerClick}
         onMouseEnter={handleTriggerMouseEnter}
         onMouseLeave={handleTriggerMouseLeave}
         onContextMenu={handleContextMenu}
+        onKeyDown={(e) => {
+          if (disabled) return
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault()
+            handleTriggerClick()
+          } else if (e.key === 'Escape' && visible) {
+            hide()
+          }
+        }}
         style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
       >
         {children}

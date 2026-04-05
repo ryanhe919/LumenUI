@@ -131,7 +131,7 @@ const LMSwitch: React.FC<LMSwitchProps> = ({
     <div>
       <label
         htmlFor={controlId}
-        className={`flex items-start rounded-2xl transition-colors duration-200 ${currentSize.container} ${
+        className={`flex items-start rounded-xl transition-colors duration-200 ${currentSize.container} ${
           props.disabled ? '' : 'cursor-pointer'
         }`}
         style={getContainerStyles()}
@@ -152,6 +152,8 @@ const LMSwitch: React.FC<LMSwitchProps> = ({
             id={controlId}
             {...props}
             className="sr-only peer"
+            role="switch"
+            aria-checked={props.checked ?? false}
             aria-invalid={error || undefined}
             aria-describedby={errorMessage ? errId : undefined}
             style={getDisabledStyles()}
@@ -197,7 +199,7 @@ const LMSwitch: React.FC<LMSwitchProps> = ({
         )}
       </label>
 
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {errorMessage && <ErrorMessage message={errorMessage} id={errId} />}
     </div>
   )
 }

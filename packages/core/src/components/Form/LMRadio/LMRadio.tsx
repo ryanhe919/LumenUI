@@ -130,7 +130,7 @@ const LMRadio: React.FC<LMRadioProps> = ({
   const radioClassName = cn(
     radioSizeClass,
     'border-2 rounded-full',
-    'focus:ring-2 focus:ring-offset-0',
+    'focus-visible:ring-2 focus-visible:ring-offset-0',
     'transition-all duration-200',
     className
   )
@@ -138,7 +138,7 @@ const LMRadio: React.FC<LMRadioProps> = ({
   return (
     <div>
       <div
-        className={`flex items-start ${currentSize.container} rounded-2xl transition-colors duration-200`}
+        className={`flex items-start ${currentSize.container} rounded-xl transition-colors duration-200`}
         style={getContainerStyles()}
         onMouseEnter={(e) => {
           if (!props.disabled)
@@ -191,7 +191,7 @@ const LMRadio: React.FC<LMRadioProps> = ({
         </div>
       </div>
 
-      {errorMessage && <ErrorMessage message={errorMessage} />}
+      {errorMessage && <ErrorMessage message={errorMessage} id={errId} />}
     </div>
   )
 }

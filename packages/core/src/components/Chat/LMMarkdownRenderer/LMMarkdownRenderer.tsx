@@ -4,6 +4,16 @@ import { clampComponentSize, COMPONENT_SIZE_ORDER } from '../../../utils/compone
 import { cn } from '../../../utils/cn'
 import { LMCodeBlock } from '../LMCodeBlock'
 
+/** URL 安全验证，防止 javascript: 等协议注入 */
+const isSafeUrl = (url: string): boolean => {
+  try {
+    const parsed = new URL(url, 'https://placeholder.com')
+    return ['http:', 'https:', 'mailto:', 'tel:'].includes(parsed.protocol)
+  } catch {
+    return /^[#/]/.test(url)
+  }
+}
+
 export interface LMMarkdownRendererProps {
   /** Markdown 内容 */
   content: string
@@ -11,8 +21,6 @@ export interface LMMarkdownRendererProps {
   size?: ComponentSize
   /** 自定义类名 */
   className?: string
-  /** 是否允许 HTML */
-  allowHtml?: boolean
   /** 代码块渲染器（可自定义） */
   renderCodeBlock?: (code: string, language?: string, filename?: string) => React.ReactNode
   /** 链接点击处理 */
@@ -273,19 +281,26 @@ const parseInlineStyles = (
     // 链接
     {
       regex: /\[([^\]]+)\]\(([^)]+)\)/g,
-      render: (match, key) => (
-        <a
-          key={key}
-          href={match[2]}
-          onClick={(e) => onLinkClick?.(match[2], e)}
-          target={openLinksInNewTab ? '_blank' : undefined}
-          rel={openLinksInNewTab ? 'noopener noreferrer' : undefined}
-          className="underline decoration-1 underline-offset-2 hover:opacity-80"
-          style={{ color: 'var(--lm-primary-500)' }}
-        >
-          {match[1]}
-        </a>
-      ),
+      render: (match, key) => {
+        const url = match[2]
+        const safe = isSafeUrl(url)
+        return (
+          <a
+            key={key}
+            href={safe ? url : '#'}
+            onClick={(e) => {
+              if (!safe) e.preventDefault()
+              onLinkClick?.(url, e)
+            }}
+            target={openLinksInNewTab ? '_blank' : undefined}
+            rel={openLinksInNewTab ? 'noopener noreferrer' : undefined}
+            className="underline decoration-1 underline-offset-2 hover:opacity-80"
+            style={{ color: 'var(--lm-primary-500)' }}
+          >
+            {match[1]}
+          </a>
+        )
+      },
     },
   ]
 
@@ -327,7 +342,6 @@ const LMMarkdownRenderer: React.FC<LMMarkdownRendererProps> = ({
   content,
   size = 'md',
   className = '',
-  allowHtml: _allowHtml = false,
   renderCodeBlock,
   onLinkClick,
   openLinksInNewTab = true,

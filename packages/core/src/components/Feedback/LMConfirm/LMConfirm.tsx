@@ -127,7 +127,9 @@ const LMConfirm: React.FC<LMConfirmProps> = ({
 
       {/* Dialog */}
       <div
-        className={`relative backdrop-blur-xl rounded-3xl shadow-2xl border p-8 max-w-md w-full mx-auto transition-all duration-200 ${
+        role="alertdialog"
+        aria-modal="true"
+        className={`relative backdrop-blur-xl rounded-xl shadow-2xl border p-8 max-w-md w-full mx-auto transition-all duration-200 ${
           isAnimating ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
         style={{
