@@ -66,6 +66,7 @@ const LMDrawer: React.FC<LMDrawerProps> = ({
   const resolvedSize = clampComponentSize(size, COMPONENT_SIZE_ORDER)
 
   const titleTextClasses: Record<ComponentSize, string> = {
+    xxs: 'text-xs',
     xs: 'text-sm',
     sm: 'text-base',
     md: 'text-lg',

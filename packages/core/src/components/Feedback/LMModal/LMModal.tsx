@@ -10,6 +10,7 @@ import {
 import type { ComponentSize } from '../../../utils/componentSizes'
 
 const MODAL_FOOTER_SIZE_MAP: Record<ComponentSize, ComponentSize> = {
+  xxs: 'xxs',
   xs: 'xs',
   sm: 'xs',
   md: 'sm',

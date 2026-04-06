@@ -14,6 +14,11 @@ export interface LMTextareaProps
 }
 
 const sizeConfig = {
+  xxs: {
+    minHeight: 'min-h-[48px]',
+    fontSize: 'text-[0.6875rem]',
+    padding: 'px-2 py-1.5',
+  },
   xs: {
     minHeight: 'min-h-[60px]',
     fontSize: 'text-xs',

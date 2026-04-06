@@ -44,6 +44,7 @@ const SIZE_CONFIG: Record<ComponentSize, {
   fontSize: string
   avatarGap: string
 }> = {
+  xxs: { dotSize: 'w-1 h-1', gap: 'gap-0.5', padding: 'px-2.5 py-1.5', fontSize: 'text-[0.6875rem]', avatarGap: 'gap-1.5' },
   xs: { dotSize: 'w-1.5 h-1.5', gap: 'gap-1', padding: 'px-3 py-2', fontSize: 'text-xs', avatarGap: 'gap-2' },
   sm: { dotSize: 'w-1.5 h-1.5', gap: 'gap-1', padding: 'px-3.5 py-2.5', fontSize: 'text-sm', avatarGap: 'gap-2.5' },
   md: { dotSize: 'w-2 h-2', gap: 'gap-1.5', padding: 'px-4 py-3', fontSize: 'text-sm', avatarGap: 'gap-3' },
@@ -54,6 +55,7 @@ const SIZE_CONFIG: Record<ComponentSize, {
 
 /** 头像尺寸 */
 const AVATAR_SIZE: Record<ComponentSize, string> = {
+  xxs: 'w-5 h-5',
   xs: 'w-6 h-6',
   sm: 'w-7 h-7',
   md: 'w-8 h-8',

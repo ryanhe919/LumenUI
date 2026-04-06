@@ -687,7 +687,7 @@ const LMDatePicker: React.FC<LMDatePickerProps> = ({
       <div
         ref={triggerRef}
         className={`
-          ${inputConfig.padding} ${inputConfig.height} ${inputConfig.fontSize}
+          ${inputConfig.padding} ${inputConfig.paddingLeft} ${inputConfig.paddingRight} ${inputConfig.height} ${inputConfig.fontSize}
           rounded-xl border backdrop-blur-md
           flex items-center gap-2
           transition-all duration-200

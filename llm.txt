@@ -1,0 +1,944 @@
+# LumenUI - AI/LLM Integration Guide
+
+> LumenUI (`@ryanhe919/lumen-ui`) is a modern React UI component library with Apple-like glassmorphism design, built with TypeScript and TailwindCSS v4.
+
+## Quick Start
+
+```bash
+npm install @ryanhe919/lumen-ui
+```
+
+```tsx
+// Import components and styles
+import '@ryanhe919/lumen-ui/dist/style.css'
+import { LMButton, LMInput, LMModal } from '@ryanhe919/lumen-ui'
+```
+
+### Peer Dependencies
+- `react` >= 18
+- `react-dom` >= 18
+
+### Theme Setup
+Wrap your app with a `data-theme` attribute. Available themes: `light` (default), `dark`, `blue`, `green`, `redWhite`.
+
+```html
+<div data-theme="dark">
+  <App />
+</div>
+```
+
+## Design System
+
+### Size System
+All components support 6 sizes via the `size` prop:
+`xs | sm | md | lg | xl | 2xl` (default: `md`)
+
+### Color Tokens (CSS Variables)
+- Primary: `--lm-primary-50` to `--lm-primary-950` (Apple System Blue #007AFF)
+- Semantic: `--lm-success-*`, `--lm-warning-*`, `--lm-error-*`, `--lm-info-*`
+- Gray: `--lm-gray-50` to `--lm-gray-950`
+- Background: `--lm-bg-default`, `--lm-bg-paper`, `--lm-bg-elevated`, `--lm-bg-hover`
+- Text: `--lm-text-primary`, `--lm-text-secondary`, `--lm-text-tertiary`
+- Border: `--lm-border-default`, `--lm-border-light`, `--lm-border-strong`
+- Shadow: `--lm-shadow-sm`, `--lm-shadow-md`, `--lm-shadow-lg`, `--lm-shadow-xl`
+- Radius: `--lm-radius-sm` (6px), `--lm-radius-md` (10px), `--lm-radius-lg` (12px), `--lm-radius-xl` (16px)
+- Transitions: `--lm-transition-fast` (120ms), `--lm-transition-normal` (180ms), `--lm-transition-slow` (250ms)
+- Easing: `--lm-ease-default`, `--lm-ease-spring`, `--lm-ease-out`, `--lm-ease-in-out`
+
+---
+
+## Components Reference
+
+### General
+
+#### LMButton
+Interactive button with 7 variants and loading state.
+
+```tsx
+<LMButton variant="primary" size="md" loading={false}>
+  Click me
+</LMButton>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'primary' \| 'secondary' \| 'outline' \| 'ghost' \| 'danger' \| 'success' \| 'warning'` | `'primary'` | Visual style |
+| `size` | `ComponentSize` | `'md'` | Button size |
+| `loading` | `boolean` | `false` | Show loading spinner |
+| `loadingText` | `string` | - | Text shown while loading |
+| `leftIcon` | `ReactNode` | - | Icon before text |
+| `rightIcon` | `ReactNode` | - | Icon after text |
+| `fullWidth` | `boolean` | `false` | Full container width |
+| `rounded` | `boolean` | `false` | Pill shape (rounded-full) |
+
+Extends `React.ButtonHTMLAttributes<HTMLButtonElement>` - supports all native button props.
+
+#### LMBadge
+Status indicator badge with dot mode.
+
+```tsx
+<LMBadge variant="success" dot>Active</LMBadge>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | - | Badge content |
+| `variant` | `'primary' \| 'secondary' \| 'success' \| 'warning' \| 'error' \| 'info' \| 'neutral'` | `'primary'` | Color variant |
+| `size` | `ComponentSize` | `'sm'` | Badge size |
+| `dot` | `boolean` | `false` | Show dot indicator |
+| `icon` | `ReactNode` | - | Leading icon |
+| `className` | `string` | - | Custom CSS class |
+
+---
+
+### Form
+
+#### LMInput
+Text input with icon support and error state.
+
+```tsx
+<LMInput
+  placeholder="Enter email..."
+  size="md"
+  error={hasError}
+  errorMessage="Invalid email"
+  leftIcon={<MailIcon />}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `leftIcon` | `ReactNode` | - | Left side icon |
+| `rightElement` | `ReactNode` | - | Right side element |
+| `error` | `boolean` | `false` | Error state |
+| `errorMessage` | `string` | - | Error text shown below |
+| `size` | `ComponentSize` | `'md'` | Input size |
+| `includeSeconds` | `boolean` | `false` | For time/datetime inputs |
+
+Extends `Omit<InputHTMLAttributes, 'size'>`. Supports `ref` forwarding.
+
+#### LMTextarea
+Multi-line text input with auto-sizing.
+
+```tsx
+<LMTextarea placeholder="Enter description..." size="md" error={false} />
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `error` | `boolean` | `false` | Error state |
+| `errorMessage` | `string` | - | Error text |
+| `size` | `ComponentSize` | `'md'` | Textarea size |
+
+Extends `TextareaHTMLAttributes`. Supports `ref` forwarding.
+
+#### LMNumberInput
+Numeric input with increment/decrement controls, precision, and range.
+
+```tsx
+<LMNumberInput value={42} onChange={setValue} min={0} max={100} step={1} precision={2} />
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number \| null` | - | Controlled value |
+| `onChange` | `(value: number \| null) => void` | - | Change handler |
+| `min` | `number` | - | Minimum value |
+| `max` | `number` | - | Maximum value |
+| `step` | `number` | `1` | Increment step |
+| `precision` | `number` | `0` | Decimal places |
+| `showControls` | `boolean` | `true` | Show +/- buttons |
+| `prefix` | `string` | - | Prefix text (e.g., "$") |
+| `suffix` | `string` | - | Suffix text (e.g., "%") |
+| `error` | `boolean` | `false` | Error state |
+| `errorMessage` | `string` | - | Error text |
+| `size` | `ComponentSize` | `'md'` | Input size |
+
+Supports `ref` forwarding to internal `<input>`.
+
+#### LMSearchInput
+Search input with debounce, clear button, and search button.
+
+```tsx
+<LMSearchInput
+  placeholder="Search..."
+  onSearch={(value) => console.log(value)}
+  debounceDelay={300}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | Controlled value |
+| `onChange` | `(value: string) => void` | - | Change handler |
+| `onSearch` | `(value: string) => void` | - | Search submit handler |
+| `showClear` | `boolean` | `true` | Show clear button |
+| `showSearchButton` | `boolean` | `true` | Show search button |
+| `searchButtonText` | `string` | `'Search'` | Button text |
+| `debounceDelay` | `number` | `300` | Debounce delay in ms |
+| `error` | `boolean` | `false` | Error state |
+| `size` | `ComponentSize` | `'md'` | Input size |
+
+Supports `ref` forwarding.
+
+#### LMSelect
+Dropdown select with single and multi-select modes.
+
+```tsx
+<LMSelect
+  options={[
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue' },
+  ]}
+  value="react"
+  onChange={(val) => setValue(val)}
+  placeholder="Choose framework..."
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `LMSelectOption[]` | - | `{ value, label, disabled? }` |
+| `value` | `string \| number \| (string \| number)[]` | - | Selected value(s) |
+| `onChange` | `(value) => void` | - | Change handler |
+| `multiple` | `boolean` | `false` | Multi-select mode |
+| `placeholder` | `string` | `'Select...'` | Placeholder text |
+| `error` | `boolean` | `false` | Error state |
+| `errorMessage` | `string` | - | Error text |
+| `size` | `ComponentSize` | `'md'` | Select size |
+
+#### LMCheckbox
+Checkbox with label and description.
+
+```tsx
+<LMCheckbox label="Accept terms" description="Read our terms of service" checked={agreed} onChange={toggle} />
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | - | **Required** label text |
+| `description` | `string` | - | Description below label |
+| `error` | `boolean` | `false` | Error state |
+| `errorMessage` | `string` | - | Error text |
+| `size` | `ComponentSize` | `'md'` | Size |
+
+Extends `Omit<InputHTMLAttributes, 'size'>` - supports `checked`, `onChange`, `disabled`, etc.
+
+#### LMRadio
+Radio button with label and description.
+
+```tsx
+<LMRadio label="Option A" name="group" value="a" checked={selected === 'a'} onChange={handleChange} />
+```
+
+Same props as LMCheckbox. Extends `Omit<InputHTMLAttributes, 'type' | 'size'>`.
+
+#### LMSwitch
+Toggle switch with `role="switch"` accessibility.
+
+```tsx
+<LMSwitch label="Dark mode" checked={isDark} onChange={toggleDark} />
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | - | Label text |
+| `description` | `string` | - | Description text |
+| `error` | `boolean` | `false` | Error state |
+| `errorMessage` | `string` | - | Error text |
+| `size` | `ComponentSize` | `'md'` | Size |
+
+Extends `Omit<InputHTMLAttributes, 'type' | 'size'>` - supports `checked`, `onChange`, `disabled`.
+
+#### LMField
+Form field wrapper with label, help text, and validation.
+
+```tsx
+<LMField label="Email" required errorMessage="Required field" help="We'll never share your email">
+  <LMInput id="email" placeholder="Enter email" error />
+</LMField>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | - | **Required** field label |
+| `required` | `boolean` | `false` | Show required indicator |
+| `errorMessage` | `string` | - | Validation error |
+| `help` | `string` | - | Help text |
+| `children` | `ReactNode` | - | Form control(s) |
+
+#### LMDatePicker
+Date picker with optional time selection.
+
+```tsx
+<LMDatePicker
+  value={date}
+  onChange={(d, str) => setDate(d)}
+  showTime
+  format="YYYY-MM-DD HH:mm:ss"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `Date \| string \| null` | - | Controlled value |
+| `defaultValue` | `Date \| string` | - | Uncontrolled initial |
+| `onChange` | `(date: Date \| null, dateString: string) => void` | - | Change handler |
+| `format` | `string` | Auto | Date format string |
+| `showTime` | `boolean \| TimePickerOptions` | `false` | Show time picker |
+| `allowClear` | `boolean` | `true` | Show clear button |
+| `disabledDate` | `(date: Date) => boolean` | - | Disable specific dates |
+| `error` | `boolean` | `false` | Error state |
+| `size` | `ComponentSize` | `'md'` | Picker size |
+
+`TimePickerOptions`: `{ showHour?, showMinute?, showSecond?, hourStep?, minuteStep?, secondStep?, use12Hours? }`
+
+#### LMUpload
+File upload with drag-and-drop, progress, and preview.
+
+```tsx
+<LMUpload
+  accept="image/*,.pdf"
+  multiple
+  maxCount={5}
+  maxSize={10 * 1024 * 1024}
+  customRequest={uploadToServer}
+  onChange={setFiles}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `fileList` | `LMUploadFile[]` | - | Controlled file list |
+| `defaultFileList` | `LMUploadFile[]` | `[]` | Initial files |
+| `accept` | `string` | - | Accepted file types |
+| `multiple` | `boolean` | `false` | Allow multiple files |
+| `maxCount` | `number` | - | Max file count |
+| `maxSize` | `number` | - | Max file size (bytes) |
+| `listType` | `'text' \| 'picture'` | `'text'` | File list display |
+| `customRequest` | `(file: File) => Promise<string>` | - | Upload handler (returns URL) |
+| `beforeUpload` | `(file: File) => boolean \| Promise<boolean>` | - | Pre-upload validation |
+| `onChange` | `(fileList: LMUploadFile[]) => void` | - | File list change |
+| `onRemove` | `(file: LMUploadFile) => void \| boolean` | - | Remove handler |
+| `children` | `ReactNode` | - | Custom trigger element |
+
+`LMUploadFile`: `{ uid, name, size, type, status: 'uploading' | 'done' | 'error', percent?, url? }`
+
+---
+
+### Data Display
+
+#### LMCard
+Content container card with header, cover, and actions.
+
+```tsx
+<LMCard title="Card Title" extra={<LMButton size="xs">Edit</LMButton>} hoverable>
+  <p>Card content here</p>
+</LMCard>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `ReactNode` | - | Card title |
+| `extra` | `ReactNode` | - | Top-right corner content |
+| `children` | `ReactNode` | - | Card body |
+| `size` | `ComponentSize` | `'md'` | Card size |
+| `bordered` | `boolean` | `true` | Show border |
+| `hoverable` | `boolean` | `false` | Hover lift effect |
+| `loading` | `boolean` | `false` | Show skeleton |
+| `cover` | `ReactNode` | - | Top cover image |
+| `actions` | `ReactNode[]` | - | Bottom action buttons |
+| `variant` | `'default' \| 'elevated' \| 'outline' \| 'soft'` | `'default'` | Card style |
+
+Extends `Omit<HTMLAttributes<HTMLDivElement>, 'title'>`.
+
+#### LMEmpty
+Empty state placeholder with illustration.
+
+```tsx
+<LMEmpty description="No results found" image="simple">
+  <LMButton variant="outline" size="sm">Refresh</LMButton>
+</LMEmpty>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `image` | `ReactNode \| 'default' \| 'simple'` | `'default'` | Illustration |
+| `description` | `ReactNode` | `'暂无数据'` | Description text |
+| `children` | `ReactNode` | - | Action below description |
+| `size` | `ComponentSize` | `'md'` | Size |
+
+#### LMStatCard
+Statistical display card with trend indicator.
+
+```tsx
+<LMStatCard
+  title="Revenue"
+  value={12580}
+  prefix="$"
+  trend={12.5}
+  trendText="vs last month"
+  variant="success"
+  icon={<DollarIcon />}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `title` | `string` | - | **Required** stat title |
+| `value` | `string \| number` | - | **Required** stat value |
+| `prefix` | `string` | - | Value prefix (e.g., "$") |
+| `suffix` | `string` | - | Value suffix (e.g., "%") |
+| `trend` | `number` | - | Trend % (positive=up, negative=down) |
+| `trendText` | `string` | - | Trend description |
+| `icon` | `ReactNode` | - | Display icon |
+| `variant` | `'default' \| 'primary' \| 'success' \| 'warning' \| 'error' \| 'info'` | `'default'` | Color variant |
+| `clickable` | `boolean` | `false` | Enable click interaction |
+| `compact` | `boolean` | `false` | Smaller spacing/fonts |
+| `size` | `ComponentSize` | `'md'` | Card size |
+
+#### LMTable
+Data table with sorting, pagination, selection, and multiple variants.
+
+```tsx
+<LMTable
+  dataSource={data}
+  columns={[
+    { title: 'Name', dataIndex: 'name', sorter: true },
+    { title: 'Age', dataIndex: 'age', align: 'center' },
+    { title: 'Action', dataIndex: 'action', render: (_, record) => <LMButton size="xs">Edit</LMButton> },
+  ]}
+  pagination={{ current: 1, pageSize: 10, total: 100, showPagination: true }}
+  selectable
+  onSelectionChange={(keys, rows) => setSelected(keys)}
+  variant="elevated"
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `dataSource` | `T[]` | - | **Required** data array |
+| `columns` | `LMTableColumn<T>[]` | - | **Required** column definitions |
+| `rowKey` | `string \| ((record, index) => string)` | `'id'` | Row identifier |
+| `pagination` | `LMPaginationConfig` | - | Pagination config |
+| `loading` | `boolean` | `false` | Loading state |
+| `selectable` | `boolean` | `false` | Row selection |
+| `selectedRowKeys` | `string[]` | `[]` | Selected keys |
+| `onSelectionChange` | `(keys, rows) => void` | - | Selection handler |
+| `onRowClick` | `(record, index) => void` | - | Row click |
+| `onSortChange` | `(field, order) => void` | - | Sort handler |
+| `variant` | `'default' \| 'elevated' \| 'outline' \| 'minimal' \| 'soft' \| 'zebra'` | `'default'` | Visual style |
+| `size` | `ComponentSize` | `'md'` | Table size |
+
+`LMTableColumn<T>`: `{ title, dataIndex, width?, render?, sorter?, align?, fixed? }`
+`LMPaginationConfig`: `{ current, pageSize, total, showPagination?, pageSizeOptions?, showTotal?, showQuickJumper?, showSizeChanger?, onChange? }`
+
+#### LMTabs
+Tabbed content navigation with line, card, and rounded styles.
+
+```tsx
+<LMTabs
+  items={[
+    { key: 'tab1', label: 'Overview', children: <Overview /> },
+    { key: 'tab2', label: 'Details', icon: <InfoIcon />, children: <Details /> },
+  ]}
+  type="line"
+  activeKey={activeTab}
+  onChange={setActiveTab}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `LMTabItem[]` | - | **Required** tab definitions |
+| `activeKey` | `string` | - | Controlled active tab |
+| `defaultActiveKey` | `string` | First item | Initial active tab |
+| `type` | `'line' \| 'card' \| 'rounded'` | `'line'` | Tab style |
+| `centered` | `boolean` | `false` | Center-aligned tabs |
+| `tabBarExtraContent` | `ReactNode` | - | Extra content in tab bar |
+| `onChange` | `(key: string) => void` | - | Tab change handler |
+| `size` | `ComponentSize` | `'md'` | Tab size |
+
+`LMTabItem`: `{ key, label, children?, disabled?, icon? }`
+
+#### LMTooltip
+Hover tooltip popup.
+
+```tsx
+<LMTooltip content="Helpful tip" placement="top">
+  <LMButton>Hover me</LMButton>
+</LMTooltip>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `content` | `ReactNode` | - | **Required** tooltip content |
+| `children` | `ReactNode` | - | **Required** trigger element |
+| `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | `'top'` | Position |
+| `maxWidth` | `number` | - | Max width in px |
+| `size` | `ComponentSize` | `'sm'` | Tooltip size |
+
+---
+
+### Navigation
+
+#### LMDropdown
+Dropdown menu triggered by click, hover, or context menu.
+
+```tsx
+<LMDropdown
+  menu={[
+    { key: 'edit', label: 'Edit', icon: <EditIcon /> },
+    { key: 'delete', label: 'Delete', danger: true },
+    { key: 'd1', divider: true },
+    { key: 'info', label: 'Info', disabled: true },
+  ]}
+  onSelect={(key) => handleAction(key)}
+  trigger="click"
+>
+  <LMButton>Actions</LMButton>
+</LMDropdown>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `menu` | `LMDropdownMenuItem[]` | - | **Required** menu items |
+| `trigger` | `'click' \| 'hover' \| 'contextMenu'` | `'click'` | Trigger mode |
+| `placement` | `'bottomLeft' \| 'bottomRight' \| 'topLeft' \| 'topRight'` | `'bottomLeft'` | Dropdown position |
+| `onSelect` | `(key: string) => void` | - | Item select handler |
+| `children` | `ReactNode` | - | **Required** trigger element |
+| `size` | `ComponentSize` | `'md'` | Menu size |
+
+`LMDropdownMenuItem`: `{ key, label, icon?, disabled?, danger?, divider? }`
+
+#### LMMenu
+Sidebar/navigation menu with nested items, collapse support.
+
+```tsx
+<LMMenu
+  items={[
+    { key: 'home', label: 'Home', icon: <HomeIcon /> },
+    {
+      key: 'settings',
+      label: 'Settings',
+      icon: <SettingsIcon />,
+      children: [
+        { key: 'profile', label: 'Profile' },
+        { key: 'account', label: 'Account' },
+      ],
+    },
+  ]}
+  mode="inline"
+  selectedKeys={[currentPage]}
+  onSelect={(key) => navigate(key)}
+  collapsed={isSidebarCollapsed}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `LMMenuItem[]` | - | **Required** menu items |
+| `mode` | `'vertical' \| 'horizontal' \| 'inline'` | `'inline'` | Menu layout |
+| `theme` | `'light' \| 'dark'` | `'light'` | Color theme |
+| `selectedKeys` | `string[]` | - | Controlled selection |
+| `openKeys` | `string[]` | - | Controlled open submenus |
+| `collapsed` | `boolean` | `false` | Collapsed state |
+| `collapsedWidth` | `number` | `64` | Width when collapsed |
+| `onSelect` | `(key, keyPath) => void` | - | Selection handler |
+| `onOpenChange` | `(openKeys) => void` | - | Submenu open handler |
+| `size` | `ComponentSize` | `'md'` | Menu size |
+
+`LMMenuItem`: `{ key, label, icon?, disabled?, children?, type? }`
+
+#### LMPagination
+Page navigation with quick jumper and size changer.
+
+```tsx
+<LMPagination
+  current={page}
+  total={200}
+  pageSize={20}
+  showQuickJumper
+  showSizeChanger
+  showTotal
+  onChange={(page, size) => { setPage(page); setPageSize(size) }}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `current` | `number` | - | **Required** current page |
+| `total` | `number` | - | **Required** total items |
+| `pageSize` | `number` | `10` | Items per page |
+| `pageSizeOptions` | `number[]` | `[10,20,50,100]` | Size options |
+| `showQuickJumper` | `boolean` | `false` | Show page jumper |
+| `showSizeChanger` | `boolean` | `false` | Show size selector |
+| `showTotal` | `boolean \| ((total, range) => ReactNode)` | `false` | Show total count |
+| `simple` | `boolean` | `false` | Simple mode (prev/next only) |
+| `onChange` | `(page, pageSize) => void` | - | Page change handler |
+| `size` | `ComponentSize` | `'md'` | Pagination size |
+
+---
+
+### Feedback
+
+#### LMMessage + LMMessageContainer
+Toast notification system.
+
+```tsx
+const [messages, setMessages] = useState<LMMessageItem[]>([])
+
+const showMessage = (type: LMMessageType, content: string) => {
+  setMessages(prev => [...prev, { id: Date.now().toString(), type, content, duration: 3000 }])
+}
+
+<LMMessageContainer
+  messages={messages}
+  onClose={(id) => setMessages(prev => prev.filter(m => m.id !== id))}
+  position="top-right"
+/>
+```
+
+`LMMessageItem`: `{ id, type: 'success' | 'error' | 'warning' | 'info', title?, content, duration? }`
+Position options: `'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center'`
+
+#### LMModal
+Dialog overlay with header, body, and footer.
+
+```tsx
+<LMModal
+  visible={isOpen}
+  title="Confirm Action"
+  onClose={() => setIsOpen(false)}
+  onOk={handleConfirm}
+  okText="Save"
+  cancelText="Cancel"
+  size="md"
+  centered
+>
+  <p>Are you sure you want to proceed?</p>
+</LMModal>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `visible` | `boolean` | - | **Required** visibility |
+| `title` | `string` | - | Modal title |
+| `children` | `ReactNode` | - | Modal body |
+| `footer` | `ReactNode` | - | Custom footer (overrides buttons) |
+| `onClose` | `() => void` | - | Close handler |
+| `onOk` | `() => void` | - | OK button handler |
+| `onCancel` | `() => void` | - | Cancel handler |
+| `okText` | `string` | `'Confirm'` | OK button text |
+| `cancelText` | `string` | `'Cancel'` | Cancel button text |
+| `okLoading` | `boolean` | `false` | OK button loading |
+| `maskClosable` | `boolean` | `false` | Click mask to close |
+| `closable` | `boolean` | `true` | Show close button |
+| `size` | `ComponentSize` | `'md'` | Modal size (xs:360px to 2xl:1200px) |
+| `centered` | `boolean` | `true` | Center vertically |
+| `fullscreen` | `boolean` | `false` | Fullscreen mode |
+
+Has `role="dialog"` and `aria-modal="true"` for accessibility.
+
+#### LMConfirm
+Simple confirmation dialog.
+
+```tsx
+<LMConfirm
+  visible={showConfirm}
+  title="Delete Item"
+  content="This action cannot be undone."
+  confirmButtonStyle="danger"
+  onConfirm={handleDelete}
+  onCancel={() => setShowConfirm(false)}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `visible` | `boolean` | - | **Required** |
+| `title` | `string` | `'Confirm'` | Dialog title |
+| `content` | `string` | - | **Required** message |
+| `confirmText` | `string` | `'Confirm'` | Confirm button text |
+| `cancelText` | `string` | `'Cancel'` | Cancel button text |
+| `confirmButtonStyle` | `'primary' \| 'danger'` | `'primary'` | Confirm button style |
+| `onConfirm` | `() => void` | - | **Required** confirm handler |
+| `onCancel` | `() => void` | - | **Required** cancel handler |
+| `closeOnOverlayClick` | `boolean` | `true` | Close on backdrop |
+
+Has `role="alertdialog"` and `aria-modal="true"`.
+
+#### LMDrawer
+Slide-in panel from any edge.
+
+```tsx
+<LMDrawer
+  visible={isOpen}
+  title="Settings"
+  placement="right"
+  width={400}
+  onClose={() => setIsOpen(false)}
+  footer={<LMButton fullWidth onClick={save}>Save</LMButton>}
+>
+  <SettingsForm />
+</LMDrawer>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `visible` | `boolean` | - | **Required** |
+| `title` | `ReactNode` | - | Drawer title |
+| `children` | `ReactNode` | - | Drawer body |
+| `placement` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'right'` | Slide direction |
+| `width` | `string \| number` | `378` | Width (left/right) |
+| `height` | `string \| number` | `378` | Height (top/bottom) |
+| `closable` | `boolean` | `true` | Show close button |
+| `maskClosable` | `boolean` | `true` | Click mask to close |
+| `footer` | `ReactNode` | - | Bottom content |
+| `onClose` | `() => void` | - | Close handler |
+| `extra` | `ReactNode` | - | Header extra content |
+| `zIndex` | `number` | `1000` | z-index |
+| `size` | `ComponentSize` | `'md'` | Drawer size |
+
+---
+
+### Chat
+
+Complete chat UI components for building AI chat interfaces.
+
+#### LMChatContainer
+All-in-one chat interface combining message list and input.
+
+```tsx
+const chatRef = useRef<LMChatContainerRef>(null)
+
+<LMChatContainer
+  ref={chatRef}
+  messages={messages}
+  onSend={(content) => sendMessage(content)}
+  isGenerating={isStreaming}
+  onStop={() => stopGeneration()}
+  placeholder="Ask anything..."
+  showTypingIndicator={isStreaming}
+  height="600px"
+  enterToSend
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `messages` | `ChatMessage[]` | - | **Required** message list |
+| `onSend` | `(content: string) => void` | - | Send handler |
+| `onStop` | `() => void` | - | Stop generation |
+| `isGenerating` | `boolean` | `false` | AI generating state |
+| `placeholder` | `string` | `'输入消息...'` | Input placeholder |
+| `showTypingIndicator` | `boolean` | `false` | Show typing dots |
+| `enterToSend` | `boolean` | `true` | Enter key sends |
+| `height` | `string \| number` | - | Container height |
+| `maxHeight` | `string \| number` | - | Max container height |
+| `bubbleMaxWidth` | `string \| number` | `'85%'` | Max bubble width |
+| `header` | `ReactNode` | - | Custom header |
+| `emptyContent` | `ReactNode` | - | Empty state content |
+| `loading` | `boolean` | `false` | Loading messages |
+| `onLoadMore` | `() => void` | - | Load more handler |
+| `hasMore` | `boolean` | `false` | More messages available |
+| `renderMessage` | `(msg, index) => ReactNode` | - | Custom message renderer |
+| `variant` | `'default' \| 'filled' \| 'outline' \| 'soft'` | `'default'` | Bubble style |
+| `size` | `ComponentSize` | `'md'` | Chat UI size |
+
+**Ref methods**: `scrollToBottom()`, `scrollToMessage(id)`, `focusInput()`, `getInputValue()`, `setInputValue(v)`, `clearInput()`
+
+`ChatMessage`: `{ id, role: 'user' | 'assistant' | 'system', content, avatar?, name?, timestamp?, status?, actions?, errorMessage?, onRetry? }`
+
+#### LMChatInput
+Standalone chat input with toolbar and send button.
+
+```tsx
+<LMChatInput
+  onSend={(msg) => send(msg)}
+  placeholder="Type a message..."
+  sending={isSending}
+  maxLength={2000}
+  showCount
+  enterToSend
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | - | Controlled value |
+| `onChange` | `(value: string) => void` | - | Change handler |
+| `onSend` | `(value: string) => void` | - | Send handler |
+| `sending` | `boolean` | `false` | Sending state |
+| `maxLength` | `number` | - | Character limit |
+| `showCount` | `boolean` | `false` | Show character count |
+| `maxRows` | `number` | `6` | Max textarea rows |
+| `enterToSend` | `boolean` | `true` | Enter sends |
+| `toolbar` | `ReactNode` | - | Toolbar above input |
+| `rightSlot` | `ReactNode` | - | Right of send button |
+| `isGenerating` | `boolean` | `false` | Show stop button |
+| `onStop` | `() => void` | - | Stop handler |
+| `size` | `ComponentSize` | `'md'` | Input size |
+
+#### LMChatMessage
+Individual chat message with avatar, actions, and status.
+
+```tsx
+<LMChatMessage
+  role="assistant"
+  content={<LMMarkdownRenderer content={markdown} />}
+  avatar="/ai-avatar.png"
+  name="AI Assistant"
+  timestamp={new Date()}
+  status="sent"
+  actions={[
+    { key: 'copy', icon: <CopyIcon />, tooltip: 'Copy', onClick: handleCopy },
+    { key: 'retry', icon: <RetryIcon />, tooltip: 'Retry', onClick: handleRetry },
+  ]}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `role` | `'user' \| 'assistant' \| 'system'` | `'user'` | Message sender |
+| `content` | `ReactNode` | - | **Required** message content |
+| `avatar` | `string \| ReactNode` | - | Avatar URL or element |
+| `name` | `string` | - | Sender name |
+| `timestamp` | `string \| Date` | - | Message time |
+| `status` | `'sending' \| 'sent' \| 'error' \| 'streaming'` | - | Message status |
+| `actions` | `ChatMessageAction[]` | - | Action buttons (on hover) |
+| `errorMessage` | `string` | - | Error text |
+| `onRetry` | `() => void` | - | Retry handler |
+| `variant` | `'default' \| 'filled' \| 'outline' \| 'soft'` | `'default'` | Bubble style |
+
+#### LMCodeBlock
+Syntax-highlighted code block with copy button.
+
+```tsx
+<LMCodeBlock
+  code={`function hello() {\n  console.log('world')\n}`}
+  language="javascript"
+  filename="hello.js"
+  showLineNumbers
+  highlightLines={[2]}
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `code` | `string` | - | **Required** code content |
+| `language` | `string` | `'plaintext'` | Language for highlighting |
+| `filename` | `string` | - | Filename header |
+| `showLineNumbers` | `boolean` | `true` | Show line numbers |
+| `highlightLines` | `number[]` | `[]` | Highlighted lines |
+| `showCopyButton` | `boolean` | `true` | Show copy button |
+| `maxHeight` | `string \| number` | - | Scrollable max height |
+| `wrapLines` | `boolean` | `false` | Wrap long lines |
+| `size` | `ComponentSize` | `'md'` | Code block size |
+
+#### LMMarkdownRenderer
+Render Markdown content with built-in code block support. Links are sanitized against XSS (javascript: protocol blocked).
+
+```tsx
+<LMMarkdownRenderer
+  content="# Hello\n\nThis is **bold** and `code`.\n\n```js\nconsole.log('hi')\n```"
+  size="md"
+  openLinksInNewTab
+/>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `content` | `string` | - | **Required** Markdown string |
+| `renderCodeBlock` | `(code, lang?, filename?) => ReactNode` | - | Custom code renderer |
+| `onLinkClick` | `(url, event) => void` | - | Link click handler |
+| `openLinksInNewTab` | `boolean` | `true` | Links target="_blank" |
+| `customRenderer` | `(content) => ReactNode` | - | Override all rendering |
+| `size` | `ComponentSize` | `'md'` | Text size |
+
+#### LMTypingIndicator
+Animated typing indicator for chat.
+
+```tsx
+<LMTypingIndicator variant="dots" text="AI is thinking..." avatar={<BotAvatar />} />
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'dots' \| 'pulse' \| 'wave' \| 'bounce'` | `'dots'` | Animation style |
+| `text` | `string` | - | Display text |
+| `avatar` | `ReactNode` | - | Avatar element |
+| `color` | `string` | - | Custom dot color |
+| `size` | `ComponentSize` | `'md'` | Indicator size |
+
+---
+
+## Common Patterns
+
+### Form with Validation
+```tsx
+<LMField label="Username" required errorMessage={errors.username}>
+  <LMInput
+    id="username"
+    value={username}
+    onChange={(e) => setUsername(e.target.value)}
+    error={!!errors.username}
+    placeholder="Enter username"
+  />
+</LMField>
+```
+
+### Data Table with Pagination
+```tsx
+<LMTable
+  dataSource={users}
+  columns={columns}
+  pagination={{
+    current: page,
+    pageSize: 20,
+    total: totalUsers,
+    showPagination: true,
+    showSizeChanger: true,
+    showQuickJumper: true,
+    onChange: (p, s) => fetchUsers(p, s),
+  }}
+  loading={isLoading}
+  variant="elevated"
+/>
+```
+
+### AI Chat Interface
+```tsx
+const [messages, setMessages] = useState<ChatMessage[]>([])
+const [isGenerating, setIsGenerating] = useState(false)
+const chatRef = useRef<LMChatContainerRef>(null)
+
+const handleSend = async (content: string) => {
+  setMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', content }])
+  setIsGenerating(true)
+  const response = await callAI(content)
+  setMessages(prev => [...prev, { id: (Date.now() + 1).toString(), role: 'assistant', content: response }])
+  setIsGenerating(false)
+}
+
+<LMChatContainer
+  ref={chatRef}
+  messages={messages}
+  onSend={handleSend}
+  isGenerating={isGenerating}
+  onStop={() => setIsGenerating(false)}
+  showTypingIndicator={isGenerating}
+  height="100vh"
+/>
+```
+
+### Theme Switching
+```tsx
+const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+<div data-theme={theme}>
+  <LMButton onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}>
+    Toggle Theme
+  </LMButton>
+</div>
+```

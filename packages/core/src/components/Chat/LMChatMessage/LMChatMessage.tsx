@@ -108,6 +108,7 @@ const LoadingDots: React.FC<{ className?: string }> = ({ className }) => (
 
 /** 头像尺寸配置 */
 const AVATAR_SIZE: Record<ComponentSize, string> = {
+  xxs: 'w-5 h-5',
   xs: 'w-6 h-6',
   sm: 'w-7 h-7',
   md: 'w-8 h-8',
@@ -118,6 +119,7 @@ const AVATAR_SIZE: Record<ComponentSize, string> = {
 
 /** 操作按钮尺寸配置 */
 const ACTION_BUTTON_SIZE: Record<ComponentSize, string> = {
+  xxs: 'w-4 h-4',
   xs: 'w-5 h-5',
   sm: 'w-6 h-6',
   md: 'w-7 h-7',

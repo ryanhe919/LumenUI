@@ -39,6 +39,7 @@ const TEXT_SIZE_CONFIG: Record<ComponentSize, {
   h3: string
   code: string
 }> = {
+  xxs: { base: 'text-[0.6875rem]', h1: 'text-base', h2: 'text-sm', h3: 'text-xs', code: 'text-[9px]' },
   xs: { base: 'text-xs', h1: 'text-lg', h2: 'text-base', h3: 'text-sm', code: 'text-[10px]' },
   sm: { base: 'text-sm', h1: 'text-xl', h2: 'text-lg', h3: 'text-base', code: 'text-xs' },
   md: { base: 'text-base', h1: 'text-2xl', h2: 'text-xl', h3: 'text-lg', code: 'text-sm' },

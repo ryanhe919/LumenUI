@@ -73,6 +73,7 @@ const LMPagination: React.FC<LMPaginationProps> = ({
   const totalPages = internalPageSize > 0 ? Math.max(1, Math.ceil(total / internalPageSize)) : 1
 
   const buttonSizeClasses: Record<ComponentSize, string> = {
+    xxs: 'w-5 h-5 text-xs',
     xs: 'w-6 h-6 text-xs',
     sm: 'w-7 h-7 text-sm',
     md: 'w-8 h-8 text-sm',
@@ -82,6 +83,7 @@ const LMPagination: React.FC<LMPaginationProps> = ({
   }
 
   const inputSizeClasses: Record<ComponentSize, string> = {
+    xxs: 'w-8 h-5 text-xs px-1',
     xs: 'w-10 h-6 text-xs px-1',
     sm: 'w-12 h-7 text-sm px-1',
     md: 'w-14 h-8 text-sm px-2',

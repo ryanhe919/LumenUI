@@ -290,6 +290,7 @@ const LMUpload: React.FC<LMUploadProps> = ({
   }
 
   const iconSizeClasses: Record<ComponentSize, string> = {
+    xxs: 'w-5 h-5',
     xs: 'w-6 h-6',
     sm: 'w-7 h-7',
     md: 'w-8 h-8',
@@ -299,6 +300,7 @@ const LMUpload: React.FC<LMUploadProps> = ({
   }
 
   const thumbSizeClasses: Record<ComponentSize, string> = {
+    xxs: 'w-8 h-8',
     xs: 'w-10 h-10',
     sm: 'w-12 h-12',
     md: 'w-14 h-14',

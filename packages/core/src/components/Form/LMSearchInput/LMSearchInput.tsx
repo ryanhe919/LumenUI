@@ -82,7 +82,7 @@ const LMSearchInput = React.forwardRef<HTMLInputElement, LMSearchInputProps>(({
     'backdrop-blur-md border rounded-xl',
     'focus-visible:ring-2 focus-visible:outline-none transition-all duration-300',
     'shadow-sm',
-    showSearchButton ? 'pr-20' : showClear ? 'pr-10' : 'pr-4',
+    showSearchButton ? 'pr-20' : showClear ? 'pr-10' : SIZE_INPUT_CONFIG[size].paddingRight,
     'pl-12',
     className
   )

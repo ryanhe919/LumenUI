@@ -20,6 +20,16 @@ export interface LMInputProps
   includeSeconds?: boolean
 }
 
+/** Padding-left values (in px) when leftIcon is present, by size */
+const ICON_PL: Record<ComponentSize, number> = {
+  xxs: 28, xs: 32, sm: 36, md: 40, lg: 44, xl: 48, '2xl': 56,
+}
+
+/** Padding-right values (in px) when rightElement is present, by size */
+const ICON_PR: Record<ComponentSize, number> = {
+  xxs: 28, xs: 32, sm: 36, md: 40, lg: 44, xl: 48, '2xl': 56,
+}
+
 const LMInput = React.forwardRef<HTMLInputElement, LMInputProps>(({
   leftIcon,
   rightElement,
@@ -48,18 +58,17 @@ const LMInput = React.forwardRef<HTMLInputElement, LMInputProps>(({
   const baseClassName = cn(
     'w-full',
     SIZE_INPUT_CONFIG[size].padding,
+    SIZE_INPUT_CONFIG[size].paddingLeft,
+    SIZE_INPUT_CONFIG[size].paddingRight,
     SIZE_INPUT_CONFIG[size].height,
     SIZE_INPUT_CONFIG[size].fontSize,
     'border rounded-xl',
     'focus-visible:ring-2 focus-visible:outline-none',
-    hasLeftIcon && 'pl-10',
-    hasRightElement && 'pr-10',
     className
   )
 
   const getInputStyles = () => {
-    // Apple-like refined input styles
-    const baseStyles = {
+    const baseStyles: React.CSSProperties = {
       backgroundColor: 'var(--lm-bg-elevated)',
       color: 'var(--lm-text-primary)',
       borderColor: error
@@ -67,7 +76,15 @@ const LMInput = React.forwardRef<HTMLInputElement, LMInputProps>(({
         : 'var(--lm-border-default)',
       boxShadow: 'var(--lm-shadow-sm)',
       transition: 'all var(--lm-transition-fast) var(--lm-ease-out)',
-    } as React.CSSProperties
+    }
+
+    // Use inline style for icon padding — immune to Tailwind CSS layer conflicts
+    if (hasLeftIcon) {
+      baseStyles.paddingLeft = `${ICON_PL[size]}px`
+    }
+    if (hasRightElement) {
+      baseStyles.paddingRight = `${ICON_PR[size]}px`
+    }
 
     return {
       ...baseStyles,

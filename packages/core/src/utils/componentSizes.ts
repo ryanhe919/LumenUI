@@ -3,10 +3,11 @@
  * @description Shared size tokens for LumenUI components
  */
 
-export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
+export type ComponentSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl'
 
 /** Size order for iteration */
 export const COMPONENT_SIZE_ORDER: ComponentSize[] = [
+  'xxs',
   'xs',
   'sm',
   'md',
@@ -17,6 +18,7 @@ export const COMPONENT_SIZE_ORDER: ComponentSize[] = [
 
 /** Text size classes with Apple-like line heights */
 export const SIZE_TEXT_CLASSES: Record<ComponentSize, string> = {
+  xxs: 'text-[0.6875rem] leading-normal',
   xs: 'text-xs leading-relaxed',
   sm: 'text-sm leading-relaxed',
   md: 'text-base leading-relaxed',
@@ -27,6 +29,7 @@ export const SIZE_TEXT_CLASSES: Record<ComponentSize, string> = {
 
 /** Heading size classes with tight tracking */
 export const SIZE_HEADING_CLASSES: Record<ComponentSize, string> = {
+  xxs: 'text-base leading-tight tracking-tight',
   xs: 'text-lg leading-tight tracking-tight',
   sm: 'text-xl leading-tight tracking-tight',
   md: 'text-2xl leading-tight tracking-tight',
@@ -37,6 +40,7 @@ export const SIZE_HEADING_CLASSES: Record<ComponentSize, string> = {
 
 /** Display size classes with extra tight tracking */
 export const SIZE_DISPLAY_CLASSES: Record<ComponentSize, string> = {
+  xxs: 'text-lg leading-none tracking-tight',
   xs: 'text-xl leading-none tracking-tight',
   sm: 'text-2xl leading-none tracking-tight',
   md: 'text-3xl leading-none tracking-tight',
@@ -47,6 +51,7 @@ export const SIZE_DISPLAY_CLASSES: Record<ComponentSize, string> = {
 
 /** Gap classes */
 export const SIZE_GAP_CLASSES: Record<ComponentSize, string> = {
+  xxs: 'gap-0.5',
   xs: 'gap-1',
   sm: 'gap-1.5',
   md: 'gap-2',
@@ -57,6 +62,7 @@ export const SIZE_GAP_CLASSES: Record<ComponentSize, string> = {
 
 /** Padding classes */
 export const SIZE_PADDING_CLASSES: Record<ComponentSize, string> = {
+  xxs: 'p-2',
   xs: 'p-3',
   sm: 'p-4',
   md: 'p-6',
@@ -70,6 +76,7 @@ export const SIZE_BUTTON_CONFIG: Record<
   ComponentSize,
   { padding: string; height: string }
 > = {
+  xxs: { padding: 'px-1.5 py-0.5', height: 'h-5' },
   xs: { padding: 'px-2.5 py-1.5', height: 'h-7' },
   sm: { padding: 'px-3 py-2', height: 'h-8' },
   md: { padding: 'px-4 py-2.5', height: 'h-10' },
@@ -78,17 +85,18 @@ export const SIZE_BUTTON_CONFIG: Record<
   '2xl': { padding: 'px-8 py-4', height: 'h-16' },
 }
 
-/** Input size config */
+/** Input size config — uses separate pl/pr so leftIcon/rightElement can override */
 export const SIZE_INPUT_CONFIG: Record<
   ComponentSize,
-  { padding: string; height: string; fontSize: string }
+  { padding: string; paddingLeft: string; paddingRight: string; height: string; fontSize: string }
 > = {
-  xs: { padding: 'px-3 py-1', height: 'h-7', fontSize: 'text-xs' },
-  sm: { padding: 'px-3 py-1.5', height: 'h-9', fontSize: 'text-sm' },
-  md: { padding: 'px-4 py-2', height: 'h-10', fontSize: 'text-sm' },
-  lg: { padding: 'px-4 py-2.5', height: 'h-12', fontSize: 'text-base' },
-  xl: { padding: 'px-5 py-3', height: 'h-14', fontSize: 'text-base' },
-  '2xl': { padding: 'px-6 py-4', height: 'h-16', fontSize: 'text-lg' },
+  xxs: { padding: 'py-0.5', paddingLeft: 'pl-2', paddingRight: 'pr-2', height: 'h-5', fontSize: 'text-[0.6875rem]' },
+  xs: { padding: 'py-1', paddingLeft: 'pl-3', paddingRight: 'pr-3', height: 'h-7', fontSize: 'text-xs' },
+  sm: { padding: 'py-1.5', paddingLeft: 'pl-3', paddingRight: 'pr-3', height: 'h-9', fontSize: 'text-sm' },
+  md: { padding: 'py-2', paddingLeft: 'pl-4', paddingRight: 'pr-4', height: 'h-10', fontSize: 'text-sm' },
+  lg: { padding: 'py-2.5', paddingLeft: 'pl-4', paddingRight: 'pr-4', height: 'h-12', fontSize: 'text-base' },
+  xl: { padding: 'py-3', paddingLeft: 'pl-5', paddingRight: 'pr-5', height: 'h-14', fontSize: 'text-base' },
+  '2xl': { padding: 'py-4', paddingLeft: 'pl-6', paddingRight: 'pr-6', height: 'h-16', fontSize: 'text-lg' },
 }
 
 /** Selector size config */
@@ -96,6 +104,7 @@ export const SIZE_SELECTOR_CONFIG: Record<
   ComponentSize,
   { padding: string; height: string; fontSize: string }
 > = {
+  xxs: { padding: 'px-2 py-0.5', height: 'h-5', fontSize: 'text-[0.6875rem]' },
   xs: { padding: 'px-3 py-1', height: 'h-7', fontSize: 'text-xs' },
   sm: { padding: 'px-3 py-1.5', height: 'h-9', fontSize: 'text-sm' },
   md: { padding: 'px-4 py-2', height: 'h-10', fontSize: 'text-sm' },
@@ -109,6 +118,7 @@ export const SIZE_MODAL_CONFIG: Record<
   ComponentSize,
   { width: string; maxWidth: string }
 > = {
+  xxs: { width: '280px', maxWidth: '90vw' },
   xs: { width: '360px', maxWidth: '90vw' },
   sm: { width: '480px', maxWidth: '90vw' },
   md: { width: '640px', maxWidth: '90vw' },
@@ -122,6 +132,7 @@ export const SIZE_TOOLTIP_CONFIG: Record<
   ComponentSize,
   { paddingClass: string; textClass: string; maxWidth: number }
 > = {
+  xxs: { paddingClass: 'px-2 py-1', textClass: 'text-[0.6875rem]', maxWidth: 160 },
   xs: { paddingClass: 'px-2.5 py-1.5', textClass: 'text-xs', maxWidth: 200 },
   sm: { paddingClass: 'px-3 py-2', textClass: 'text-sm', maxWidth: 240 },
   md: { paddingClass: 'px-4 py-2.5', textClass: 'text-sm', maxWidth: 300 },
@@ -132,6 +143,7 @@ export const SIZE_TOOLTIP_CONFIG: Record<
 
 /** Icon size config */
 export const SIZE_ICON_CONFIG: Record<ComponentSize, string> = {
+  xxs: 'w-3 h-3',
   xs: 'w-4 h-4',
   sm: 'w-5 h-5',
   md: 'w-6 h-6',
@@ -145,6 +157,7 @@ export const SIZE_TABLE_CONFIG: Record<
   ComponentSize,
   { cellPadding: string; rowHeight: string }
 > = {
+  xxs: { cellPadding: 'px-1.5 py-0.5', rowHeight: 'h-6' },
   xs: { cellPadding: 'px-2 py-1', rowHeight: 'h-8' },
   sm: { cellPadding: 'px-3 py-1.5', rowHeight: 'h-10' },
   md: { cellPadding: 'px-4 py-2', rowHeight: 'h-12' },

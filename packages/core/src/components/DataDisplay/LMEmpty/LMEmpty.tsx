@@ -23,6 +23,7 @@ export interface LMEmptyProps extends React.HTMLAttributes<HTMLDivElement> {
 /** Default empty illustration */
 const DefaultImage: React.FC<{ size: ComponentSize }> = ({ size }) => {
   const sizeMap: Record<ComponentSize, number> = {
+    xxs: 52,
     xs: 64,
     sm: 80,
     md: 100,
@@ -70,6 +71,7 @@ const DefaultImage: React.FC<{ size: ComponentSize }> = ({ size }) => {
 /** Simple empty illustration */
 const SimpleImage: React.FC<{ size: ComponentSize }> = ({ size }) => {
   const sizeMap: Record<ComponentSize, number> = {
+    xxs: 40,
     xs: 48,
     sm: 56,
     md: 64,
@@ -142,6 +144,7 @@ const LMEmpty: React.FC<LMEmptyProps> = ({
   const resolvedSize = clampComponentSize(size, COMPONENT_SIZE_ORDER)
 
   const descriptionTextClasses: Record<ComponentSize, string> = {
+    xxs: 'text-[0.6875rem]',
     xs: 'text-xs',
     sm: 'text-sm',
     md: 'text-sm',
@@ -151,6 +154,7 @@ const LMEmpty: React.FC<LMEmptyProps> = ({
   }
 
   const paddingClasses: Record<ComponentSize, string> = {
+    xxs: 'py-3',
     xs: 'py-4',
     sm: 'py-6',
     md: 'py-8',

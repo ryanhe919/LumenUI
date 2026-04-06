@@ -161,6 +161,7 @@ const LANGUAGE_DISPLAY: Record<string, string> = {
 
 /** 代码字体尺寸配置 */
 const CODE_SIZE: Record<ComponentSize, { fontSize: string; lineHeight: string; padding: string }> = {
+  xxs: { fontSize: '10px', lineHeight: '1.4', padding: '10px' },
   xs: { fontSize: '11px', lineHeight: '1.5', padding: '12px' },
   sm: { fontSize: '12px', lineHeight: '1.5', padding: '14px' },
   md: { fontSize: '13px', lineHeight: '1.6', padding: '16px' },

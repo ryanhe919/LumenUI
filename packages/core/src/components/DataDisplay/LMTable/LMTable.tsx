@@ -295,6 +295,14 @@ const LMTable = <T = unknown,>({
   }, [pagination])
 
   const paginationUiClasses = {
+    xxs: {
+      container: 'px-2 py-1.5',
+      text: 'text-[0.6875rem]',
+      control: 'px-1.5 py-0.5 text-[0.6875rem]',
+      gap: 'gap-0.5',
+      select: 'px-1.5 py-0.5 text-[0.6875rem]',
+      input: 'px-1.5 py-0.5 text-[0.6875rem] w-12',
+    },
     xs: {
       container: 'px-3 py-2',
       text: 'text-xs',

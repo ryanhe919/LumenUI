@@ -81,6 +81,7 @@ const LMMenu: React.FC<LMMenuProps> = ({
   const openKeys = controlledOpenKeys ?? internalOpenKeys
 
   const itemPaddingClasses: Record<ComponentSize, string> = {
+    xxs: 'px-2 py-1',
     xs: 'px-3 py-1.5',
     sm: 'px-3 py-2',
     md: 'px-4 py-2.5',
@@ -90,6 +91,7 @@ const LMMenu: React.FC<LMMenuProps> = ({
   }
 
   const collapsedPaddingClasses: Record<ComponentSize, string> = {
+    xxs: 'px-1.5 py-1',
     xs: 'px-2 py-1.5',
     sm: 'px-2.5 py-2',
     md: 'px-3 py-2.5',
@@ -99,6 +101,7 @@ const LMMenu: React.FC<LMMenuProps> = ({
   }
 
   const iconSizeClasses: Record<ComponentSize, string> = {
+    xxs: 'w-3.5 h-3.5',
     xs: 'w-4 h-4',
     sm: 'w-4 h-4',
     md: 'w-5 h-5',

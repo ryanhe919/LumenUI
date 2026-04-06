@@ -66,6 +66,7 @@ const LMTabs: React.FC<LMTabsProps> = ({
   const activeKey = controlledActiveKey ?? internalActiveKey
 
   const tabPaddingClasses: Record<ComponentSize, string> = {
+    xxs: 'px-1.5 py-0.5',
     xs: 'px-2 py-1',
     sm: 'px-3 py-1.5',
     md: 'px-4 py-2',
@@ -75,6 +76,7 @@ const LMTabs: React.FC<LMTabsProps> = ({
   }
 
   const cardPaddingClasses: Record<ComponentSize, string> = {
+    xxs: 'px-1.5 py-0.5',
     xs: 'px-2 py-1',
     sm: 'px-3 py-1.5',
     md: 'px-4 py-2',

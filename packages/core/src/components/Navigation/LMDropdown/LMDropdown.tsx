@@ -63,6 +63,7 @@ const LMDropdown: React.FC<LMDropdownProps> = ({
   const hoverTimeoutRef = useRef<number | null>(null)
 
   const itemPaddingClasses: Record<ComponentSize, string> = {
+    xxs: 'px-1.5 py-0.5',
     xs: 'px-2 py-1',
     sm: 'px-2.5 py-1.5',
     md: 'px-3 py-2',
@@ -72,6 +73,7 @@ const LMDropdown: React.FC<LMDropdownProps> = ({
   }
 
   const minWidthClasses: Record<ComponentSize, string> = {
+    xxs: 'min-w-[80px]',
     xs: 'min-w-[100px]',
     sm: 'min-w-[120px]',
     md: 'min-w-[140px]',

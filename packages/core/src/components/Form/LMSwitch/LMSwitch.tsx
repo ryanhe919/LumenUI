@@ -17,6 +17,15 @@ export interface LMSwitchProps
 }
 
 const sizeConfig = {
+  xxs: {
+    container: 'p-1.5 gap-1.5',
+    label: 'text-[0.6875rem]',
+    description: 'text-[0.6875rem] mt-0.5',
+    errorMessage: 'text-[0.6875rem]',
+    track: 'w-6 h-3.5',
+    thumb: 'w-2 h-2',
+    translate: 'translate-x-2.5',
+  },
   xs: {
     container: 'p-2 gap-2',
     label: 'text-xs',

@@ -171,6 +171,7 @@ const SIZE_CONFIG: Record<ComponentSize, {
   sendButtonSize: string
   sendIconSize: string
 }> = {
+  xxs: { minHeight: '24px', padding: 'px-2.5 py-1.5', buttonSize: 'w-5 h-5', iconSize: 'w-2.5 h-2.5', gap: 'gap-1.5', sendButtonSize: 'w-5 h-5', sendIconSize: 'w-2.5 h-2.5' },
   xs: { minHeight: '28px', padding: 'px-3 py-2', buttonSize: 'w-6 h-6', iconSize: 'w-3 h-3', gap: 'gap-2', sendButtonSize: 'w-6 h-6', sendIconSize: 'w-3 h-3' },
   sm: { minHeight: '32px', padding: 'px-3.5 py-2.5', buttonSize: 'w-7 h-7', iconSize: 'w-3.5 h-3.5', gap: 'gap-2.5', sendButtonSize: 'w-7 h-7', sendIconSize: 'w-3.5 h-3.5' },
   md: { minHeight: '36px', padding: 'px-4 py-3', buttonSize: 'w-8 h-8', iconSize: 'w-4 h-4', gap: 'gap-3', sendButtonSize: 'w-8 h-8', sendIconSize: 'w-4 h-4' },

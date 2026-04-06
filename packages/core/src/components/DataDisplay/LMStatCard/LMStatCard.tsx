@@ -83,6 +83,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
 
   const iconSizeClasses: Record<ComponentSize, string> = compact
     ? {
+        xxs: 'w-3 h-3',
         xs: 'w-4 h-4',
         sm: 'w-5 h-5',
         md: 'w-6 h-6',
@@ -91,6 +92,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
         '2xl': 'w-12 h-12',
       }
     : {
+        xxs: 'w-4 h-4',
         xs: 'w-5 h-5',
         sm: 'w-6 h-6',
         md: 'w-10 h-10',
@@ -101,6 +103,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
 
   const titleTextClasses: Record<ComponentSize, string> = compact
     ? {
+        xxs: 'text-[9px]',
         xs: 'text-[10px]',
         sm: 'text-[10px]',
         md: 'text-xs',
@@ -109,6 +112,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
         '2xl': 'text-lg',
       }
     : {
+        xxs: 'text-[0.6875rem]',
         xs: 'text-xs',
         sm: 'text-xs',
         md: 'text-sm',
@@ -119,6 +123,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
 
   const metaTextClasses: Record<ComponentSize, string> = compact
     ? {
+        xxs: 'text-[9px]',
         xs: 'text-[10px]',
         sm: 'text-[10px]',
         md: 'text-[10px]',
@@ -127,6 +132,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
         '2xl': 'text-xs',
       }
     : {
+        xxs: 'text-[0.6875rem]',
         xs: 'text-xs',
         sm: 'text-xs',
         md: 'text-sm',
@@ -136,6 +142,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
       }
 
   const descriptionTextClasses: Record<ComponentSize, string> = {
+    xxs: 'text-[0.6875rem]',
     xs: 'text-xs',
     sm: 'text-xs',
     md: 'text-xs',
@@ -146,6 +153,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
 
   const valueTextClasses: Record<ComponentSize, string> = compact
     ? {
+        xxs: 'text-xs',
         xs: 'text-sm',
         sm: 'text-base',
         md: 'text-lg',
@@ -154,6 +162,7 @@ const LMStatCard: React.FC<LMStatCardProps> = ({
         '2xl': 'text-3xl',
       }
     : {
+        xxs: 'text-base',
         xs: 'text-lg',
         sm: 'text-xl',
         md: 'text-3xl',

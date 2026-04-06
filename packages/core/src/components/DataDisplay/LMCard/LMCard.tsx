@@ -52,6 +52,7 @@ const LMCard: React.FC<LMCardProps> = ({
   const [isHovered, setIsHovered] = useState(false)
 
   const titleTextClasses: Record<ComponentSize, string> = {
+    xxs: 'text-xs',
     xs: 'text-sm',
     sm: 'text-sm',
     md: 'text-base',

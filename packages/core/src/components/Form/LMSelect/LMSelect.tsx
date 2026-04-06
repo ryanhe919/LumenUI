@@ -45,6 +45,7 @@ const SIZE_DROPDOWN_CONFIG: Record<
     optionTextSize: string
   }
 > = {
+  xxs: { maxHeight: 'max-h-28', optionPadding: 'px-2.5 py-1', optionTextSize: 'text-[0.6875rem]' },
   xs: { maxHeight: 'max-h-32', optionPadding: 'px-3 py-1.5', optionTextSize: 'text-xs' },
   sm: { maxHeight: 'max-h-40', optionPadding: 'px-3 py-2', optionTextSize: 'text-xs' },
   md: { maxHeight: 'max-h-48', optionPadding: 'px-4 py-2.5', optionTextSize: 'text-sm' },

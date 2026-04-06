@@ -19,6 +19,12 @@ export interface LMCheckboxProps
 }
 
 const sizeConfig = {
+  xxs: {
+    container: 'p-1.5 gap-1.5',
+    label: 'text-[0.6875rem]',
+    description: 'text-[0.6875rem] mt-0.5',
+    errorMessage: 'text-[0.6875rem]',
+  },
   xs: {
     container: 'p-2 gap-2',
     label: 'text-xs',
