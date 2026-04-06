@@ -574,7 +574,7 @@ const LMTable = <T = unknown,>({
                 >
                   <div className="flex items-center justify-center gap-2">
                     <SpinnerIcon />
-                    Loading...
+                    加载中...
                   </div>
                 </td>
               </tr>
@@ -668,7 +668,7 @@ const LMTable = <T = unknown,>({
                       className={paginationUiClasses[size].text}
                       style={{ color: 'var(--lm-text-secondary)' }}
                     >
-                      Total {pagination.total} items / {totalPages} pages
+                      共 {pagination.total} 条 / {totalPages} 页
                     </span>
                   )}
                   {pagination.showSizeChanger && (
@@ -677,7 +677,7 @@ const LMTable = <T = unknown,>({
                         className={paginationUiClasses[size].text}
                         style={{ color: 'var(--lm-text-secondary)' }}
                       >
-                        Show:
+                        每页:
                       </span>
                       <select
                         value={pageSize}
@@ -692,7 +692,7 @@ const LMTable = <T = unknown,>({
                       >
                         {pagination.pageSizeOptions?.map((s) => (
                           <option key={s} value={s}>
-                            {s} / page
+                            {s} 条/页
                           </option>
                         ))}
                       </select>
@@ -706,8 +706,8 @@ const LMTable = <T = unknown,>({
                     disabled={currentPage <= 1}
                     className={`${paginationUiClasses[size].control} border rounded-lg transition-colors`}
                     style={getButtonStyles(currentPage <= 1)}
-                    aria-label="Previous page"
-                    title="Previous page"
+                    aria-label="上一页"
+                    title="上一页"
                   >
                     <ChevronLeftIcon />
                   </button>
@@ -728,8 +728,8 @@ const LMTable = <T = unknown,>({
                     disabled={currentPage >= totalPages}
                     className={`${paginationUiClasses[size].control} border rounded-lg transition-colors`}
                     style={getButtonStyles(currentPage >= totalPages)}
-                    aria-label="Next page"
-                    title="Next page"
+                    aria-label="下一页"
+                    title="下一页"
                   >
                     <ChevronRightIcon />
                   </button>
@@ -740,7 +740,7 @@ const LMTable = <T = unknown,>({
                         className={paginationUiClasses[size].text}
                         style={{ color: 'var(--lm-text-secondary)' }}
                       >
-                        Go to:
+                        跳至:
                       </span>
                       <input
                         type="number"
@@ -781,10 +781,10 @@ const LMTable = <T = unknown,>({
             {loadMore.loading ? (
               <div className="flex items-center gap-2">
                 <SpinnerIcon />
-                Loading...
+                加载中...
               </div>
             ) : (
-              'Load more'
+              '加载更多'
             )}
           </button>
         </div>
